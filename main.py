@@ -14,6 +14,7 @@ from PySide6.QtCore import QTimer # type: ignore
 # Importing program files
 from libs.Logging.logging import Logging
 from libs.application import Application
+from libs.Errors.exceptions import *
 
 
 # Create signal for canceling (Ctrl + C)
@@ -43,22 +44,19 @@ class Main(Logging):
 if __name__ == "__main__":
     # Try block for cathcing exceptions
     try:
-        # Check parametres
-        if len(sys.argv) > 1:
+        if len(sys.argv) == 2:
             # --run command for running application
             if sys.argv[1] == "--run":
                 # Creating insatence of Main class
                 main = Main
 
-
                 # Running main
                 main()
-            #
+        # Check parametres
+        if len(sys.argv) > 2:
+            # Raise too many arguments exception
+            raise TooManyArgumentsError("")
     except Exception as e:
-        # Print info about error
-        main.printf(status="ERROR", msg="")
-
-
         # Print exception
         traceback.print_exception(type(e), e, e.__traceback__)
 
