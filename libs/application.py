@@ -70,7 +70,7 @@ class Application(Logging, QApplication):
         self.process_index = 0
 
         # Load Ui file
-        ui_file = QtCore.QFile("Application/QtGuiFiles/SetupWindow.ui")
+        ui_file = QtCore.QFile("QtGuiFiles/SetupWindow.ui")
 
         # Read Ui file
         ui_file.open(QtCore.QFile.ReadOnly)

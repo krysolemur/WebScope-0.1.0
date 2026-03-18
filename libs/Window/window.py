@@ -16,7 +16,7 @@ class Window(QMainWindow):
         self.app = app
 
         # Load QtUi file 
-        ui_file = QFile("Application/QtGuiFiles/MainWindow.ui")
+        ui_file = QFile("QtGuiFiles/MainWindow.ui")
 
         # Open for reading
         ui_file.open(QFile.ReadOnly)
