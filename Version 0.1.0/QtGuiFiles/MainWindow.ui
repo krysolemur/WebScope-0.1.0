@@ -27,9 +27,8 @@
     <property name="title">
      <string>Window</string>
     </property>
+    <addaction name="separator"/>
     <addaction name="actionSettings"/>
-    <addaction name="actionRestart"/>
-    <addaction name="actionQuit"/>
     <addaction name="separator"/>
     <addaction name="actionAbout"/>
     <addaction name="actionDocumentation"/>
@@ -37,6 +36,9 @@
     <addaction name="separator"/>
     <addaction name="actionReport_bug"/>
     <addaction name="actionIdeas"/>
+    <addaction name="separator"/>
+    <addaction name="actionRestart"/>
+    <addaction name="actionQuit"/>
    </widget>
    <widget class="QMenu" name="menuTarget">
     <property name="title">
@@ -70,7 +72,6 @@
    <addaction name="menuAttack"/>
    <addaction name="menuPlugins"/>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
   <action name="actionSettings">
    <property name="text">
     <string>Settings</string>
