@@ -3,6 +3,7 @@
 # This is for managing users in this application
 
 # Importing system files
+import json
 import os
 
 from PySide6 import QtWidgets, QtCore, QtUiTools, QtGui # type: ignore
@@ -145,25 +146,37 @@ class UsersManager(Logging):
         self.usersDialog.exec()
 
     # Login function
-    def login(self, username) -> bool:
+    def login(self, username, password) -> bool:
         '''
-        Load ui for settings dialog.
+        Check password for that username.
         '''
 
-        # Load Ui file
-        ui_file = QtCore.QFile("libs/QtGuiFiles/LoginDialog.ui")
+        # Try except block for checking if user really exists 
+        try:
+            # Open user config file
+            with open(f"{self.users_dir}/{username}/user_config.json", "r") as config:
+                # Check if is password required
+                if not bool(json.load(config)["requiredPassword"]):
+                    return True
+                
+                # Load password from json
+                pwd = json.load(config)["password"]
 
-        # Read Ui file
-        ui_file.open(QtCore.QFile.ReadOnly)
+                # Compare both passwords
+                if pwd == password:
+                    # Return success
+                    return True
 
-        # Load to setupDialog
-        self.loginDialog = QtUiTools.QUiLoader().load(ui_file)
+                    # Close file
+                    config.close()
+                else:
+                    # Return error
+                    return False
 
-        # Process events
-        QtWidgets.QApplication.processEvents()
-
-        # Close Ui file
-        ui_file.close()
+                    # Close file
+                    config.close()
+        except FileExistsError:
+            None
 
     # Function that create user folder
     def addUser(self, name) -> None:
@@ -178,4 +191,16 @@ class UsersManager(Logging):
             # Print info
             self.printe(msg=f"Error while adding user {name}", exception=e, function=__name__)
 
+    # Remove user
+    def removeUser(self, name) -> None:
+        # Try except block
+        try:
+            # Create
+            os.makedirs(self.default_dir)
+
+            # Print info
+            self.printo(msg=f"Added user {name}")
+        except FileNotFoundError as e:
+            # Print info
+            self.printe(msg=f"Error while adding user {name}", exception=e, function=__name__)
 

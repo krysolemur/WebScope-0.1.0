@@ -24,7 +24,7 @@ class UnknownCommandError(Exception):
         sys.exit(1)
 
 # Wrong password exception
-class WrongPasswordError(Exception):
+class LoginError(Exception):
     def __init__(self, user, msg=None):
         # Print msg if there is any msg
         print(msg) if msg else print(f"Wrong password for user {user}!")

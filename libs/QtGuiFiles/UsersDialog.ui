@@ -124,6 +124,20 @@
         </layout>
        </item>
        <item>
+        <layout class="QHBoxLayout" name="emailLayout">
+         <item>
+          <widget class="QLabel" name="emailLabel">
+           <property name="text">
+            <string>Email:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="emailLineEdit"/>
+         </item>
+        </layout>
+       </item>
+       <item>
         <widget class="QLabel" name="resetPwdLabel">
          <property name="text">
           <string>RESET PASSWORD</string>

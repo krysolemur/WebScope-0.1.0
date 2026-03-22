@@ -29,6 +29,8 @@ class Logging:
         # Print error    
         print(f"[  \033[31mERROR\033[0m   ] {msg if msg else "ERROR"} at line {last_tb.lineno} in {last_tb.filename} in {function}", end=endch)
 
+        print(exception)
+
     # Print info
     def printi(self, msg, endch=".\n") -> None:
         # Print info

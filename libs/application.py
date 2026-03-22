@@ -15,6 +15,7 @@ from PySide6.QtUiTools import QUiLoader # type: ignore
 from libs.MainWindow.mainwindow import MainWindow
 from libs.Logging.logging import Logging
 from libs.Errors.errors import Error
+from libs.Errors.exceptions import *
 from Users.usersmanager import UsersManager
 from Users.configmanager import ConfigManager
 
@@ -232,58 +233,64 @@ class Application(Logging, QApplication):
         self.timer.stop()
 
         # Username layout
-        usernameLayout = QHBoxLayout()
+        self.setupDialog.usernameLayout = QHBoxLayout()
 
         # Password layout
-        pwdLayout = QHBoxLayout()
+        self.setupDialog.pwdLayout = QHBoxLayout()
 
         # Buttons layout
-        buttonsLayout = QHBoxLayout()
+        self.setupDialog.buttonsLayout = QHBoxLayout()
 
         # Username label
-        usernameLabel = QLabel("Username:")
+        self.setupDialog.usernameLabel = QLabel("Username:")
 
         # Password label
-        pwdLabel = QLabel("Password:")
+        self.setupDialog.pwdLabel = QLabel("Password:")
 
         # Password line edit
-        passwordLineEdit = QLineEdit()
+        self.setupDialog.passwordLineEdit = QLineEdit()
 
         # Username combobox
-        usernameComboBox = QComboBox()
+        self.setupDialog.usernameComboBox = QComboBox()
 
         # Login button
-        loginButton = QPushButton("Login")
+        self.setupDialog.loginButton = QPushButton("Login")
 
         # Reset password button
-        resetpwdButton = QPushButton("Reset password")
+        self.setupDialog.resetpwdButton = QPushButton("Reset password")
 
         # Add label to username layout
-        usernameLayout.addWidget(usernameLabel)
+        self.setupDialog.usernameLayout.addWidget(self.setupDialog.usernameLabel)
 
         # Add combo box to username layout
-        usernameLayout.addWidget(usernameComboBox)
+        self.setupDialog.usernameLayout.addWidget(self.setupDialog.usernameComboBox)
 
         # Add label to password layout
-        pwdLayout.addWidget(pwdLabel)
+        self.setupDialog.pwdLayout.addWidget(self.setupDialog.pwdLabel)
 
         # Add line edit to password layout
-        pwdLayout.addWidget(passwordLineEdit)
+        self.setupDialog.pwdLayout.addWidget(self.setupDialog.passwordLineEdit)
 
         # Add reset password to button layout
-        buttonsLayout.addWidget(resetpwdButton)
+        self.setupDialog.buttonsLayout.addWidget(self.setupDialog.resetpwdButton)
 
         # Add login button to button layout
-        buttonsLayout.addWidget(loginButton)
+        self.setupDialog.buttonsLayout.addWidget(self.setupDialog.loginButton)
 
         # Add username layout to login layout
-        self.setupDialog.loginLayout.addLayout(usernameLayout)
+        self.setupDialog.loginLayout.addLayout(self.setupDialog.usernameLayout)
 
         # Add username layout to login layout
-        self.setupDialog.loginLayout.addLayout(pwdLayout)
+        self.setupDialog.loginLayout.addLayout(self.setupDialog.pwdLayout)
 
         # Add username layout to login layout
-        self.setupDialog.loginLayout.addLayout(buttonsLayout)
+        self.setupDialog.loginLayout.addLayout(self.setupDialog.buttonsLayout)
+
+        # Set login button diabled
+        self.setupDialog.loginButton.setEnabled(False)
+
+        # Set login button diabled
+        self.setupDialog.passwordLineEdit.setEnabled(True)
 
         '''
         Set window for another layout.
@@ -302,28 +309,84 @@ class Application(Logging, QApplication):
         # User variable from users manager
         for user in self.users.all_users:
             # Add user to combo box
-            usernameComboBox.addItem(user)
+            self.setupDialog.usernameComboBox.addItem(user)
 
-    # Handle login functino 
-    def _handle_login(self, username, password):
+        '''
+        Button actions.
+        '''
+
+        # Login button action
+        self.setupDialog.loginButton.clicked.connect(self._handle_login)
+
+        # Set enabled login buttin if there is any text 
+        self.setupDialog.passwordLineEdit.textChanged.connect(self._update_login_button)
+
+        # Set enabled login buttin if there is any text 
+        self.setupDialog.usernameComboBox.currentTextChanged.connect(self._update_login_button)
+
+        # Set disabled passwor field when is default user
+        self.setupDialog.usernameComboBox.currentTextChanged.connect(lambda text: self.setupDialog.passwordLineEdit.setEnabled(text != "Default"))
+
+    # Function that update login button set enabled True/False
+    def _update_login_button(self, _=None):
+        # Check password
+        password_ok = bool(self.setupDialog.passwordLineEdit.text().strip())
+
+        # Check user
+        user_ok = self.setupDialog.usernameComboBox.currentText() != "Default"
+
+        # Enable button
+        if not user_ok:
+            # If default user, continue without password
+            self.setupDialog.loginButton.setEnabled(True)  
+
+            # Set reset password to disabled
+            self.setupDialog.resetpwdButton.setEnabled(False)
+        else:
+            # Else with password
+            self.setupDialog.loginButton.setEnabled(bool(password_ok))  
+                    
+    # Handle login function
+    def _handle_login(self) -> None:
+        '''
+        Get username, password, hashed password with salt and loing using login function from usermanager module.
+        '''
+        # Get user name value
+        username = self.setupDialog.usernameComboBox.currentText()
+
+        # Get password value
+        password = self.setupDialog.passwordLineEdit.text()
+
+        # Check if user is default
+        if username == "Default":
+            # Set password to ""
+            password = ""
+
         # Encode password
         pwd = password.encode()
 
         # Generate hash with random salt
-        hashed = bcrypt.hashpw(password, bcrypt.gensalt())
+        hashed = bcrypt.hashpw(pwd, bcrypt.gensalt())
 
-        # Check login
-        if username == "admin" and password == "1234":
+        # Login using login function from user manager
+        if self.users.login(username, hashed):
+            # Set ERROR Color
             self.setupDialog.statusLabel.setStyleSheet("color: #00ff00")
+
+            # Set ERROR status of function
             self.setupDialog.statusLabel.setText("OK")
 
-            # pokračuj dál v procesu
-            self.process_index += 1
+            # Start timer
             self.timer.start()
-
-        else:
+        else: 
+            # Set ERROR Color
             self.setupDialog.statusLabel.setStyleSheet("color: #ff0000")
-            self.setupDialog.statusLabel.setText("Wrong credentials")
+
+            # Set ERROR status of function
+            self.setupDialog.statusLabel.setText("ERROR")
+
+            # Raise login error
+            raise LoginError(username)
 
     '''
     Public functions.
