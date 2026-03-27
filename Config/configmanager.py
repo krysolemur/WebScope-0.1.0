@@ -24,7 +24,10 @@ class ConfigManager(Logging):
         self.config_dir = "Config"
 
         # Config file path
-        self.default_path = "Config/config.jon"
+        self.default_path = "Config/config.json"
+
+        # All profiles
+        self.all_profiles = self._getProfiles()
 
         '''
         Check defautl config file.
@@ -42,3 +45,36 @@ class ConfigManager(Logging):
 
                 # Close file
                 config.close()
+    '''
+    Private functions.
+    '''
+
+    # Get all profiles
+    def _getProfiles(self) -> list:
+        # Create list
+        profiles = []
+
+        # List config directory
+        for config in os.listdir(self.config_dir):
+            # Check json type
+            if config.endswith(".json"):
+                # Append config to profiles
+                profiles.append(config)
+
+        # Return list
+        return profiles
+    
+    '''
+    Public functions.
+    '''
+
+    # Add profile function
+    def addProfile(self, name) -> None:
+        # Create config file
+        with open(f"{self.config_dir}/{name}.json", "w") as nwconfig:
+            # Write json
+            json.dump(self.default_config, nwconfig, indent=4)
+
+    # Remove profile function
+    def removeProfile(self) -> None:
+        None

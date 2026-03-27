@@ -14,7 +14,6 @@ from PySide6.QtGui import QIcon
 
 # Importing program files
 from libs.MainWindow.mainwindow import MainWindow
-from Config.configmanager import ConfigManager
 from libs.Logging.logging import Logging
 from libs.Errors.errors import Error
 from libs.Errors.exceptions import *
@@ -47,9 +46,6 @@ class Application(Logging, QApplication):
 
         # Error module
         self.error = Error()
-
-        # Config moduel
-        self.config = ConfigManager()
 
         # Window module
         self.window = MainWindow(app=self)
@@ -199,18 +195,7 @@ class Application(Logging, QApplication):
 
     # Checking config files
     def _checkConfigDir(self) -> None:
-        # Check Config/config.json in main directory
-        if not os.path.exists(self.config.default_path):
-            # Print warning
-            self.printw(msg=f"Default config doesen't exists! Creating new.")
-
-            # Create general.json
-            with open(self.config.default_path, "w") as config:
-                # Write default settings
-                json.dump(self.config.default_config, config, indent=4)
-
-                # Close file
-                config.close()
+        None
 
 
     '''

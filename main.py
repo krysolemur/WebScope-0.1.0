@@ -1,9 +1,11 @@
 # main.py
 
+
 # Importing system files
 import sys
 import signal
 import traceback
+
 
 # Importing program files
 from libs.Logging.logging import Logging

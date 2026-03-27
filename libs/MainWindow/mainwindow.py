@@ -171,15 +171,44 @@ class MainWindow(QMainWindow, Logging):
         # Show target dialog
         self.targetDialog.show()
 
+        # Set action button
+        self.targetDialog.setTargetButton.clicked.connect(self._onCheckURL)
+
     # Check url function
     def _checkURL(self, url) -> bool:
         # Try reach url
         try:
             # Get response
-            r = requests.get(url)
-        except requests.RequestException as e:
-            self.printe(exception=e, function=self._checkURL.__name, )
+            r = requests.head(url, timeout=5, allow_redirects=True)
 
+            # Check status code first if the server does not using head
+            if r.status_code == 405:
+                # Get new request
+                r = requests.get(url, timeout=5)
+
+            # Return status code
+            return 200 <= r.status_code < 400
+        except requests.RequestException as e:
+            # Print error
+            self.printe(exception=e, function=self._checkURL.__name__, )
+
+            # Return false
+            return False
+
+    # Button action
+    def _onCheckURL(self):
+        # Get URL
+        url = self.targetDialog.setTargetLineEdit.text()
+
+        # Check URL
+        if not self._checkURL(url): 
+            # Set wrong URL stylesheet
+            self.targetDialog.setTargetLineEdit.setStyleSheet(
+                "border: 2px solid red;"
+            )
+        else:
+            # Close dialog
+            self.targetDialog.close()
     '''
     Public functions.
     '''
