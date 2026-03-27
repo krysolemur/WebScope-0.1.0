@@ -3,16 +3,16 @@
 # Module for managing settings window
 
 # Importing system files
-from PySide6 import QtWidgets, QtCore, QtUiTools, QtGui # type: ignore
-from PySide6.QtWidgets import QDialog, QLabel, QVBoxLayout, QApplication, QMainWindow, QMessageBox # type: ignore
-from PySide6.QtCore import QTimer, QFile # type: ignore
-from PySide6.QtUiTools import QUiLoader # type: ignore
+from PySide6.QtWidgets import QDialog, QVBoxLayout
+from PySide6.QtCore import QFile 
+from PySide6.QtUiTools import QUiLoader
+from PySide6.QtGui import QIcon 
 
 # Importing program files
 from libs.Logging.logging import Logging
 
 # Class settings window
-class SettingsWindow(Logging, QDialog):
+class SettingsWindow(QDialog, Logging):
     def __init__(self, app) -> None:
         '''
         Init parents, save app and print info message.
@@ -31,29 +31,44 @@ class SettingsWindow(Logging, QDialog):
         '''
 
         # Load Ui file
-        ui_file = QtCore.QFile("libs/QtGuiFiles/SettingsDialog.ui")
+        ui_file = QFile("libs/QtGuiFiles/SettingsDialog.ui")
 
         # Read Ui file
-        ui_file.open(QtCore.QFile.ReadOnly)
+        ui_file.open(QFile.ReadOnly)
 
         # Load to settingsWindow
-        self.ui = QUiLoader().load(ui_file, self)
+        self.ui = QUiLoader().load(ui_file)
 
-        # Process events
-        QtWidgets.QApplication.processEvents()
+        # Create layout
+        self.layout = QVBoxLayout()
+
+        # Add ui to the layout
+        self.layout.addWidget(self.ui)
+
+        # Delete edges from layout
+        self.layout.setContentsMargins(0, 0, 0, 0) 
+
+        # Set layout to settings dialog
+        self.setLayout(self.layout)
 
         # Close Ui file
         ui_file.close()
+
+        # Process events
+        self.app.processEvents()
 
         '''
         Title, size and other settings.
         '''
 
         # Dialog properties like title, size and more
-        self.setWindowTitle(f"WebScope | {self.app.version} | Settings")
+        self.setWindowTitle(f"{self.app.name} | {self.app.version} | Settings")
+
+        # Set window icon
+        self.setWindowIcon(QIcon("icon.svg"))
 
         # Set size
-        self.setFixedSize(800, 600)
+        self.setFixedSize(622, 514)
 
     '''
     Public functions.
@@ -65,4 +80,4 @@ class SettingsWindow(Logging, QDialog):
         self.printi(msg="Closing settings window")
 
         # Close window
-        self.close()
+        event.accept()

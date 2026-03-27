@@ -10,6 +10,7 @@ from PySide6.QtWidgets import QLabel, QApplication, QHBoxLayout, QPushButton, QC
 from PySide6.QtCore import QTimer
 from PySide6.QtCore import QFile
 from PySide6.QtUiTools import QUiLoader
+from PySide6.QtGui import QIcon
 
 # Importing program files
 from libs.MainWindow.mainwindow import MainWindow
@@ -36,6 +37,9 @@ class Application(Logging, QApplication):
 
         # Application version
         self.version = "0.1.0"
+
+        # Application name
+        self.name = "WebScope"
 
         '''
         Inicializing all neccessary modules.
@@ -84,7 +88,10 @@ class Application(Logging, QApplication):
         '''
 
         # Dialog properties like title, size and more
-        self.setupDialog.setWindowTitle(f"WebScope | {self.version} | Inicializing")
+        self.setupDialog.setWindowTitle(f"{self.name} | {self.version} | Inicializing")
+
+        # Window icon
+        self.setupDialog.setWindowIcon(QIcon("icon.svg"))
 
         # Set size
         self.setupDialog.resize(600, 75)

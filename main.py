@@ -62,19 +62,30 @@ if __name__ == "__main__":
             
 
             # --run command for running application
-            if command == "--run":
+            elif command == "--run":
                 # Creating insatence of Main class
                 main = Main
 
                 
                 # Running main
                 main()
+
+
+            # Run others commands
+            else:
+                None
+
         # Check parametres
         elif len(sys.argv) > 2:
             # Raise too many arguments exception
             raise TooManyArgumentsError()
+        
+
         else:
-            print("Run \"python3 main.py --run\" to start application.")
+            # Print help command for running
+            print("Run \"python3 main.py --run\" to start application. Type --help for help menu.")
+            
+
     except Exception as e:
         # Print exception
         traceback.print_exception(type(e), e, e.__traceback__)

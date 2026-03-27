@@ -1,13 +1,15 @@
 # window.py
 
 # Importing system files
+import requests
 import sys
 import os
 
-from PySide6 import QtWidgets, QtCore, QtUiTools, QtGui # type: ignore
-from PySide6.QtWidgets import QDialog, QLabel, QVBoxLayout, QApplication, QMainWindow, QMessageBox # type: ignore
-from PySide6.QtCore import QTimer, QFile # type: ignore
-from PySide6.QtUiTools import QUiLoader # type: ignore
+from PySide6 import QtWidgets, QtCore, QtUiTools, QtGui 
+from PySide6.QtWidgets import QDialog, QLabel, QVBoxLayout, QApplication, QMainWindow, QMessageBox 
+from PySide6.QtCore import QTimer, QFile 
+from PySide6.QtUiTools import QUiLoader 
+from PySide6.QtGui import QIcon 
 
 # Imporing program files
 from libs.Logging.logging import Logging
@@ -44,9 +46,6 @@ class MainWindow(QMainWindow, Logging):
         # Close file
         ui_file.close()
 
-        # Process events
-        QtWidgets.QApplication.processEvents()
-
         '''
         Set actions for all menu in tool bar like settings, help and more...
         '''
@@ -60,12 +59,18 @@ class MainWindow(QMainWindow, Logging):
         # Restart action
         self.ui.actionRestart.triggered.connect(self._restart)
 
+        # Set target action
+        self.ui.actionSetTarget.triggered.connect(self._setTarget)
+
         '''
         Other windows settings like size, title and more...
         '''
 
         # Title
-        self.setWindowTitle(f"WebScope | {self.app.version}")  
+        self.setWindowTitle(f"{self.app.name} | {self.app.version}")  
+
+        # Set window icon
+        self.setWindowIcon(QIcon("icon.png"))
 
         # Size
         self.resize(800, 600) 
@@ -145,6 +150,35 @@ class MainWindow(QMainWindow, Logging):
 
         # Show dialog
         self.restartDialog.exec()
+        
+    # Set target function
+    def _setTarget(self) -> None:
+        # Load QtUi file 
+        ui_file = QFile("libs/QtGuiFiles/TargetDialog.ui")
+
+        # Open for reading
+        ui_file.open(QFile.ReadOnly)
+
+        # Load Ui
+        self.targetDialog = QUiLoader().load(ui_file)
+
+        # Close file
+        ui_file.close()
+
+        # Adjust size
+        self.targetDialog.adjustSize()
+
+        # Show target dialog
+        self.targetDialog.show()
+
+    # Check url function
+    def _checkURL(self, url) -> bool:
+        # Try reach url
+        try:
+            # Get response
+            r = requests.get(url)
+        except requests.RequestException as e:
+            self.printe(exception=e, function=self._checkURL.__name, )
 
     '''
     Public functions.

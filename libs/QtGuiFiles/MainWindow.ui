@@ -44,7 +44,7 @@
     <property name="title">
      <string>Target</string>
     </property>
-    <addaction name="actionAdd"/>
+    <addaction name="actionSetTarget"/>
     <addaction name="actionDownloadSourceCode"/>
    </widget>
    <widget class="QMenu" name="menuAttack">
@@ -55,7 +55,7 @@
      <property name="title">
       <string>Injections</string>
      </property>
-     <addaction name="actionSQL_Injection_2"/>
+     <addaction name="actionSQLInjection2"/>
     </widget>
     <addaction name="menuInjections"/>
     <addaction name="actionXSS"/>
@@ -102,9 +102,9 @@
     <string>Help</string>
    </property>
   </action>
-  <action name="actionAdd">
+  <action name="actionSetTarget">
    <property name="text">
-    <string>Add</string>
+    <string>Set target</string>
    </property>
   </action>
   <action name="actionDownloadSourceCode">
@@ -117,7 +117,7 @@
     <string>XSS</string>
    </property>
   </action>
-  <action name="actionSQL_Injection_2">
+  <action name="actionSQLInjection2">
    <property name="text">
     <string>SQL Injection</string>
    </property>
