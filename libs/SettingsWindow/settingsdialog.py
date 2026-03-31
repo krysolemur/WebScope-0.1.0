@@ -77,12 +77,25 @@ class SettingsDialog(QDialog, Logging):
         # Update it after window loads
         self.ui.removeProfileButton.setEnabled(self.ui.profilesComboBox.currentText() != "config.json")
 
+        # Save settings action
+        self.ui.applyButton.clicked.connect(lambda: self.config.saveSettings(self.ui.profilesComboBox.currentText()))
+
+        # Reset settings action
+        self.ui.resetButton.clicked.connect(lambda: self.config.resetSettings(self.ui.profilesComboBox.currentText()))
+
+        # Cancel button action
+        self.ui.cancelButton.clicked.connect(self.close)
+
         # Resize
         self.resize(660, 528)
 
 
     '''
     Private functions.
+    '''
+
+    '''
+    Profiles methods.
     '''
 
     # Load profiles
@@ -163,6 +176,7 @@ class SettingsDialog(QDialog, Logging):
 
         # Akutalize profiles
         self._loadProfiles()
+        
     '''
     Public functions.
     '''

@@ -2,59 +2,70 @@
 <ui version="4.0">
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
+  <property name="windowModality">
+   <enum>Qt::NonModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>798</width>
+    <width>800</width>
     <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="toolButtonStyle">
+   <enum>Qt::ToolButtonIconOnly</enum>
+  </property>
+  <property name="tabShape">
+   <enum>QTabWidget::Rounded</enum>
+  </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="verticalLayoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>801</width>
-      <height>581</height>
-     </rect>
+   <layout class="QGridLayout" name="mainLayout">
+    <property name="leftMargin">
+     <number>0</number>
     </property>
-    <layout class="QVBoxLayout" name="toolsLayout">
-     <item>
-      <widget class="QTabWidget" name="toolsWidget">
-       <property name="currentIndex">
-        <number>0</number>
-       </property>
-       <widget class="QWidget" name="sourceCodeTab">
-        <attribute name="title">
-         <string>Source</string>
-        </attribute>
-       </widget>
-       <widget class="QWidget" name="networkRequestsTab">
-        <attribute name="title">
-         <string>Network</string>
-        </attribute>
-       </widget>
-       <widget class="QWidget" name="memoryTab">
-        <attribute name="title">
-         <string>Memory</string>
-        </attribute>
-       </widget>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+    <item row="0" column="0">
+     <widget class="QTabWidget" name="toolsTabWidget">
+      <property name="currentIndex">
+       <number>1</number>
+      </property>
+      <widget class="QWidget" name="sourceTab">
+       <attribute name="title">
+        <string>Source</string>
+       </attribute>
       </widget>
-     </item>
-    </layout>
-   </widget>
+      <widget class="QWidget" name="networkTab">
+       <attribute name="title">
+        <string>Network</string>
+       </attribute>
+      </widget>
+      <widget class="QWidget" name="consoleTab">
+       <attribute name="title">
+        <string>Console</string>
+       </attribute>
+      </widget>
+     </widget>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>798</width>
+     <width>800</width>
      <height>20</height>
     </rect>
    </property>
@@ -70,7 +81,6 @@
     <addaction name="actionHelp"/>
     <addaction name="separator"/>
     <addaction name="actionReportBug"/>
-    <addaction name="actionIdeas"/>
     <addaction name="separator"/>
     <addaction name="actionRestart"/>
     <addaction name="actionQuit"/>
@@ -90,7 +100,7 @@
      <property name="title">
       <string>Injections</string>
      </property>
-     <addaction name="actionSQLInjection2"/>
+     <addaction name="actionSQLInjection"/>
     </widget>
     <addaction name="menuInjections"/>
     <addaction name="actionXSS"/>
@@ -99,7 +109,7 @@
     <property name="title">
      <string>Plugins</string>
     </property>
-    <addaction name="actionAdd_2"/>
+    <addaction name="actionAdd"/>
     <addaction name="actionInstall"/>
    </widget>
    <addaction name="menuWindow"/>
@@ -152,7 +162,7 @@
     <string>XSS</string>
    </property>
   </action>
-  <action name="actionSQLInjection2">
+  <action name="actionSQLInjection">
    <property name="text">
     <string>SQL Injection</string>
    </property>
@@ -162,7 +172,7 @@
     <string>Plugins</string>
    </property>
   </action>
-  <action name="actionAdd_2">
+  <action name="actionAdd">
    <property name="text">
     <string>Manage</string>
    </property>

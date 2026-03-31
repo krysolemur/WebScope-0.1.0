@@ -95,6 +95,10 @@ class MainWindow(QMainWindow, Logging):
         # Move to center
         window.move(x, y)
 
+    '''
+    Mainwindow toolbar actions.
+    '''
+
     # Settings function
     def _openSettings(self) -> None:
         # Create settings window object
@@ -102,7 +106,7 @@ class MainWindow(QMainWindow, Logging):
 
         # Exec settings window
         self.settingsDialog.exec()
-        
+
     # Set target function
     def _setTarget(self) -> None:
         # Load QtUi file 

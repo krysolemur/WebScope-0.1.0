@@ -42,6 +42,9 @@ class Application(Logging, QApplication):
         # Application name
         self.name = "XyraEngine"
 
+        # Profile name for settings and configuration
+        self.actual_profile = "config.json"
+
         '''
         Load ui for custom restart dialog.
         '''

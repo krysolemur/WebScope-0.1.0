@@ -57,18 +57,6 @@ class ConfigManager(Logging):
     Public functions.
     '''
 
-    # Add profile function
-    def addProfile(self, name) -> None:
-        # Create config file
-        with open(f"{self.config_dir}/{name}.json", "w") as nwconfig:
-            # Write json
-            json.dump(self.default_config, nwconfig, indent=4)
-
-    # Remove profile function
-    def removeProfile(self, name) -> None:
-        # Try remove profile
-        os.remove(f"{self.config_dir}/{name}")
-
     # Check default config file
     def checkDefaultConfig(self) -> None:
         # Check Config/config.json in main directory
@@ -84,12 +72,42 @@ class ConfigManager(Logging):
                 # Close file
                 config.close()
 
+    '''
+    Profiles methods.
+    '''
+
+    # Add profile function
+    def addProfile(self, name) -> None:
+        # Create config file
+        with open(f"{self.config_dir}/{name}.json", "w") as nwconfig:
+            # Write json
+            json.dump(self.default_config, nwconfig, indent=4)
+
+    # Remove profile function
+    def removeProfile(self, name) -> None:
+        # Try remove profile
+        os.remove(f"{self.config_dir}/{name}")
+
+    '''
+    Settings methods.
+    '''
+
     # Save settings 
-    def saveSettings(self) -> None:
-        None
-
+    def saveSettings(self, profile) -> None:
+        new_config = 0
+        # Open profile
+        with open(f"{self.config_dir}/{profile}", "w") as nwconfig:
+            # Write into profile new configuration
+            json.dump(new_config, nwconfig, indent=4)
+        
     # Reset settings
-    def resetSettings(self) -> None:
-        None
+    def resetSettings(self, profile) -> None:
+        # Open profile
+        with open(f"{self.config_dir}/{profile}", "w") as nwconfig:
+            # Write into profile new configuration
+            json.dump(self.default_config, nwconfig, indent=4)
 
+    # Load settings from disk
+    def loadSettings(self, profile) -> None:
+        None
     
