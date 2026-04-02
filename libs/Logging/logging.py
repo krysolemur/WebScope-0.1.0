@@ -21,15 +21,23 @@ class Logging:
         }
 
     # Print error
-    def printe(self, exception, function=None, endch=".\n", msg=None) -> None:
+    def printe(self, exception=None, function=None, endch=".\n", msg=None) -> None:
         # Get info from error
         exc_type, exc_value, exc_tb = sys.exc_info()
-        last_tb = traceback.extract_tb(exc_tb)[-1]
+        tb_list = traceback.extract_tb(exc_tb)
+        
+        # Check tb_lsit
+        if tb_list:
+            # Get index
+            last_tb = tb_list[-1]
+        else:
+            # Else None
+            last_tb = None
 
         # Print error    
-        print(f"[  \033[31mERROR\033[0m   ] {msg if msg else "ERROR"} at line {last_tb.lineno} in {last_tb.filename}{f" in {function}" if function else ""}", end=endch)
+        print(f"[  \033[31mERROR\033[0m   ] {msg if msg else "ERROR"}{f"at line {last_tb.lineno} in {last_tb.filename}" if exception else ""}{f" in {function}" if function else ""}", end=endch)
 
-        print(exception)
+        print(exception) if exception else None
 
     # Print info
     def printi(self, msg, endch=".\n") -> None:

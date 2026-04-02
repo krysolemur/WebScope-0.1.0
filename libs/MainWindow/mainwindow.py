@@ -234,7 +234,7 @@ class MainWindow(QMainWindow, Logging):
         self.aboutDialog.setWindowTitle(f"{self.app.name} | {self.app.version} | About")  
 
         # Adjust size
-        self.aboutDialog.adjustSize()
+        self.aboutDialog.resize(self.aboutDialog.sizeHint())
 
         # Set version text
         self.aboutUi.versionLabel.setText(f"{self.aboutUi.versionLabel.text()} {self.app.version}")

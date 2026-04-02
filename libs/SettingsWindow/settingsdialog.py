@@ -62,6 +62,9 @@ class SettingsDialog(QDialog, Logging):
         # Add profiles into combobox
         self._loadProfiles()
 
+        # Load settings
+        self._loadSettings()
+
         # Add profile action
         self.ui.addProfileButton.clicked.connect(self._addProfile)
 
@@ -88,7 +91,6 @@ class SettingsDialog(QDialog, Logging):
 
         # Resize
         self.resize(660, 528)
-
 
     '''
     Private functions.
@@ -176,7 +178,15 @@ class SettingsDialog(QDialog, Logging):
 
         # Akutalize profiles
         self._loadProfiles()
-        
+    
+    '''
+    Settings methods.
+    '''
+
+    # Load settings
+    def _loadSettings(self, settings) -> None:
+        None
+
     '''
     Public functions.
     '''

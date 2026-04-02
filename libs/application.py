@@ -176,6 +176,20 @@ class Application(Logging, QApplication):
         # Set label text
         self.ui.loadingLabel.setText("Checking config directory")
 
+    # Check general config file
+    def checkGeneralConfig(self) -> None:
+        # Check Config/general.json in config directory
+        if not os.path.exists(self.config.general_path):
+            # Print warning
+            self.printw(msg=f"General config doesen't exists! Creating new.")
+
+            # Create general.json
+            with open(self.config.general_path, "w") as config:
+                # Write default settings
+                json.dump(self.config.general_config, config, indent=4)
+
+                # Close file
+                config.close()
     '''
     Public functions.
     '''
