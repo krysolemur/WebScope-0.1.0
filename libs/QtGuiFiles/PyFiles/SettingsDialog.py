@@ -283,33 +283,9 @@ class Ui_SettingsDialog(object):
 
         self.buttonsLayout.addWidget(self.applyButton)
 
-        self.removeProfileButton = QPushButton(SettingsDialog)
-        self.removeProfileButton.setObjectName(u"removeProfileButton")
-        sizePolicy5.setHeightForWidth(self.removeProfileButton.sizePolicy().hasHeightForWidth())
-        self.removeProfileButton.setSizePolicy(sizePolicy5)
-
-        self.buttonsLayout.addWidget(self.removeProfileButton)
-
-        self.addProfileButton = QPushButton(SettingsDialog)
-        self.addProfileButton.setObjectName(u"addProfileButton")
-        sizePolicy5.setHeightForWidth(self.addProfileButton.sizePolicy().hasHeightForWidth())
-        self.addProfileButton.setSizePolicy(sizePolicy5)
-
-        self.buttonsLayout.addWidget(self.addProfileButton)
-
-        self.profilesComboBox = QComboBox(SettingsDialog)
-        self.profilesComboBox.setObjectName(u"profilesComboBox")
-        sizePolicy5.setHeightForWidth(self.profilesComboBox.sizePolicy().hasHeightForWidth())
-        self.profilesComboBox.setSizePolicy(sizePolicy5)
-
-        self.buttonsLayout.addWidget(self.profilesComboBox)
-
         self.buttonsLayout.setStretch(0, 1)
         self.buttonsLayout.setStretch(1, 1)
         self.buttonsLayout.setStretch(2, 1)
-        self.buttonsLayout.setStretch(3, 1)
-        self.buttonsLayout.setStretch(4, 1)
-        self.buttonsLayout.setStretch(5, 1)
 
         self.mainLayout.addLayout(self.buttonsLayout)
 
@@ -344,10 +320,8 @@ class Ui_SettingsDialog(object):
         self.checkUpdatesComboBox.setItemText(0, QCoreApplication.translate("SettingsDialog", u"Yes", None))
         self.checkUpdatesComboBox.setItemText(1, QCoreApplication.translate("SettingsDialog", u"No", None))
 
-        self.cancelButton.setText(QCoreApplication.translate("SettingsDialog", u"Cancel", None))
+        self.cancelButton.setText(QCoreApplication.translate("SettingsDialog", u"Close", None))
         self.resetButton.setText(QCoreApplication.translate("SettingsDialog", u"Reset", None))
         self.applyButton.setText(QCoreApplication.translate("SettingsDialog", u"Apply", None))
-        self.removeProfileButton.setText(QCoreApplication.translate("SettingsDialog", u"Remove", None))
-        self.addProfileButton.setText(QCoreApplication.translate("SettingsDialog", u"Add", None))
     # retranslateUi
 

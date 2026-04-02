@@ -1,7 +1,7 @@
 {
-    "askOnCloseComboBox": 0,
+    "askOnCloseComboBox": "No",
     "themeComboBox": "",
-    "fontComboBox": "Ubuntu",
-    "fontSizeSlider": 0,
-    "checkUpdatesComboBox": 0
+    "fontComboBox": "P052 [UKWN]",
+    "fontSizeSlider": 75,
+    "checkUpdatesComboBox": "No"
 }

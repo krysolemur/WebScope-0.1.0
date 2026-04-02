@@ -35,7 +35,7 @@ class Logging:
             last_tb = None
 
         # Print error    
-        print(f"[  \033[31mERROR\033[0m   ] {msg if msg else "ERROR"}{f"at line {last_tb.lineno} in {last_tb.filename}" if exception else ""}{f" in {function}" if function else ""}", end=endch)
+        print(f"[  \033[31mERROR\033[0m   ] {msg if msg else "ERROR"}{f" at line {last_tb.lineno} in {last_tb.filename}" if exception else ""}{f" in {function}" if function else ""}", end=endch)
 
         print(exception) if exception else None
 

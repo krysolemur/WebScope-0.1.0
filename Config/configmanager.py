@@ -19,7 +19,13 @@ class ConfigManager(Logging):
         super().__init__()
 
         # Default app config
-        self.default_config = {}
+        self.default_config = {
+            "askOnCloseComboBox": "Yes",
+            "themeComboBox": "",
+            "fontComboBox": "Ubuntu",
+            "fontSizeSlider": 0,
+            "checkUpdatesComboBox": "Yes"
+        }
 
         # General config 
         self.general_config = {}
@@ -33,9 +39,6 @@ class ConfigManager(Logging):
         # General config path
         self.general_path = "Config/general.json"
 
-        # All profiles
-        self.all_profiles = self._getProfiles
-
         # Check default config file
         self.checkDefaultConfig()
 
@@ -46,57 +49,34 @@ class ConfigManager(Logging):
         self.config = self._loadSettings
 
         # Load settings 
-        self.config("config.json")
+        self.config()
 
     '''
     Private functions.
     '''
 
-    # Get all profiles
-    def _getProfiles(self) -> list:
-        # Create list
-        profiles = []
-
-        # List config directory
-        for config in os.listdir(self.config_dir):
-            # Check json type
-            if config.endswith(".json"):
-                # Append config to profiles
-                profiles.append(config)
-
-        # Return list
-        return profiles
-    
     # Load settings from disk
-    def _loadSettings(self, profile) -> list:
+    def _loadSettings(self) -> list:
         # Settings list
         settings = {}
 
-        # Check if file exists
-        if os.path.exists(f"{self.config_dir}/{profile}"):
+        # Try except
+        try:
             # Open file
-            with open(f"{self.config_dir}/{profile}", "r") as config:
+            with open(f"{self.config_dir}/config.json", "r") as config:
                 # Parsing json
-                try:
-                    # Load settings
-                    settings = json.load(config)
-
-                    # Close file
-                    config.close()
-
-                    # Return settings
-                    return settings
-                except json.decoder.JSONDecodeError as e:
-                    # Show message
-                    self.printe(msg=f"Error while parsing {profile}, applying default config", exception=e, function=self._loadSettings.__name__)
-
-                    # Return default
-                    return self.default_config
-        else:
+                return json.load(config)
+        except FileNotFoundError as e:
             # Error msg
-            self.printe(msg=f"Configuration file not found, applaying default config", function=self._loadSettings.__name__)
+            self.printe(msg=f"Configuration file not found, applaying default config", function=self._loadSettings.__name__, exception=e)
 
             # Return default config
+            return self.default_config
+        except json.decoder.JSONDecodeError as e:
+            # Show message
+            self.printe(msg=f"Error while parsing config.json, applying default config", exception=e, function=self._loadSettings.__name__)
+
+            # Return default
             return self.default_config
     
     '''
@@ -134,40 +114,27 @@ class ConfigManager(Logging):
                 config.close()
 
     '''
-    Profiles methods.
-    '''
-
-    # Add profile function
-    def addProfile(self, name) -> None:
-        # Create config file
-        with open(f"{self.config_dir}/{name}.json", "w") as nwconfig:
-            # Write json
-            json.dump(self.default_config, nwconfig, indent=4)
-
-    # Remove profile function
-    def removeProfile(self, name) -> None:
-        # Try remove profile
-        os.remove(f"{self.config_dir}/{name}")
-
-    '''
     Settings methods.
     '''
 
     # Save settings 
-    def saveSettings(self, profile, settings) -> None:
+    def saveSettings(self, settings) -> None:
         # Open profile
-        with open(f"{self.config_dir}/{profile}", "w") as nwconfig:
+        with open(f"{self.config_dir}/config.json", "w") as nwconfig:
             # Write into profile new configuration
             json.dump(settings, nwconfig, indent=4)
 
         # Print saved
-        self.printo(msg=f"Settings saved in profile {profile[0:-5]}")
+        self.printo(msg="Settings saved")
         
     # Reset settings
-    def resetSettings(self, profile) -> None:
+    def resetSettings(self) -> None:
         # Open profile
-        with open(f"{self.config_dir}/{profile}", "w") as nwconfig:
+        with open(f"{self.config_dir}/config.json", "w") as nwconfig:
             # Write into profile new configuration
             json.dump(self.default_config, nwconfig, indent=4)
+        
+        # Log message
+        self.printi(msg="Settings reseted")
 
     

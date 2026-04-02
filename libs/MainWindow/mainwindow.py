@@ -253,46 +253,46 @@ class MainWindow(QMainWindow, Logging):
         '''
 
         # Load Ui
-        self.closeDialog = QDialog()
+        closeDialog = QDialog()
 
-        self.closeDialogUi = Ui_customDialog()
+        closeDialogUi = Ui_customDialog()
 
         # Setup ui 
-        self.closeDialogUi.setupUi(self.closeDialog)
+        closeDialogUi.setupUi(closeDialog)
         '''
         Set properties for custom dialog, title, size and center it.
         '''
 
         # Set title
-        self.closeDialog.setWindowTitle(f"{self.app.name} | {self.app.version} | Close")
+        closeDialog.setWindowTitle(f"{self.app.name} | {self.app.version} | Close")
 
         # Adjust dialog
-        self.closeDialog.adjustSize()
+        closeDialog.adjustSize()
 
         # Set dialog modal
-        self.closeDialog.setModal(True)
+        closeDialog.setModal(True)
 
         '''
         Set parametres for buttons and actions.
         '''
 
         # Set label text
-        self.closeDialogUi.textLabel.setText("Do you really want to quit application?")
+        closeDialogUi.textLabel.setText("Do you really want to quit application?")
 
         # Set cancel button text
-        self.closeDialogUi.cancelButton.setText("No")
+        closeDialogUi.cancelButton.setText("No")
 
         # Set sumbit button text
-        self.closeDialogUi.sumbitButton.setText("Yes")
+        closeDialogUi.sumbitButton.setText("Yes")
 
         # Set cancel action
-        self.closeDialogUi.cancelButton.clicked.connect(self.closeDialog.close)
+        closeDialogUi.cancelButton.clicked.connect(closeDialog.close)
 
         # Set sumbit action
-        self.closeDialogUi.sumbitButton.clicked.connect(lambda: (self.printi(msg="Quiting application"), QApplication.quit()))
+        closeDialogUi.sumbitButton.clicked.connect(lambda: (self.printi(msg="Quiting application"), QApplication.quit()))
 
         # Show dialog
-        self.closeDialog.exec()
+        closeDialog.exec()
 
         # Ignore event
         event.ignore()

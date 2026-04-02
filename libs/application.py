@@ -5,11 +5,8 @@ import json
 import os
 import sys
 
-from PySide6.QtWidgets import QLabel, QApplication, QHBoxLayout, QPushButton, QComboBox, QLineEdit, QDialog # type: ignore
+from PySide6.QtWidgets import QApplication, QDialog # type: ignore
 from PySide6.QtCore import QTimer # type: ignore
-from PySide6.QtCore import QFile # type: ignore
-from PySide6.QtUiTools import QUiLoader # type: ignore
-from PySide6.QtGui import QIcon # type: ignore
 
 # Importing program files
 from libs.MainWindow.mainwindow import MainWindow
@@ -41,9 +38,6 @@ class Application(Logging, QApplication):
 
         # Application name
         self.name = "XyraEngine"
-
-        # Profile name for settings and configuration
-        self.actual_profile = "config.json"
 
         '''
         Load ui for custom restart dialog.
@@ -94,7 +88,7 @@ class Application(Logging, QApplication):
         all_process = [
             self._checkNetworkConnection,
             self._checkForUpdates,
-            self._checkConfigDir
+            self._checkConfigDir,
         ]
 
         '''
@@ -176,20 +170,6 @@ class Application(Logging, QApplication):
         # Set label text
         self.ui.loadingLabel.setText("Checking config directory")
 
-    # Check general config file
-    def checkGeneralConfig(self) -> None:
-        # Check Config/general.json in config directory
-        if not os.path.exists(self.config.general_path):
-            # Print warning
-            self.printw(msg=f"General config doesen't exists! Creating new.")
-
-            # Create general.json
-            with open(self.config.general_path, "w") as config:
-                # Write default settings
-                json.dump(self.config.general_config, config, indent=4)
-
-                # Close file
-                config.close()
     '''
     Public functions.
     '''
