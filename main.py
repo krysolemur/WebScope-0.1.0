@@ -1,108 +1,136 @@
 # main.py
 
+'''
+Importing system files for process management, signal handling, 
+and detailed error tracking.
+'''
 
-# Importing system files
+# Standard library for system-specific parameters and functions
 import sys
+
+# Module to set handlers for asynchronous events (e.g., keyboard interrupts)
 import signal
+
+# Module for extracting, formatting and printing stack traces of Python programs
 import traceback
 
 
-# Importing program files
+'''
+Importing program-specific modules for the main application logic 
+and command-line interface handling.
+'''
+
+# The core Application class that manages the GUI and main loop
 from libs.application import Application
+
+# Module containing the definitions for supported console commands
 from libs.Commands.commands import Commands
 
 
-# Create signal for canceling (Ctrl + C)
-# DEBUG
+# Set the signal handler for Interrupt (Ctrl+C) to the default behavior
 signal.signal(signal.SIGINT, signal.SIG_DFL)
 
 
 '''
-Class Main using Logging class as a parent for better logging into console and file. The Main class is start point of the application.
+The Main class serves as the entry point for the graphical version of the application.
+It initializes the application logic and starts the event loop.
 '''
 
-
-# Main class
+# Define the Main class as the starting point
 class Main:
+
+    # Constructor method for the Main class
     def __init__(self) -> None:
-        # Init parents
+
+        # Initialize any parent classes if they exist (using super)
         super().__init__()
 
 
-        # Init application
+        # Create an instance of the core Application class
         self.application = Application()
 
 
-        # Execute applcation
+        # Execute the application and exit the script with its return code
         sys.exit(self.application.exec())
 
 
 '''
-Main block that is running and inicializing main class. Used too for running just some program with arguments in console
+Main execution block. This part handles command-line arguments,
+initializes the command logic, and catches global exceptions.
 '''
 
-
-# Main block
+# Check if the script is being run directly as the main module
 if __name__ == "__main__":
-    # Init commands
+
+    # Initialize the command management class
     commands = Commands()
 
 
-    # Try block for cathcing exceptions
+    # Try block to wrap the execution for global error handling
     try:
+
         '''
-        Checking arguments and running commands.
+        Argument handling logic: determines whether to run the GUI 
+        or a specific console command.
         '''
 
 
+        # Check if exactly one command-line argument was provided
         if len(sys.argv) == 2:
-            # Save sys.argv[1] as command
+
+            # Store the first argument (index 1) into a command variable
             command = sys.argv[1]
 
 
-            # Check if command exists
+            # Verify if the provided command exists in the defined commands dictionary
             if command not in commands.commands.keys():
-                # Unknown command error
+
+                # Inform the user about the invalid command
                 print("Unknown command! Try --help for help menu.")
 
 
-                # Exit
+                # Exit the script with an error status code
                 sys.exit(1)
             
 
-            # --run command for running application
+            # Check if the specific command is the trigger to run the GUI
             if command == "--run":
-                # Creating insatence of Main class
+
+                # Assign the Main class to a variable for instantiation
                 main = Main
 
                 
-                # Running main
+                # Create the Main instance, starting the application
                 main()
 
 
-            # Run others commands
+            # Handle all other valid commands defined in the commands module
             else:
-                # Run command from command module
+
+                # Execute the function associated with the command key
                 commands.commands[command]()
 
 
-        # Check parametres
+        # Check if the user provided more than the expected number of arguments
         elif len(sys.argv) > 2:
-            # Print too many arguments error
+
+            # Print an error message regarding excessive arguments
             print("Too many arguments used! Try --help for help menu.")
 
 
-            # Exit
+            # Exit the script with an error status code
             sys.exit(1)
         
 
+        # Handle the case where no arguments were provided at all
         else:
-            # Print help command for running
+
+            # Provide the user with instructions on how to start the application
             print("Run \"python3 main.py --run\" to start application. Type \"--help\" for help menu.")
             
     
-    # Catch exception
+    # Generic catch-all for any exceptions that occur during runtime
     except Exception as e:
-        # Print exception
-        traceback.print_exception(type(e), e, e.__traceback__)
 
+        # Print a full traceback of the exception for debugging purposes
+        traceback.print_exception(type(e), e, e.__traceback__)

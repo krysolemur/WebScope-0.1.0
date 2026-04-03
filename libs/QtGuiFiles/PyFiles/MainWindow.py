@@ -16,15 +16,16 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
     QIcon, QImage, QKeySequence, QLinearGradient,
     QPainter, QPalette, QPixmap, QRadialGradient,
     QTransform)
-from PySide6.QtWidgets import (QApplication, QGridLayout, QMainWindow, QMenu,
-    QMenuBar, QSizePolicy, QTabWidget, QWidget)
+from PySide6.QtWidgets import (QApplication, QFrame, QGridLayout, QMainWindow,
+    QMenu, QMenuBar, QSizePolicy, QTabWidget,
+    QTextEdit, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
         MainWindow.setWindowModality(Qt.NonModal)
-        MainWindow.resize(800, 600)
+        MainWindow.resize(871, 600)
         MainWindow.setToolButtonStyle(Qt.ToolButtonIconOnly)
         MainWindow.setTabShape(QTabWidget.Rounded)
         self.actionSettings = QAction(MainWindow)
@@ -70,6 +71,17 @@ class Ui_MainWindow(object):
         self.toolsTabWidget.setObjectName(u"toolsTabWidget")
         self.sourceTab = QWidget()
         self.sourceTab.setObjectName(u"sourceTab")
+        self.sourceLayout = QGridLayout(self.sourceTab)
+        self.sourceLayout.setObjectName(u"sourceLayout")
+        self.sourceLayout.setContentsMargins(0, 0, 0, 0)
+        self.sourceTextEdit = QTextEdit(self.sourceTab)
+        self.sourceTextEdit.setObjectName(u"sourceTextEdit")
+        self.sourceTextEdit.setFrameShape(QFrame.NoFrame)
+        self.sourceTextEdit.setFrameShadow(QFrame.Plain)
+        self.sourceTextEdit.setReadOnly(True)
+
+        self.sourceLayout.addWidget(self.sourceTextEdit, 0, 0, 1, 1)
+
         self.toolsTabWidget.addTab(self.sourceTab, "")
         self.networkTab = QWidget()
         self.networkTab.setObjectName(u"networkTab")
@@ -83,7 +95,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 800, 20))
+        self.menubar.setGeometry(QRect(0, 0, 871, 20))
         self.menuWindow = QMenu(self.menubar)
         self.menuWindow.setObjectName(u"menuWindow")
         self.menuTarget = QMenu(self.menubar)
@@ -121,7 +133,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.toolsTabWidget.setCurrentIndex(1)
+        self.toolsTabWidget.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -146,6 +158,14 @@ class Ui_MainWindow(object):
         self.actionIdeas.setText(QCoreApplication.translate("MainWindow", u"Ideas", None))
         self.actionManageUsers.setText(QCoreApplication.translate("MainWindow", u"Manage users", None))
         self.actionInstall_own.setText(QCoreApplication.translate("MainWindow", u"Install own", None))
+        self.sourceTextEdit.setHtml(QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"hr { height: 1px; border-width: 0; }\n"
+"li.unchecked::marker { content: \"\\2610\"; }\n"
+"li.checked::marker { content: \"\\2612\"; }\n"
+"</style></head><body style=\" font-family:'Ubuntu'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>", None))
         self.toolsTabWidget.setTabText(self.toolsTabWidget.indexOf(self.sourceTab), QCoreApplication.translate("MainWindow", u"Source", None))
         self.toolsTabWidget.setTabText(self.toolsTabWidget.indexOf(self.networkTab), QCoreApplication.translate("MainWindow", u"Network", None))
         self.toolsTabWidget.setTabText(self.toolsTabWidget.indexOf(self.consoleTab), QCoreApplication.translate("MainWindow", u"Console", None))

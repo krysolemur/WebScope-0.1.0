@@ -6,9 +6,9 @@
 import sys
 import os
 
-from PySide6.QtWidgets import QDialog, QSlider, QComboBox, QWidget, QCheckBox # type: ignore
-from PySide6.QtCore import QSignalBlocker # type: ignore
-from PySide6.QtGui import QIcon # type: ignore
+from PySide6.QtWidgets import QDialog, QSlider, QComboBox, QWidget, QCheckBox, QFontDialog, QColorDialog # type: ignore
+from PySide6.QtCore import QSignalBlocker, QSize, Qt # type: ignore
+from PySide6.QtGui import QIcon, QPixmap # type: ignore
 
 # Importing program files
 from libs.Logging.logging import Logging
@@ -16,6 +16,7 @@ from resources.Themes.theme import Theme
 
 from libs.QtGuiFiles.PyFiles.SettingsDialog import Ui_SettingsDialog
 from libs.QtGuiFiles.PyFiles.CustomDialog import Ui_customDialog
+from libs.QtGuiFiles.PyFiles.StyleDialog import Ui_styleDialog
 
 # Class settings window
 class SettingsDialog(QDialog, Logging):
@@ -109,6 +110,19 @@ class SettingsDialog(QDialog, Logging):
         # Resize
         self.resize(660, 528)
 
+        '''
+        Source code buttons actions.
+        '''
+
+        # Html elements style button
+        self.ui.htmlElementsButton.clicked.connect(lambda: self.ui.htmlElementsButton.setStyleSheet(self._stylePicker().strip()))
+
+        # Html elements style button
+        self.ui.htmlAtributsButton.clicked.connect(lambda: self.ui.htmlAtributsButton.setStyleSheet(self._stylePicker().strip()))
+
+        # Html elements style button
+        self.ui.atributsValuesButton.clicked.connect(lambda: self.ui.atributsValuesButton.setStyleSheet(self._stylePicker().strip()))
+
     '''
     Private functions.
     '''
@@ -139,6 +153,9 @@ class SettingsDialog(QDialog, Logging):
                 elif isinstance(widget, QSlider):
                     # For slider
                     widget.setValue(int(value))
+                elif isinstance(widget, QCheckBox):
+                    # Load their value for checkbox
+                    widget.setChecked(bool(value))
 
     # Get value of all settings childs, make dictonary from it and overwrite config.json.
     def _saveSettingsAction(self) -> None:
@@ -149,7 +166,10 @@ class SettingsDialog(QDialog, Logging):
             "stylesheetComboBox": self.ui.stylesheetComboBox.currentText(),
             "fontComboBox": self.ui.fontComboBox.currentText(),
             "fontSizeSlider": self.ui.fontSizeSlider.value(),
-            "checkUpdatesComboBox": self.ui.checkUpdatesComboBox.currentText()
+            "checkUpdatesComboBox": self.ui.checkUpdatesComboBox.currentText(),
+            "htmlElementsCheckBox": self.ui.htmlElementsCheckBox.isChecked(),
+            "htmlAtributsCheckBox": self.ui.htmlAtributsCheckBox.isChecked(),
+            "atributsValuesCheckBox": self.ui.atributsValuesCheckBox.isChecked()
         }
 
         # Save settings in file
@@ -250,74 +270,261 @@ class SettingsDialog(QDialog, Logging):
             # Enable button
             self.ui.applyButton.setEnabled(not self.isSaved)
 
+    # Logic for a custom style picker dialog designed for HTML text elements.
+    def _stylePicker(self) -> str:
+        '''
+        Initializes and manages a sub-dialog for picking text styles.
+        Contains nested helper functions to handle UI updates and color selection.
+        '''
+
+        # Nested function to refresh the visual preview label based on current selections.
+        def _updatePreview() -> None:
+            # Retrieve the stored foreground color or default to black if not set.
+            fg = getattr(self, 'current_fg', 'black')
+
+            # Retrieve the stored background color or default to transparent.
+            bg = getattr(self, 'current_bg', 'transparent')
+
+            # Determine font weight based on the toggle state of the bold button.
+            weight = "bold" if styleDialogUi.boldButton.isChecked() else "normal"
+
+            # Determine font style based on the toggle state of the italic button.
+            style = "italic" if styleDialogUi.italicButton.isChecked() else "normal"
+
+            # Determine text decoration based on the toggle state of the underline button.
+            under = "underline" if styleDialogUi.underlineButton.isChecked() else "none"
+
+            # Get the currently selected index from the text case combo box.
+            case_index = styleDialogUi.caseComboBox.currentIndex()
+
+            # Initialize text transform as none and update based on index selection.
+            transform = "none"
+            # Check if the user selected the Uppercase option (Index 1).
+            if case_index == 1:
+                # Apply uppercase transformation.
+                transform = "uppercase"
+            # Check if the user selected the Lowercase option (Index 2).
+            elif case_index == 2:
+                # Apply lowercase transformation.
+                transform = "lowercase"
+            # Check if the user selected the Capitalize option (Index 3).
+            elif case_index == 3:
+                # Apply capitalization to the first letter of each word.
+                transform = "capitalize"
+
+            # Apply the generated CSS-like stylesheet to the preview label.
+            styleDialogUi.exampleTextLabel.setStyleSheet(f"""
+                color: {fg};
+                background-color: {bg};
+                font-weight: {weight};
+                font-style: {style};
+                text-decoration: {under};
+                text-transform: {transform};
+            """)
+
+            # Evaluate if any styling attribute differs from its default state.
+            has_changes = (fg != 'black' or bg != 'transparent' or 
+                           styleDialogUi.boldButton.isChecked() or 
+                           styleDialogUi.italicButton.isChecked() or 
+                           styleDialogUi.underlineButton.isChecked() or
+                           styleDialogUi.caseComboBox.currentIndex() != 0)
+            
+            # Toggle the reset button's availability based on the presence of changes.
+            styleDialogUi.resetButton.setEnabled(has_changes)
+
+        # Nested function to open the system color picker and store the result.
+        def _handleColorChange(button) -> None:
+            # Invoke the standard Qt color dialog to let the user pick a color.
+            color = QColorDialog.getColor()
+
+            # Verify that the user confirmed the selection and didn't cancel.
+            if color.isValid():
+                # Determine if the foreground button triggered the change.
+                if button == styleDialogUi.foregroundButton:
+                    # Store the selected hex color as the current foreground.
+                    self.current_fg = color.name()
+                # Determine if the background button triggered the change.
+                elif button == styleDialogUi.backgroundButton:
+                    # Store the selected hex color as the current background.
+                    self.current_bg = color.name()
+                
+                # Refresh the preview label to reflect the new color selection.
+                _updatePreview()
+
+        # Function to extract the CSS stylesheet from the preview label and return it as a string.
+        def _encodeStyle() -> str:
+            # Store the resulting CSS string into the instance variable before closing.
+            self.css = styleDialogUi.exampleTextLabel.styleSheet()
+
+            # Close the dialog and return the QDialog.Accepted code to the caller.
+            styleDialog.accept()
+
+            # Return the generated CSS for internal function usage.
+            return self.css
+        
+        # Nested function to clear all custom style selections and refresh the UI.
+        def _resetStyles() -> None:
+            # Revert color variables to their default states.
+            self.current_fg = 'black'
+            self.current_bg = 'transparent'
+
+            # Uncheck all styling toggle buttons.
+            styleDialogUi.boldButton.setChecked(False)
+            styleDialogUi.italicButton.setChecked(False)
+            styleDialogUi.underlineButton.setChecked(False)
+
+            # Reset the text case selection to the first index (None).
+            styleDialogUi.caseComboBox.setCurrentIndex(0)
+
+            # Update the preview label to reflect the cleared styles.
+            _updatePreview()
+            
+        '''
+        Dialog initialization, UI loading, and widget setup.
+        '''
+
+        # Create a new QDialog instance with the main window as its parent.
+        styleDialog = QDialog(self)
+
+        # Instantiate the generated UI layout for the style picker.
+        styleDialogUi = Ui_styleDialog()
+
+        # Apply the layout and widgets to the newly created dialog instance.
+        styleDialogUi.setupUi(styleDialog)
+
+        # Trigger initial preview update to show default settings.
+        _updatePreview()
+
+        '''
+        Configuring dialog window properties like geometry and titles.
+        '''
+
+        # Prevent the user from shrinking the window below its calculated size hint.
+        styleDialog.setMinimumSize(styleDialog.sizeHint())
+
+        # Set the initial dimensions of the dialog based on its layout needs.
+        styleDialog.resize(styleDialog.sizeHint())
+
+        # Define the title displayed in the window's title bar.
+        styleDialog.setWindowTitle(f"{self.app.name} | {self.app.version} | Style picker")
+
+        '''
+        Establishing signal and slot connections for interactive widgets.
+        '''
+
+        # Trigger color selection for the text foreground on button click.
+        styleDialogUi.foregroundButton.clicked.connect(lambda: _handleColorChange(styleDialogUi.foregroundButton))
+
+        # Trigger color selection for the text background on button click.
+        styleDialogUi.backgroundButton.clicked.connect(lambda: _handleColorChange(styleDialogUi.backgroundButton))     
+
+        # Update the live preview whenever the bold toggle is clicked.
+        styleDialogUi.boldButton.clicked.connect(_updatePreview)        
+
+        # Update the live preview whenever the italic toggle is clicked.
+        styleDialogUi.italicButton.clicked.connect(_updatePreview)      
+
+        # Update the live preview whenever the underline toggle is clicked.
+        styleDialogUi.underlineButton.clicked.connect(_updatePreview)      
+
+        # Update the live preview whenever the text case selection changes.
+        styleDialogUi.caseComboBox.currentIndexChanged.connect(_updatePreview)
+
+        # Execute the encoding logic when the user confirms with the OK button.
+        styleDialogUi.okButton.clicked.connect(_encodeStyle)
+
+        # Trigger the style reset logic whenever the reset button is clicked.
+        styleDialogUi.resetButton.clicked.connect(_resetStyles)
+
+        # Display the dialog as a modal window and capture the return result.
+        result = styleDialog.exec()
+
+        # Evaluate if the dialog was closed via the OK button (Accepted).
+        if result == QDialog.Accepted:
+            # Return the CSS string captured during the encoding process.
+            return getattr(self, 'css', "")
+        
+        # Return an empty string if the user cancelled or closed the dialog.
+        return ""
+
     '''
     Public functions.
     '''
 
-    # Qt close event overwritten.
+    # Overriding the default Qt close event to handle unsaved changes.
     def closeEvent(self, event) -> None:
-        # If it is saved
+        '''
+        Handles the window closure logic by checking if settings are saved.
+        If changes are pending, it prompts the user with a confirmation dialog.
+        '''
+
+        # Check the boolean flag that tracks if current settings are saved
         if self.isSaved:
-            # Show message for close
+            # Log an informational message about closing the window
             self.printi(msg="Closing settings window")
 
-            # And close through accept event method
+            # Tell Qt to proceed with closing the window
             event.accept()
 
+            # Exit the function early as no further action is needed
             return
 
-        # If not saved, create dialog for user response if continue without saving or save
+        # Create a new modal dialog to warn the user about unsaved data
         closeDialog = QDialog(self) 
         
-        # Load Ui
+        # Instantiate the custom dialog UI layout
         closeDialogUi = Ui_customDialog()
 
-        # Setup Ui
+        # Apply the UI components to the dialog instance
         closeDialogUi.setupUi(closeDialog)
 
-        # Set dialog title
+        # Define the window title using application metadata
         closeDialog.setWindowTitle(f"{self.app.name} | {self.app.version} | Close settings")
 
-        # Set information label text
+        # Set the descriptive text informing the user about the unsaved state
         closeDialogUi.textLabel.setText("Settings not saved! Do you want to abort it?")
 
-        # Set cancel button text 
+        # Configure the secondary button for discarding changes
         closeDialogUi.cancelButton.setText("Close without saving")
 
-        # Set sumbit buttin text for saving
+        # Configure the primary button for saving and then closing
         closeDialogUi.sumbitButton.setText("Save & Close")
         
-        # Set modalable 
+        # Ensure the dialog blocks interaction with the parent window
         closeDialog.setModal(True)
 
-        # Adjust dialog size
+        # Adjust the dialog dimensions to fit the newly set text and buttons
         closeDialog.adjustSize()
 
-        # Cancel button connect to close dialog through cross button in title
+        # Link the discard button to the dialog's rejected result
         closeDialogUi.cancelButton.clicked.connect(closeDialog.reject)
         
-        # Sumbit button connect for save and close
+        # Link the save button to the dialog's accepted result
         closeDialogUi.sumbitButton.clicked.connect(closeDialog.accept)
 
-        # Run dialog with resutl 
+        # Execute the dialog modally and capture the user's choice
         result = closeDialog.exec()
 
-        # Check result
+        # Evaluate if the user chose the 'Save & Close' option
         if result == QDialog.Accepted:
-            # Show message save and quit
+            # Log the intent to save data before exiting
             self.printi(msg="Saving and quitting...")
 
-            # Save settings
+            # Execute the internal logic to write settings to storage
             self._saveSettingsAction() 
 
-            # Accept event for close dialog
+            # Allow the main window close event to proceed
             event.accept() 
+
+        # Evaluate if the user chose to 'Close without saving'
         elif result == QDialog.Rejected:
-            # Close dialog and settings window msg that window is closing without saving settings
+            # Log that the window is closing and changes are being discarded
             self.printi(msg="Quitting without saving")
 
-            # Accept event and close
+            # Allow the main window close event to proceed despite lack of saving
             event.accept()
+
+        # Handle cases where the user closes the dialog without a choice (e.g., Esc)
         else:
-            # Ignore event if user just click close cross button
+            # Cancel the window closure to keep the settings window open
             event.ignore()

@@ -2,8 +2,8 @@
 
 # Importing system files
 import requests
-import sys
-import os
+from bs4 import BeautifulSoup
+import jsbeautifier # type: ignore
 
 from PySide6.QtWidgets import QDialog, QApplication, QMainWindow # type: ignore
 from PySide6.QtGui import QIcon # type: ignore
@@ -11,6 +11,7 @@ from PySide6.QtGui import QIcon # type: ignore
 # Imporing program files
 from libs.Logging.logging import Logging
 from libs.SettingsWindow.settingsdialog import SettingsDialog
+from libs.SourceSyntax.sourcesyntax import SourceSyntax
 
 from libs.QtGuiFiles.PyFiles.MainWindow import Ui_MainWindow
 from libs.QtGuiFiles.PyFiles.CustomDialog import Ui_customDialog
@@ -31,6 +32,9 @@ class MainWindow(QMainWindow, Logging):
 
         # Config 
         self.config = self.app.config
+
+        # Url 
+        self.url = None
 
         '''
         Load UI for MainWindow.
@@ -61,12 +65,14 @@ class MainWindow(QMainWindow, Logging):
         # Set target menu action
         self.ui.actionSetTarget.triggered.connect(self._setTargetAction)
 
+        self.highlighter = SourceSyntax(self.ui.sourceTextEdit.document())
+
         '''
         Other windows properties like size, title and more...
         '''
 
         # Window title
-        self.setWindowTitle(f"{self.app.name} | {self.app.version}")  
+        self.setWindowTitle(f"{self.app.name} | {self.app.version} {f"| {self.url}" if self.url else ""}")  
 
         # Window icon
         self.setWindowIcon(QIcon(self.app.iconPath))
@@ -160,6 +166,15 @@ class MainWindow(QMainWindow, Logging):
             # Close dialog if url is ok
             self.targetDialog.close()
 
+            # Set url
+            self.url = url
+
+            # Change title
+            self.setWindowTitle(f"{self.app.name} | {self.app.version} {f"| {self.url}" if self.url else ""}")  
+
+            # Load page like requests and source code and other
+            self._loadWebPage()
+
     # About action for open about dialog which is used to show inforamtion about this application like version and more.
     def _aboutAction(self) -> None:
         '''
@@ -189,6 +204,35 @@ class MainWindow(QMainWindow, Logging):
 
         # Show dialog
         aboutDialog.show()
+
+    # Load page function that runs _getSource and other function for inspecting page.
+    def _loadWebPage(self) -> None:
+        # Get source code first and load it to text edit
+        self.ui.sourceTextEdit.setPlainText(self._getSourceCode())
+
+
+    # Download source from url which is get from set target menu and function.
+    def _getSourceCode(self) -> str:
+        # Setn GET request
+        source = requests.get(self.url)
+        
+        # Check if page is loaded 
+        source.raise_for_status()
+
+        # Set parametres for formating
+        opts = jsbeautifier.default_options()
+
+        # Ident size four spaces
+        opts.indent_size = 4  
+
+        # Long rows
+        opts.wrap_line_length = 80  
+        
+        # Format whole text (HTML, CSS, JS)
+        formatted_code = jsbeautifier.beautify(source.text, opts)
+        
+        # Return formated source code for better reading
+        return formatted_code
 
     '''
     Public functions.

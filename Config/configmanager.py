@@ -18,14 +18,16 @@ class ConfigManager(Logging):
 
         # Default app config
         self.defaultConfig = {
-            "askOnCloseComboBox": "Yes",
-            "themeComboBox": "Default",
+            "askOnCloseComboBox": "No",
+            "themeComboBox": "Light",
             "stylesheetComboBox": "",
             "fontComboBox": "Sans Serif",
             "fontSizeSlider": 10,
-            "checkUpdatesComboBox": "No"
+            "checkUpdatesComboBox": "No",
+            "htmlElementsCheckBox": True,
+            "htmlAtributsCheckBox": True,
+            "atributsValuesCheckBox": True
         }
-
         # Config file path
         self.configPath = "Config/config.json"
 
@@ -80,11 +82,6 @@ class ConfigManager(Logging):
 
     '''
     Public functions.
-    '''
-
-
-    '''
-    Settings methods.
     '''
 
     # Public version of save settings function that is used in settings dialog which is calling from.

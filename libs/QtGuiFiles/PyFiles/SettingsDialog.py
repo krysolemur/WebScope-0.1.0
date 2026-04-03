@@ -15,12 +15,12 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QAbstractScrollArea, QApplication, QComboBox, QDialog,
-    QFontComboBox, QFrame, QHBoxLayout, QHeaderView,
-    QLabel, QLayout, QListWidget, QListWidgetItem,
-    QPushButton, QScrollArea, QSizePolicy, QSlider,
-    QSpacerItem, QStackedWidget, QTableWidget, QTableWidgetItem,
-    QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QAbstractScrollArea, QApplication, QCheckBox, QComboBox,
+    QDialog, QFontComboBox, QFrame, QHBoxLayout,
+    QHeaderView, QLabel, QLayout, QListWidget,
+    QListWidgetItem, QPushButton, QScrollArea, QSizePolicy,
+    QSlider, QSpacerItem, QStackedWidget, QTableWidget,
+    QTableWidgetItem, QVBoxLayout, QWidget)
 
 class Ui_SettingsDialog(object):
     def setupUi(self, SettingsDialog):
@@ -48,6 +48,7 @@ class Ui_SettingsDialog(object):
         self.settingsLayout.setObjectName(u"settingsLayout")
         self.settingsLayout.setSizeConstraint(QLayout.SetDefaultConstraint)
         self.settingsView = QListWidget(SettingsDialog)
+        QListWidgetItem(self.settingsView)
         QListWidgetItem(self.settingsView)
         QListWidgetItem(self.settingsView)
         self.settingsView.setObjectName(u"settingsView")
@@ -278,15 +279,104 @@ class Ui_SettingsDialog(object):
         self.generalLayout.addWidget(self.generalScrollArea)
 
         self.settingsWidget.addWidget(self.generalPage)
-        self.page = QWidget()
-        self.page.setObjectName(u"page")
-        self.settingsWidget.addWidget(self.page)
-        self.shortcustPage = QWidget()
-        self.shortcustPage.setObjectName(u"shortcustPage")
-        self.shortcutsLayout = QVBoxLayout(self.shortcustPage)
+        self.sourceCodePage = QWidget()
+        self.sourceCodePage.setObjectName(u"sourceCodePage")
+        sizePolicy2.setHeightForWidth(self.sourceCodePage.sizePolicy().hasHeightForWidth())
+        self.sourceCodePage.setSizePolicy(sizePolicy2)
+        self.sourceCodeLayout = QHBoxLayout(self.sourceCodePage)
+        self.sourceCodeLayout.setSpacing(0)
+        self.sourceCodeLayout.setObjectName(u"sourceCodeLayout")
+        self.sourceCodeLayout.setContentsMargins(0, 0, 0, 0)
+        self.sourceCodeScrollArea = QScrollArea(self.sourceCodePage)
+        self.sourceCodeScrollArea.setObjectName(u"sourceCodeScrollArea")
+        self.sourceCodeScrollArea.setSizeAdjustPolicy(QAbstractScrollArea.AdjustToContents)
+        self.sourceCodeScrollArea.setWidgetResizable(True)
+        self.sourceCodeScrollArea.setAlignment(Qt.AlignCenter)
+        self.sourceCodeScrollContents = QWidget()
+        self.sourceCodeScrollContents.setObjectName(u"sourceCodeScrollContents")
+        self.sourceCodeScrollContents.setGeometry(QRect(0, 0, 400, 585))
+        self.sourceCodeScrollLayout = QVBoxLayout(self.sourceCodeScrollContents)
+        self.sourceCodeScrollLayout.setObjectName(u"sourceCodeScrollLayout")
+        self.sourceCodeScrollLayout.setContentsMargins(0, 0, 0, 0)
+        self.htmlElementsLayout = QHBoxLayout()
+        self.htmlElementsLayout.setObjectName(u"htmlElementsLayout")
+        self.htmlElementsLayout.setContentsMargins(6, 6, 6, 6)
+        self.htmlElementsCheckBox = QCheckBox(self.sourceCodeScrollContents)
+        self.htmlElementsCheckBox.setObjectName(u"htmlElementsCheckBox")
+        sizePolicy3.setHeightForWidth(self.htmlElementsCheckBox.sizePolicy().hasHeightForWidth())
+        self.htmlElementsCheckBox.setSizePolicy(sizePolicy3)
+
+        self.htmlElementsLayout.addWidget(self.htmlElementsCheckBox)
+
+        self.htmlElementsButton = QPushButton(self.sourceCodeScrollContents)
+        self.htmlElementsButton.setObjectName(u"htmlElementsButton")
+        sizePolicy4.setHeightForWidth(self.htmlElementsButton.sizePolicy().hasHeightForWidth())
+        self.htmlElementsButton.setSizePolicy(sizePolicy4)
+
+        self.htmlElementsLayout.addWidget(self.htmlElementsButton)
+
+        self.htmlElementsLayout.setStretch(0, 1)
+
+        self.sourceCodeScrollLayout.addLayout(self.htmlElementsLayout)
+
+        self.htmlAtributsLayout = QHBoxLayout()
+        self.htmlAtributsLayout.setObjectName(u"htmlAtributsLayout")
+        self.htmlAtributsLayout.setContentsMargins(6, 6, 6, 6)
+        self.htmlAtributsCheckBox = QCheckBox(self.sourceCodeScrollContents)
+        self.htmlAtributsCheckBox.setObjectName(u"htmlAtributsCheckBox")
+        sizePolicy3.setHeightForWidth(self.htmlAtributsCheckBox.sizePolicy().hasHeightForWidth())
+        self.htmlAtributsCheckBox.setSizePolicy(sizePolicy3)
+
+        self.htmlAtributsLayout.addWidget(self.htmlAtributsCheckBox)
+
+        self.htmlAtributsButton = QPushButton(self.sourceCodeScrollContents)
+        self.htmlAtributsButton.setObjectName(u"htmlAtributsButton")
+        sizePolicy4.setHeightForWidth(self.htmlAtributsButton.sizePolicy().hasHeightForWidth())
+        self.htmlAtributsButton.setSizePolicy(sizePolicy4)
+
+        self.htmlAtributsLayout.addWidget(self.htmlAtributsButton)
+
+        self.htmlAtributsLayout.setStretch(0, 1)
+
+        self.sourceCodeScrollLayout.addLayout(self.htmlAtributsLayout)
+
+        self.atributsValuesLayout = QHBoxLayout()
+        self.atributsValuesLayout.setObjectName(u"atributsValuesLayout")
+        self.atributsValuesLayout.setContentsMargins(6, 6, 6, 6)
+        self.atributsValuesCheckBox = QCheckBox(self.sourceCodeScrollContents)
+        self.atributsValuesCheckBox.setObjectName(u"atributsValuesCheckBox")
+        sizePolicy3.setHeightForWidth(self.atributsValuesCheckBox.sizePolicy().hasHeightForWidth())
+        self.atributsValuesCheckBox.setSizePolicy(sizePolicy3)
+        self.atributsValuesCheckBox.setTristate(False)
+
+        self.atributsValuesLayout.addWidget(self.atributsValuesCheckBox)
+
+        self.atributsValuesButton = QPushButton(self.sourceCodeScrollContents)
+        self.atributsValuesButton.setObjectName(u"atributsValuesButton")
+        sizePolicy4.setHeightForWidth(self.atributsValuesButton.sizePolicy().hasHeightForWidth())
+        self.atributsValuesButton.setSizePolicy(sizePolicy4)
+
+        self.atributsValuesLayout.addWidget(self.atributsValuesButton)
+
+        self.atributsValuesLayout.setStretch(0, 1)
+
+        self.sourceCodeScrollLayout.addLayout(self.atributsValuesLayout)
+
+        self.sourceCodeLayoutSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.sourceCodeScrollLayout.addItem(self.sourceCodeLayoutSpacer)
+
+        self.sourceCodeScrollArea.setWidget(self.sourceCodeScrollContents)
+
+        self.sourceCodeLayout.addWidget(self.sourceCodeScrollArea)
+
+        self.settingsWidget.addWidget(self.sourceCodePage)
+        self.shortcutsPage = QWidget()
+        self.shortcutsPage.setObjectName(u"shortcutsPage")
+        self.shortcutsLayout = QVBoxLayout(self.shortcutsPage)
         self.shortcutsLayout.setObjectName(u"shortcutsLayout")
         self.shortcutsLayout.setContentsMargins(0, 0, 0, 0)
-        self.shortcutsTableWidget = QTableWidget(self.shortcustPage)
+        self.shortcutsTableWidget = QTableWidget(self.shortcutsPage)
         if (self.shortcutsTableWidget.columnCount() < 3):
             self.shortcutsTableWidget.setColumnCount(3)
         __qtablewidgetitem = QTableWidgetItem()
@@ -325,7 +415,7 @@ class Ui_SettingsDialog(object):
 
         self.shortcutsLayout.addWidget(self.shortcutsTableWidget)
 
-        self.settingsWidget.addWidget(self.shortcustPage)
+        self.settingsWidget.addWidget(self.shortcutsPage)
 
         self.settingsLayout.addWidget(self.settingsWidget)
 
@@ -371,7 +461,7 @@ class Ui_SettingsDialog(object):
 
         self.retranslateUi(SettingsDialog)
 
-        self.settingsWidget.setCurrentIndex(2)
+        self.settingsWidget.setCurrentIndex(1)
 
 
         QMetaObject.connectSlotsByName(SettingsDialog)
@@ -385,7 +475,9 @@ class Ui_SettingsDialog(object):
         ___qlistwidgetitem = self.settingsView.item(0)
         ___qlistwidgetitem.setText(QCoreApplication.translate("SettingsDialog", u"General", None))
         ___qlistwidgetitem1 = self.settingsView.item(1)
-        ___qlistwidgetitem1.setText(QCoreApplication.translate("SettingsDialog", u"Shortcuts", None))
+        ___qlistwidgetitem1.setText(QCoreApplication.translate("SettingsDialog", u"Source code ", None))
+        ___qlistwidgetitem2 = self.settingsView.item(2)
+        ___qlistwidgetitem2.setText(QCoreApplication.translate("SettingsDialog", u"Shortcuts", None))
         self.settingsView.setSortingEnabled(__sortingEnabled)
 
         self.askOnCloseLabel.setText(QCoreApplication.translate("SettingsDialog", u"Ask on close: ", None))
@@ -407,6 +499,12 @@ class Ui_SettingsDialog(object):
         self.checkUpdatesComboBox.setItemText(0, QCoreApplication.translate("SettingsDialog", u"Yes", None))
         self.checkUpdatesComboBox.setItemText(1, QCoreApplication.translate("SettingsDialog", u"No", None))
 
+        self.htmlElementsCheckBox.setText(QCoreApplication.translate("SettingsDialog", u"Mark html elements", None))
+        self.htmlElementsButton.setText(QCoreApplication.translate("SettingsDialog", u"Style", None))
+        self.htmlAtributsCheckBox.setText(QCoreApplication.translate("SettingsDialog", u"Mark html atributs", None))
+        self.htmlAtributsButton.setText(QCoreApplication.translate("SettingsDialog", u"Style", None))
+        self.atributsValuesCheckBox.setText(QCoreApplication.translate("SettingsDialog", u"Mark atributs values", None))
+        self.atributsValuesButton.setText(QCoreApplication.translate("SettingsDialog", u"Style", None))
         ___qtablewidgetitem = self.shortcutsTableWidget.horizontalHeaderItem(0)
         ___qtablewidgetitem.setText(QCoreApplication.translate("SettingsDialog", u"Name", None))
         ___qtablewidgetitem1 = self.shortcutsTableWidget.horizontalHeaderItem(1)

@@ -4,5 +4,8 @@
     "stylesheetComboBox": "",
     "fontComboBox": "Sans Serif",
     "fontSizeSlider": 10,
-    "checkUpdatesComboBox": "No"
+    "checkUpdatesComboBox": "No",
+    "htmlElementsCheckBox": true,
+    "htmlAtributsCheckBox": true,
+    "atributsValuesCheckBox": true
 }
