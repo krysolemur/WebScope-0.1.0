@@ -308,7 +308,7 @@ class SettingsDialog(QDialog, Logging):
             self.printi(msg="Saving and quitting...")
 
             # Save settings
-            self._saveSettings() 
+            self._saveSettingsAction() 
 
             # Accept event for close dialog
             event.accept() 

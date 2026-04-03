@@ -44,6 +44,10 @@ Main block that is running and inicializing main class. Used too for running jus
 
 # Main block
 if __name__ == "__main__":
+    # Init commands
+    commands = Commands()
+
+
     # Try block for cathcing exceptions
     try:
         '''
@@ -57,7 +61,7 @@ if __name__ == "__main__":
 
 
             # Check if command exists
-            if command not in Commands().commands:
+            if command not in commands.commands.keys():
                 # Unknown command error
                 print("Unknown command! Try --help for help menu.")
 
@@ -78,7 +82,8 @@ if __name__ == "__main__":
 
             # Run others commands
             else:
-                None
+                # Run command from command module
+                commands.commands[command]()
 
 
         # Check parametres

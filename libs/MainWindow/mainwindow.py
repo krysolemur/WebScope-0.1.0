@@ -126,7 +126,7 @@ class MainWindow(QMainWindow, Logging):
         self.targetDialog.show()
 
         # Connect _onCheckUrl to target button
-        self.targetDialogUi.setTargetButton.clicked.connect(self._onCheckURL)
+        self.targetDialogUi.setTargetButton.clicked.connect(lambda: self._onCheckURL(self.targetDialogUi.setTargetLineEdit.text()))
 
     # Check if is target reachable, show message if not.
     def _checkURL(self, url) -> bool:
@@ -149,10 +149,7 @@ class MainWindow(QMainWindow, Logging):
             return False
 
     # Function that is calling _checkURL with url parametr, is called from _setTargetAction.
-    def _onCheckURL(self) -> None:
-        # Get URL from line edit 
-        url = self.targetDialogUi.setTargetLineEdit.text()
-
+    def _onCheckURL(self, url) -> None:
         # Check if URL is enetered or if is reachable
         if not self._checkURL(url): 
             # Set wrong url stylesheet for line edit (red border)

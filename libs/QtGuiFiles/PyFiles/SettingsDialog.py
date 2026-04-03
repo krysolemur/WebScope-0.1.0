@@ -325,10 +325,6 @@ class Ui_SettingsDialog(object):
 
         self.shortcutsLayout.addWidget(self.shortcutsTableWidget)
 
-        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
-
-        self.shortcutsLayout.addItem(self.verticalSpacer)
-
         self.settingsWidget.addWidget(self.shortcustPage)
 
         self.settingsLayout.addWidget(self.settingsWidget)
@@ -375,7 +371,7 @@ class Ui_SettingsDialog(object):
 
         self.retranslateUi(SettingsDialog)
 
-        self.settingsWidget.setCurrentIndex(0)
+        self.settingsWidget.setCurrentIndex(2)
 
 
         QMetaObject.connectSlotsByName(SettingsDialog)
