@@ -15,9 +15,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QComboBox, QFontComboBox, QGridLayout,
-    QHBoxLayout, QLabel, QPushButton, QScrollArea,
-    QSizePolicy, QSpacerItem, QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QComboBox, QFontComboBox, QHBoxLayout,
+    QLabel, QPushButton, QScrollArea, QSizePolicy,
+    QSpacerItem, QVBoxLayout, QWidget)
 
 class Ui_generalPage(object):
     def setupUi(self, generalPage):
@@ -35,9 +35,9 @@ class Ui_generalPage(object):
         self.generalScrollContent = QWidget()
         self.generalScrollContent.setObjectName(u"generalScrollContent")
         self.generalScrollContent.setGeometry(QRect(0, 0, 885, 812))
-        self.verticalLayout_2 = QVBoxLayout(self.generalScrollContent)
-        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
-        self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
+        self.generalScrollLayout = QVBoxLayout(self.generalScrollContent)
+        self.generalScrollLayout.setObjectName(u"generalScrollLayout")
+        self.generalScrollLayout.setContentsMargins(0, 0, 0, 0)
         self.fontSizeLayout = QHBoxLayout()
         self.fontSizeLayout.setObjectName(u"fontSizeLayout")
         self.fontSizeLayout.setContentsMargins(6, 6, 6, 6)
@@ -61,7 +61,7 @@ class Ui_generalPage(object):
 
         self.fontSizeLayout.setStretch(1, 1)
 
-        self.verticalLayout_2.addLayout(self.fontSizeLayout)
+        self.generalScrollLayout.addLayout(self.fontSizeLayout)
 
         self.fontLayout = QHBoxLayout()
         self.fontLayout.setObjectName(u"fontLayout")
@@ -94,7 +94,7 @@ class Ui_generalPage(object):
 
         self.fontLayout.setStretch(1, 1)
 
-        self.verticalLayout_2.addLayout(self.fontLayout)
+        self.generalScrollLayout.addLayout(self.fontLayout)
 
         self.stylesheetLayout = QHBoxLayout()
         self.stylesheetLayout.setObjectName(u"stylesheetLayout")
@@ -122,7 +122,7 @@ class Ui_generalPage(object):
 
         self.stylesheetLayout.setStretch(1, 1)
 
-        self.verticalLayout_2.addLayout(self.stylesheetLayout)
+        self.generalScrollLayout.addLayout(self.stylesheetLayout)
 
         self.themeLayout = QHBoxLayout()
         self.themeLayout.setObjectName(u"themeLayout")
@@ -153,7 +153,7 @@ class Ui_generalPage(object):
 
         self.themeLayout.setStretch(1, 1)
 
-        self.verticalLayout_2.addLayout(self.themeLayout)
+        self.generalScrollLayout.addLayout(self.themeLayout)
 
         self.checkUpdatesLayout = QHBoxLayout()
         self.checkUpdatesLayout.setObjectName(u"checkUpdatesLayout")
@@ -176,66 +176,11 @@ class Ui_generalPage(object):
 
         self.checkUpdatesLayout.setStretch(1, 1)
 
-        self.verticalLayout_2.addLayout(self.checkUpdatesLayout)
-
-        self.loggingLayout = QGridLayout()
-        self.loggingLayout.setObjectName(u"loggingLayout")
-        self.loggingLayout.setContentsMargins(6, 6, 6, 6)
-        self.successButton = QPushButton(self.generalScrollContent)
-        self.successButton.setObjectName(u"successButton")
-        self.successButton.setCheckable(True)
-
-        self.loggingLayout.addWidget(self.successButton, 0, 2, 1, 1)
-
-        self.infoButton = QPushButton(self.generalScrollContent)
-        self.infoButton.setObjectName(u"infoButton")
-        self.infoButton.setCheckable(True)
-
-        self.loggingLayout.addWidget(self.infoButton, 0, 0, 1, 1)
-
-        self.warningButton = QPushButton(self.generalScrollContent)
-        self.warningButton.setObjectName(u"warningButton")
-        self.warningButton.setCheckable(True)
-
-        self.loggingLayout.addWidget(self.warningButton, 0, 1, 1, 1)
-
-        self.errorButton = QPushButton(self.generalScrollContent)
-        self.errorButton.setObjectName(u"errorButton")
-        self.errorButton.setCheckable(True)
-
-        self.loggingLayout.addWidget(self.errorButton, 0, 3, 1, 1)
-
-        self.debugButton = QPushButton(self.generalScrollContent)
-        self.debugButton.setObjectName(u"debugButton")
-        self.debugButton.setCheckable(True)
-
-        self.loggingLayout.addWidget(self.debugButton, 0, 4, 1, 1)
-
-
-        self.verticalLayout_2.addLayout(self.loggingLayout)
-
-        self.fileLoggingLayout = QHBoxLayout()
-        self.fileLoggingLayout.setObjectName(u"fileLoggingLayout")
-        self.fileLoggingLayout.setContentsMargins(6, 6, 6, 6)
-        self.fileLoggingLabel = QLabel(self.generalScrollContent)
-        self.fileLoggingLabel.setObjectName(u"fileLoggingLabel")
-
-        self.fileLoggingLayout.addWidget(self.fileLoggingLabel)
-
-        self.fileLoggingComboBox = QComboBox(self.generalScrollContent)
-        self.fileLoggingComboBox.addItem("")
-        self.fileLoggingComboBox.addItem("")
-        self.fileLoggingComboBox.setObjectName(u"fileLoggingComboBox")
-
-        self.fileLoggingLayout.addWidget(self.fileLoggingComboBox)
-
-        self.fileLoggingLayout.setStretch(1, 1)
-
-        self.verticalLayout_2.addLayout(self.fileLoggingLayout)
+        self.generalScrollLayout.addLayout(self.checkUpdatesLayout)
 
         self.layoutSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
-        self.verticalLayout_2.addItem(self.layoutSpacer)
+        self.generalScrollLayout.addItem(self.layoutSpacer)
 
         self.generalScrollArea.setWidget(self.generalScrollContent)
 
@@ -267,15 +212,6 @@ class Ui_generalPage(object):
         self.checkUpdatesLabel.setText(QCoreApplication.translate("generalPage", u"Checking updates automaticly:", None))
         self.checkUpdatesComboBox.setItemText(0, QCoreApplication.translate("generalPage", u"Yes", None))
         self.checkUpdatesComboBox.setItemText(1, QCoreApplication.translate("generalPage", u"No", None))
-
-        self.successButton.setText(QCoreApplication.translate("generalPage", u"Success", None))
-        self.infoButton.setText(QCoreApplication.translate("generalPage", u"Info", None))
-        self.warningButton.setText(QCoreApplication.translate("generalPage", u"Warnings", None))
-        self.errorButton.setText(QCoreApplication.translate("generalPage", u"Errors", None))
-        self.debugButton.setText(QCoreApplication.translate("generalPage", u"Debugs", None))
-        self.fileLoggingLabel.setText(QCoreApplication.translate("generalPage", u"Log into files:", None))
-        self.fileLoggingComboBox.setItemText(0, QCoreApplication.translate("generalPage", u"Yes", None))
-        self.fileLoggingComboBox.setItemText(1, QCoreApplication.translate("generalPage", u"No", None))
 
     # retranslateUi
 

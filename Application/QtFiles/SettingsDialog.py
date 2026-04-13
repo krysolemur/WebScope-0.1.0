@@ -47,6 +47,7 @@ class Ui_SettingsDialog(object):
         self.settingsView = QListWidget(SettingsDialog)
         QListWidgetItem(self.settingsView)
         QListWidgetItem(self.settingsView)
+        QListWidgetItem(self.settingsView)
         self.settingsView.setObjectName(u"settingsView")
         sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Expanding)
         sizePolicy1.setHorizontalStretch(0)
@@ -118,7 +119,9 @@ class Ui_SettingsDialog(object):
         ___qlistwidgetitem = self.settingsView.item(0)
         ___qlistwidgetitem.setText(QCoreApplication.translate("SettingsDialog", u"General", None))
         ___qlistwidgetitem1 = self.settingsView.item(1)
-        ___qlistwidgetitem1.setText(QCoreApplication.translate("SettingsDialog", u"Source code ", None))
+        ___qlistwidgetitem1.setText(QCoreApplication.translate("SettingsDialog", u"Logging", None))
+        ___qlistwidgetitem2 = self.settingsView.item(2)
+        ___qlistwidgetitem2.setText(QCoreApplication.translate("SettingsDialog", u"Source code ", None))
         self.settingsView.setSortingEnabled(__sortingEnabled)
 
         self.cancelButton.setText(QCoreApplication.translate("SettingsDialog", u"Close", None))

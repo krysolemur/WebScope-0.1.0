@@ -3,30 +3,19 @@
 # Import system files
 import os
 import sys
-import logging
 
-from logging.handlers import RotatingFileHandler
-
-from PySide6.QtWidgets import QApplication, QDialog # type: ignore
+from PySide6.QtWidgets import QApplication # type: ignore
 from PySide6.QtGui import QFont # type: ignore
 
 # Importing program files
 from Application.MainWindow.MainWindow import MainWindow
 
-from Application.QtFiles.CustomDialog import Ui_customDialog
+from Logs.Logger import Logger
 
-from Application.SetupDialog.SetupDialog import SetupDialog
-
-from Config.configmanager import ConfigManager
-
-from resources.Themes.ThemesManager import ThemesManager
+from Config.ConfigManager import ConfigManager
 
 # Class for managing whole application
 class Application(QApplication):
-
-    '''
-    Usefull variables without inicializing.
-    '''
 
     # Version 
     version = "0.1.0"
@@ -38,23 +27,28 @@ class Application(QApplication):
     iconPath = ""
 
     # Initiator
-    def __init__(self, args) -> None:
-
+    def __init__(self) -> None:
+        
         # Init parents
-        super().__init__(args)
-
-        # Setup dialog object
-        self.SetupDialog = SetupDialog()
+        super().__init__()
 
         # Config object
         self.ConfigManager = ConfigManager()
 
-        # Init theme manager
-        self.ThemesManager = ThemesManager()
+        # Config variable
+        self.config = self.ConfigManager.loadSettings()
+
+        # Logger object
+        self.Logger = Logger(self.config["LoggingPage"], self.name)
 
         # Setup application
         self._setupApplication()
 
+        # Init MainWindow
+        self.MainWindow = MainWindow(self)
+
+        # Show main window
+        self.MainWindow.show()
         
     '''
     Private functions.
@@ -63,7 +57,7 @@ class Application(QApplication):
     # Setup function that loads general settings
     def _setupApplication(self) -> None:
         # Get configuration
-        self.config = self.ConfigManager.loadSettings()
+        config = self.ConfigManager.config["GeneralPage"]
 
         # Font size dictonary
         fontSize = {
@@ -73,54 +67,23 @@ class Application(QApplication):
         }
 
         # Set font and font size for whole application
-        self.setFont(QFont(str(self.config["GeneralPage"]["fontComboBox"]), int(fontSize[str(self.config["GeneralPage"]["fontSizeComboBox"])])))
-
-        # Load theme for application
-        self._loadTheme(self.config["GeneralPage"]["themeComboBox"])
-
-        # Load stylesheet for application
-        self._loadStylesheet(None)
-
-    # Start main window
-    def _startMainWindow(self) -> None:
-        # Init MainWindow module
-        self.MainWindow = MainWindow(self)
-
-        # Show and run main window
-        self.MainWindow.show()
-
-    # Method that load function from theme.py or own theme, must be parsed by parseJSONPalette function in theme.py.
-    def _loadTheme(self, palette) -> None:
-        # Check if palette is default
-        if palette == "Default":
-            # Do not load any palette for default
-            return
-        
-        # Check if palette is build in theme
-        if palette in self.ThemesManager.defaultThemes.keys():
-            # Load build in palette using directory that stored function with palette argument
-            self.setPalette(self.ThemesManager.defaultThemes[palette]())
-
-            return
-
-        # Parse another palette from system
-        if self.ThemesManager.parsePalette(palette):
-            # Load palete if its parsed
-            self.setPalette(self.ThemesManager.loadPalette(palette))
-        else:
-            None
-
-            # Do not load any palette for default
-
-    # Load stylesheet
-    def _loadStylesheet(self, stylesheet) -> None:
-        None
+        self.setFont(QFont(str(config["fontComboBox"]), int(fontSize[str(config["fontSizeComboBox"])])))
 
     '''
     Public functions.
     '''
 
-    # Restart function for restarting application. Saved sys arguments, closed application and runned it again. Used in mainwindow.py.
+    # Reload config
+    def reloadConfiguration(self) -> None:
+        # New config variable
+        self.config = self.ConfigManager.loadSettings()
+
+    # Restart application function
     def restartApplication(self) -> None:
         # Restart command
         os.execv(sys.executable, [sys.executable] + sys.argv)
+
+    # Quit application
+    def quitApplication(self) -> None:
+        # Quit
+        QApplication.quit()

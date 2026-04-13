@@ -1,10 +1,10 @@
-# commands.py
+# Commands.py
 
 # Import system files
 import sys
 
 # Importing program files
-from Config.configmanager import ConfigManager
+from Config.ConfigManager import ConfigManager
 from Application.Application import Application as app
 
 # Stored all commands 

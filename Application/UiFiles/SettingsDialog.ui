@@ -85,6 +85,11 @@
        </item>
        <item>
         <property name="text">
+         <string>Logging</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
          <string>Source code </string>
         </property>
        </item>

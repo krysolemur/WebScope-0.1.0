@@ -9,7 +9,6 @@ from PySide6.QtGui import QIcon # type: ignore
 
 # Imporing program files
 from Application.SettingsDialog.SettingsDialog import SettingsDialog
-from Application.SourceSyntax.sourcesyntax import SourceSyntax
 
 from Application.QtFiles.MainWindow import Ui_MainWindow
 from Application.QtFiles.AboutDialog import Ui_aboutDialog
@@ -17,67 +16,63 @@ from Application.QtFiles.TargetDialog import Ui_TargetDialog
 
 # Main class window for managing window and loading GUI
 class MainWindow(QMainWindow):
+
+    # Initiator
     def __init__(self, app) -> None:
+
         '''
-        Init parents and save app object as a variable, load all important modules from it.
+        Init parents and save instances.
         '''
-        # Init QMainWindow
+
+        # Init parents
         super().__init__()
 
-        # Save parent 
+        # App variable
         self.app = app
 
-        # Config 
-        self.config = self.app.ConfigManager
-
-        # Settings
-        self.settings = self.app.config
-
-        # Url 
-        self.url = None
+        # ConfigManager
+        self.ConfigManager = app.ConfigManager
 
         '''
-        Load UI for MainWindow.
+        Load Ui for MainWindow.
         '''
 
         # Load Ui
         self.ui = Ui_MainWindow()
 
-        # Setup Ui for self (QMainWindow)
+        # Setup Ui
         self.ui.setupUi(self)
 
         '''
-        Set actions for all menu in tool bar like settings, help and more...
+        Add all actions for tool bar buttons.
         '''
 
-        # Settings menu action
-        self.ui.actionSettings.triggered.connect(self._openSettingsAction)
+        # Quit application
+        self.ui.actionQuit.triggered.connect(self.app.quitApplication)
 
-        # Close menu action
-        self.ui.actionQuit.triggered.connect(self.close)
-
-        # Restart menu action
+        # Restart application
         self.ui.actionRestart.triggered.connect(self.app.restartApplication)
 
-        # About menu action
+        # Open settings dialog
+        self.ui.actionSettings.triggered.connect(self._openSettingsAction)
+
+        # Open about dialog
         self.ui.actionAbout.triggered.connect(self._aboutAction)
 
-        # Set target menu action
+        # Open target dialog
         self.ui.actionSetTarget.triggered.connect(self._setTargetAction)
 
-        self.highlighter = SourceSyntax(self.ui.sourceTextEdit.document())
-
         '''
-        Windows properties like size, title and more...
+        Set window preferences.
         '''
 
-        # Window title
-        self.setWindowTitle(f"{app.name} | {app.version} {f"| {self.url}" if self.url else ""}")  
+        # Set window title
+        self.setWindowTitle(f"{self.app.name} | {self.app.version}")  
 
-        # Window icon
+        # Set window icon
         self.setWindowIcon(QIcon(self.app.iconPath))
 
-        # Default size
+        # Resize to default size
         self.resize(800, 600) 
 
         # Center main window
@@ -106,13 +101,13 @@ class MainWindow(QMainWindow):
     Mainwindow toolbar actions.
     '''
 
-    # Settings function for opening settings dialog from settingsdialog.py.
+    # Open settings dialog
     def _openSettingsAction(self) -> None:
-        # Create settings window object
-        self.settingsDialog = SettingsDialog(self.app)
+        # Create settings dialog object
+        self.SettingsDialog = SettingsDialog(self.app)
 
-        # Exec settings window
-        self.settingsDialog.exec()
+        # Exec settings dialog
+        self.SettingsDialog.exec()
 
     # Function that set target url and save it to variable.
     def _setTargetAction(self) -> None:

@@ -16,15 +16,14 @@ signal.signal(signal.SIGINT, signal.SIG_DFL)
 # Createing Main class as program starter
 class Main:
 
-    # Constructor method for the Main class
+    # Constructor for the Main class
     def __init__(self) -> None:
 
         # Application object
-        self.Application = Application(sys.argv)
-    
-        # Exit program with application.exec return code
-        sys.exit(self.Application.exec())
+        self.Application = Application()
 
+        # Exit program with return code
+        sys.exit(self.Application.exec())
 
 # Run script only as interpreter, not as module
 if __name__ == "__main__":

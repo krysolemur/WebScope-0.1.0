@@ -1,4 +1,4 @@
-# settingswindow.py
+# SettingsDialog.py
 
 # Module for managing settings window
 
@@ -11,41 +11,37 @@ from PySide6.QtWidgets import QDialog # type: ignore
 from PySide6.QtGui import QIcon # type: ignore
 
 # Importing program files
-
 from Application.SettingsDialog.SourcePage.SourcePage import SourcePage
 from Application.SettingsDialog.GeneralPage.GeneralPage import GeneralPage
+from Application.SettingsDialog.LoggingPage.LoggingPage import LoggingPage
 
 from Application.QtFiles.SettingsDialog import Ui_SettingsDialog
 from Application.QtFiles.CustomDialog import Ui_customDialog
 
 # Class settings window
 class SettingsDialog(QDialog):
+
+    # Initiator
     def __init__(self, app) -> None:
+
         '''
-        Init parents, save app and get all important objects.
+        Init parents and save instances.
         '''
 
         # Init parents
         super().__init__()
 
-        # Save application
+        # App objects
         self.app = app
 
-        # Save config module from app
-        self.config = self.app.config
+        # Config manager
+        self.ConfigManager = app.ConfigManager
 
-        # Save settings
-        self.settings = self.app.settings
-
-        '''
-        All usefull variables.
-        '''
-
-        # Default title
-        self.title = f"{self.app.name} | {self.app.version} | Settings"
+        # Config from config manager
+        self.config = app.config
 
         '''
-        Load Ui file for settings dialog.
+        Load Ui to SettingsDialog.
         '''
 
         # Load Ui file
@@ -53,41 +49,36 @@ class SettingsDialog(QDialog):
 
         # Setup Ui 
         self.ui.setupUi(self)
-
-        '''
-        Inicializing all pages.
-        '''
         
+        '''
+        Save instances of all pages.
+        '''
+
         # General page
-        self.generalPage = GeneralPage
+        self.GeneralPage = GeneralPage
 
         # Source page
-        self.sourcePage = SourcePage
+        self.SourcePage = SourcePage
+
+        # Logging page
+        self.LoggingPage = LoggingPage
 
         # All pages
         self.pages = [
-            self.generalPage,
-            self.sourcePage
+            self.GeneralPage,
+            self.LoggingPage,
+            self.SourcePage
         ]
 
         # Actiave pages
         self.activePages = [
             False,
             False,
+            False
         ]
 
         '''
-        Set window title, window icon, minimum size, default size.
-        '''
-
-        # Window title
-        self.setWindowTitle(self.title)
-
-        # Icon
-        self.setWindowIcon(QIcon(self.app.iconPath))
-
-        '''
-        Settings buttons actions, page actions.
+        Connect all actions to buttons and widgets.
         '''
 
         # Set general as a first page
@@ -104,6 +95,16 @@ class SettingsDialog(QDialog):
 
         # Cancel button action
         self.ui.cancelButton.clicked.connect(self.close)
+
+        '''
+        Set window preferences.
+        '''
+
+        # Window title
+        # self.setWindowTitle(self.title)
+
+        # Icon
+        # self.setWindowIcon(QIcon(self.app.iconPath))
 
     '''
     Private functions.
@@ -123,7 +124,7 @@ class SettingsDialog(QDialog):
             self.ui.settingsWidget.insertWidget(pageIndex, newPage)
         
             # Load settings
-            newPage.loadSettings(self.settings.get(type(newPage).__name__, self.config.defaultConfig))
+            newPage.loadSettings(self.config.get(type(newPage).__name__))
 
         # Show page
         self.ui.settingsWidget.setCurrentIndex(pageIndex)
@@ -131,7 +132,7 @@ class SettingsDialog(QDialog):
     # Collects values from all UI widgets, saves them to a dictionary, and updates the configuration file.
     def _saveSettingsAction(self) -> None:
         # Create settings
-        settings = self.settings
+        config = self.config
 
         # Browse all pages
         for page in self.activePages:
@@ -143,13 +144,13 @@ class SettingsDialog(QDialog):
                     pageName = type(page).__name__
 
                     # Get settings
-                    settings[pageName] = page.getSettings()
+                    config[pageName] = page.getSettings()
 
                     # Mark page as saved
                     page.isSaved = True
 
         # Write the settings dictionary to the physical configuration file via the config handler.
-        self.config.saveSettings(settings)
+        self.ConfigManager.saveSettings(config)
     
         # Revert the window title to its original state, typically removing an unsaved '*' marker.
         # self.setWindowTitle(self.title)
@@ -157,11 +158,13 @@ class SettingsDialog(QDialog):
     # Reverts the configuration file to its factory defaults and refreshes the settings interface.
     def _resetSettingsAction(self) -> None:
         # Trigger the configuration handler to overwrite the current JSON with default values.
-        self.config.resetSettings()
+        self.ConfigManager.resetSettings()
 
-        # Re-load the settings into the UI widgets to reflect the restored defaults.
-        self._loadSettings()
-        
+        # Browse active pages
+        for page in self.activePages:
+            # Reload Ui
+            page.loadSettings(self.config.get(type(page).__name__))
+            
     '''
     Public functions.
     '''
@@ -179,8 +182,6 @@ class SettingsDialog(QDialog):
             if page:
                 # Check the boolean flag that tracks if current settings are saved
                 if page.isSaved:
-                    # Log an informational message about closing the window
-                    self.printi(msg="Closing settings window")
 
                     # Tell Qt to proceed with closing the window
                     event.accept()
@@ -227,8 +228,6 @@ class SettingsDialog(QDialog):
         # Evaluate if the user chose the 'Save & Close' option
         if result == QDialog.Accepted:
             # Log the intent to save data before exiting
-            self.printi(msg="Saving and quitting...")
-
             # Execute the internal logic to write settings to storage
             self._saveSettingsAction() 
 
@@ -237,8 +236,6 @@ class SettingsDialog(QDialog):
 
         # Evaluate if the user chose to 'Close without saving'
         elif result == QDialog.Rejected:
-            # Log that the window is closing and changes are being discarded
-            self.printi(msg="Quitting without saving")
 
             # Allow the main window close event to proceed despite lack of saving
             event.accept()

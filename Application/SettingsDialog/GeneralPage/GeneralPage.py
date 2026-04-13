@@ -8,52 +8,33 @@ from Application.QtFiles.GeneralPage import Ui_generalPage
 
 # Main class GeneralPage
 class GeneralPage(QWidget):
-    def __init__(self, parent) -> None:
-        '''
-        Save parent, save usefull variables.
-        '''
 
-        # Init parent
+    # Initiator
+    def __init__(self, parent) -> None:
+
+        # Init parents
         super().__init__(parent)
 
-        # Save parent
-        self.parent = parent
-
-        # Set theme
-        self.theme = self.parent.app.theme
-
         # Config variable
-        self.config = self.parent.config
+        self.config = parent.config
 
-        '''
-        Load Ui for page and setup page.
-        '''
-
-        # Load page
+        # Load page Ui
         self.ui = Ui_generalPage()
 
-        # Setup ui
+        # Setup Ui to QDialog
         self.ui.setupUi(self)
-
-        '''
-        Variables.
-        '''
 
         # Saved variable
         self.isSaved = True
 
-        '''
-        Setup functions and general buttons actions.
-        '''
-        
-        # Connect tracking changes
+        # Connect tracking changes for all widgets
         self._connectChangesTracking()
                 
         # Add all themes to theme combobox
-        self.ui.themeComboBox.addItems(self.theme.themes())
+        # self.ui.themeComboBox.addItems(self.theme.themes())
 
         # Add theme button action
-        self.ui.themeAddButton.clicked.connect(self.theme.getTheme)
+        # self.ui.themeAddButton.clicked.connect(self.theme.getTheme)
 
     '''
     Settings methods.
@@ -98,13 +79,7 @@ class GeneralPage(QWidget):
             "stylesheetComboBox": self.ui.stylesheetComboBox.currentText(),
             "fontComboBox": self.ui.fontComboBox.currentText(),
             "fontSizeComboBox": self.ui.fontSizeComboBox.currentText(),
-            "checkUpdatesComboBox": self.ui.checkUpdatesComboBox.currentText(),
-            "infoButton": self.ui.infoButton.isChecked(),
-            "warningButton": self.ui.warningButton.isChecked(),
-            "debugButton": self.ui.debugButton.isChecked(),
-            "successButton": self.ui.successButton.isChecked(),
-            "errorButton": self.ui.errorButton.isChecked(),
-            "fileLoggingComboBox": self.ui.fileLoggingComboBox.currentText()
+            "checkUpdatesComboBox": self.ui.checkUpdatesComboBox.currentText()
         }
     
     '''

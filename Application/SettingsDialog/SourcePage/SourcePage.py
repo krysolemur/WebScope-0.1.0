@@ -323,7 +323,7 @@ class SourcePage(QWidget):
 
         # Locate all push button widgets within the UI.
         for button in container.findChildren(QPushButton):
-            # Check if is checkabel
+            # # Check if is checkabel
             # if button.isCheckable():
             #     # Connect the toggle signal to the dirty state tracker for checkable buttons.
             #     button.clicked.connect(self._markAsDirty)
