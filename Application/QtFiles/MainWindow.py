@@ -62,6 +62,10 @@ class Ui_MainWindow(object):
         self.actionManageUsers.setObjectName(u"actionManageUsers")
         self.actionInstall_own = QAction(MainWindow)
         self.actionInstall_own.setObjectName(u"actionInstall_own")
+        self.actionThemeCreator = QAction(MainWindow)
+        self.actionThemeCreator.setObjectName(u"actionThemeCreator")
+        self.actionStylesheetCreator = QAction(MainWindow)
+        self.actionStylesheetCreator.setObjectName(u"actionStylesheetCreator")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.mainLayout = QGridLayout(self.centralwidget)
@@ -106,12 +110,15 @@ class Ui_MainWindow(object):
         self.menuInjections.setObjectName(u"menuInjections")
         self.menuPlugins = QMenu(self.menubar)
         self.menuPlugins.setObjectName(u"menuPlugins")
+        self.menuTools = QMenu(self.menubar)
+        self.menuTools.setObjectName(u"menuTools")
         MainWindow.setMenuBar(self.menubar)
 
         self.menubar.addAction(self.menuWindow.menuAction())
         self.menubar.addAction(self.menuTarget.menuAction())
         self.menubar.addAction(self.menuAttack.menuAction())
         self.menubar.addAction(self.menuPlugins.menuAction())
+        self.menubar.addAction(self.menuTools.menuAction())
         self.menuWindow.addSeparator()
         self.menuWindow.addAction(self.actionSettings)
         self.menuWindow.addSeparator()
@@ -130,10 +137,12 @@ class Ui_MainWindow(object):
         self.menuInjections.addAction(self.actionSQLInjection)
         self.menuPlugins.addAction(self.actionAdd)
         self.menuPlugins.addAction(self.actionInstall)
+        self.menuTools.addAction(self.actionThemeCreator)
+        self.menuTools.addAction(self.actionStylesheetCreator)
 
         self.retranslateUi(MainWindow)
 
-        self.toolsTabWidget.setCurrentIndex(0)
+        self.toolsTabWidget.setCurrentIndex(2)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -158,6 +167,8 @@ class Ui_MainWindow(object):
         self.actionIdeas.setText(QCoreApplication.translate("MainWindow", u"Ideas", None))
         self.actionManageUsers.setText(QCoreApplication.translate("MainWindow", u"Manage users", None))
         self.actionInstall_own.setText(QCoreApplication.translate("MainWindow", u"Install own", None))
+        self.actionThemeCreator.setText(QCoreApplication.translate("MainWindow", u"Theme creator", None))
+        self.actionStylesheetCreator.setText(QCoreApplication.translate("MainWindow", u"Stylesheet creator", None))
         self.sourceTextEdit.setHtml(QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
@@ -174,5 +185,6 @@ class Ui_MainWindow(object):
         self.menuAttack.setTitle(QCoreApplication.translate("MainWindow", u"Attack", None))
         self.menuInjections.setTitle(QCoreApplication.translate("MainWindow", u"Injections", None))
         self.menuPlugins.setTitle(QCoreApplication.translate("MainWindow", u"Plugins", None))
+        self.menuTools.setTitle(QCoreApplication.translate("MainWindow", u"Tools", None))
     # retranslateUi
 

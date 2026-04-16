@@ -39,7 +39,7 @@
     <item row="0" column="0">
      <widget class="QTabWidget" name="toolsTabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="sourceTab">
        <attribute name="title">
@@ -149,10 +149,18 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <addaction name="actionAdd"/>
     <addaction name="actionInstall"/>
    </widget>
+   <widget class="QMenu" name="menuTools">
+    <property name="title">
+     <string>Tools</string>
+    </property>
+    <addaction name="actionThemeCreator"/>
+    <addaction name="actionStylesheetCreator"/>
+   </widget>
    <addaction name="menuWindow"/>
    <addaction name="menuTarget"/>
    <addaction name="menuAttack"/>
    <addaction name="menuPlugins"/>
+   <addaction name="menuTools"/>
   </widget>
   <action name="actionSettings">
    <property name="text">
@@ -237,6 +245,16 @@ li.checked::marker { content: &quot;\2612&quot;; }
   <action name="actionInstall_own">
    <property name="text">
     <string>Install own</string>
+   </property>
+  </action>
+  <action name="actionThemeCreator">
+   <property name="text">
+    <string>Theme creator</string>
+   </property>
+  </action>
+  <action name="actionStylesheetCreator">
+   <property name="text">
+    <string>Stylesheet creator</string>
    </property>
   </action>
  </widget>

@@ -10,6 +10,8 @@ from PySide6.QtGui import QIcon # type: ignore
 # Imporing program files
 from Application.SettingsDialog.SettingsDialog import SettingsDialog
 
+from resources.Themes.ThemeCreator import ThemeCreator
+
 from Application.QtFiles.MainWindow import Ui_MainWindow
 from Application.QtFiles.AboutDialog import Ui_aboutDialog
 from Application.QtFiles.TargetDialog import Ui_TargetDialog
@@ -61,6 +63,9 @@ class MainWindow(QMainWindow):
 
         # Open target dialog
         self.ui.actionSetTarget.triggered.connect(self._setTargetAction)
+
+        # Theme creator
+        self.ui.actionThemeCreator.triggered.connect(ThemeCreator)
 
         '''
         Set window preferences.

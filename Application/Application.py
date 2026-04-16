@@ -10,6 +10,8 @@ from PySide6.QtGui import QFont # type: ignore
 # Importing program files
 from Application.MainWindow.MainWindow import MainWindow
 
+from resources.Themes.ThemesManager import ThemesManager
+
 from Logs.Logger import Logger
 
 from Config.ConfigManager import ConfigManager
@@ -40,6 +42,9 @@ class Application(QApplication):
 
         # Logger object
         self.Logger = Logger(self.config["LoggingPage"], self.name)
+
+        # ThemeManager
+        self.ThemeManager = ThemesManager()
 
         # Setup application
         self._setupApplication()

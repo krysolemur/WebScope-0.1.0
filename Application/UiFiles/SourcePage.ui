@@ -6,24 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1049</width>
-    <height>580</height>
+    <width>650</width>
+    <height>1000</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="mainLayout">
    <property name="spacing">
     <number>0</number>
    </property>
-   <property name="leftMargin">
-    <number>0</number>
-   </property>
-   <property name="topMargin">
-    <number>0</number>
-   </property>
-   <property name="rightMargin">
-    <number>0</number>
-   </property>
-   <property name="bottomMargin">
+   <property name="margin" stdset="0">
     <number>0</number>
    </property>
    <item>
@@ -39,32 +30,30 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>1049</width>
-        <height>580</height>
+        <width>650</width>
+        <height>1000</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="sourceCodeScrollLayout">
        <property name="spacing">
         <number>20</number>
        </property>
-       <property name="leftMargin">
+       <property name="margin" stdset="0">
         <number>15</number>
        </property>
-       <property name="topMargin">
-        <number>15</number>
-       </property>
-       <property name="rightMargin">
-        <number>15</number>
-       </property>
-       <property name="bottomMargin">
-        <number>15</number>
-       </property>
+       <item>
+        <widget class="QLabel" name="l_pre">
+         <property name="text">
+          <string>&lt;b&gt;Editor Preview&lt;/b&gt;</string>
+         </property>
+        </widget>
+       </item>
        <item>
         <widget class="QTextEdit" name="te_preview">
          <property name="minimumSize">
           <size>
            <width>0</width>
-           <height>250</height>
+           <height>140</height>
           </size>
          </property>
          <property name="readOnly">
@@ -78,19 +67,19 @@ hr { height: 1px; border-width: 0; }
 li.unchecked::marker { content: &quot;\2610&quot;; }
 li.checked::marker { content: &quot;\2612&quot;; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;pre style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#1e1e1e;&quot;&gt;&lt;span style=&quot; font-family:'monospace'; color:#808080;&quot;&gt;&amp;lt;!-- HTML --&amp;gt;&lt;/span&gt;&lt;/pre&gt;
-&lt;pre style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#1e1e1e;&quot;&gt;&lt;span style=&quot; font-family:'monospace'; color:#569cd6;&quot;&gt;&amp;lt;div&lt;/span&gt;&lt;span style=&quot; font-family:'monospace'; color:#d4d4d4;&quot;&gt; &lt;/span&gt;&lt;span style=&quot; font-family:'monospace'; color:#9cdcfe;&quot;&gt;class&lt;/span&gt;&lt;span style=&quot; font-family:'monospace'; color:#d4d4d4;&quot;&gt;=&lt;/span&gt;&lt;span style=&quot; font-family:'monospace'; color:#ce9178;&quot;&gt;&amp;quot;box&amp;quot;&lt;/span&gt;&lt;span style=&quot; font-family:'monospace'; color:#569cd6;&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span style=&quot; font-family:'monospace'; color:#d4d4d4;&quot;&gt;Xyra&lt;/span&gt;&lt;span style=&quot; font-family:'monospace'; color:#569cd6;&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;&lt;/pre&gt;
-&lt;pre style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'monospace'; color:#569cd6; background-color:#1e1e1e;&quot;&gt;&lt;br /&gt;&lt;/pre&gt;
-&lt;pre style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#1e1e1e;&quot;&gt;&lt;span style=&quot; font-family:'monospace'; color:#808080;&quot;&gt;/* CSS */&lt;/span&gt;&lt;/pre&gt;
-&lt;pre style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#1e1e1e;&quot;&gt;&lt;span style=&quot; font-family:'monospace'; color:#d7ba7d;&quot;&gt;.box&lt;/span&gt;&lt;span style=&quot; font-family:'monospace'; color:#d4d4d4;&quot;&gt; { &lt;/span&gt;&lt;span style=&quot; font-family:'monospace'; color:#9cdcfe;&quot;&gt;display&lt;/span&gt;&lt;span style=&quot; font-family:'monospace'; color:#d4d4d4;&quot;&gt;: flex; }&lt;/span&gt;&lt;/pre&gt;
-&lt;pre style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'monospace'; color:#d4d4d4; background-color:#1e1e1e;&quot;&gt;&lt;br /&gt;&lt;/pre&gt;
-&lt;pre style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#1e1e1e;&quot;&gt;&lt;span style=&quot; font-family:'monospace'; color:#808080;&quot;&gt;// JS&lt;/span&gt;&lt;/pre&gt;
-&lt;pre style=&quot; margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#1e1e1e;&quot;&gt;&lt;span style=&quot; font-family:'monospace'; color:#569cd6;&quot;&gt;const&lt;/span&gt;&lt;span style=&quot; font-family:'monospace'; color:#d4d4d4;&quot;&gt; &lt;/span&gt;&lt;span style=&quot; font-family:'monospace'; color:#9cdcfe;&quot;&gt;init&lt;/span&gt;&lt;span style=&quot; font-family:'monospace'; color:#d4d4d4;&quot;&gt; = () =&amp;gt; &lt;/span&gt;&lt;span style=&quot; font-family:'monospace'; color:#b5cea8;&quot;&gt;true&lt;/span&gt;&lt;span style=&quot; font-family:'monospace'; color:#d4d4d4;&quot;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&amp;lt;div style=&amp;quot;font-family: 'Consolas', 'Monaco', monospace; line-height: 1.4; font-size: 13px;&amp;quot;&amp;gt; &amp;lt;span style=&amp;quot;color: #569cd6;&amp;quot;&amp;gt;&amp;amp;lt;div&amp;lt;/span&amp;gt; &amp;lt;span style=&amp;quot;color: #9cdcfe;&amp;quot;&amp;gt;class&amp;lt;/span&amp;gt;=&amp;lt;span style=&amp;quot;color: #ce9178;&amp;quot;&amp;gt;&amp;quot;card&amp;quot;&amp;lt;/span&amp;gt; &amp;lt;span style=&amp;quot;color: #9cdcfe;&amp;quot;&amp;gt;id&amp;lt;/span&amp;gt;=&amp;lt;span style=&amp;quot;color: #ce9178;&amp;quot;&amp;gt;&amp;quot;hero&amp;quot;&amp;lt;/span&amp;gt;&amp;lt;span style=&amp;quot;color: #569cd6;&amp;quot;&amp;gt;&amp;amp;gt;&amp;lt;/span&amp;gt; &amp;lt;br&amp;gt;&amp;amp;nbsp;&amp;amp;nbsp;&amp;lt;span style=&amp;quot;color: #569cd6;&amp;quot;&amp;gt;&amp;amp;lt;h1&amp;amp;gt;&amp;lt;/span&amp;gt;Xyra Editor&amp;lt;span style=&amp;quot;color: #569cd6;&amp;quot;&amp;gt;&amp;amp;lt;/h1&amp;amp;gt;&amp;lt;/span&amp;gt; &amp;lt;br&amp;gt;&amp;lt;span style=&amp;quot;color: #569cd6;&amp;quot;&amp;gt;&amp;amp;lt;/div&amp;amp;gt;&amp;lt;/span&amp;gt;&amp;lt;br&amp;gt; &amp;lt;br&amp;gt;&amp;lt;span style=&amp;quot;color: #6a9955;&amp;quot;&amp;gt;/* CSS: Selektory a Vlastnosti */&amp;lt;/span&amp;gt;&amp;lt;br&amp;gt; &amp;lt;span style=&amp;quot;color: #d7ba7d;&amp;quot;&amp;gt;.card&amp;lt;/span&amp;gt; { &amp;lt;br&amp;gt;&amp;amp;nbsp;&amp;amp;nbsp;&amp;lt;span style=&amp;quot;color: #9cdcfe;&amp;quot;&amp;gt;color&amp;lt;/span&amp;gt;: &amp;lt;span style=&amp;quot;color: #b5cea8;&amp;quot;&amp;gt;#ffffff&amp;lt;/span&amp;gt;; &amp;lt;br&amp;gt;&amp;amp;nbsp;&amp;amp;nbsp;&amp;lt;span style=&amp;quot;color: #9cdcfe;&amp;quot;&amp;gt;display&amp;lt;/span&amp;gt;: &amp;lt;span style=&amp;quot;color: #ce9178;&amp;quot;&amp;gt;flex&amp;lt;/span&amp;gt;; &amp;lt;br&amp;gt;}&amp;lt;br&amp;gt; &amp;lt;br&amp;gt;&amp;lt;span style=&amp;quot;color: #6a9955;&amp;quot;&amp;gt;// JS: Klíčová slova a Proměnné&amp;lt;/span&amp;gt;&amp;lt;br&amp;gt; &amp;lt;span style=&amp;quot;color: #569cd6;&amp;quot;&amp;gt;const&amp;lt;/span&amp;gt; &amp;lt;span style=&amp;quot;color: #4fc1ff;&amp;quot;&amp;gt;app&amp;lt;/span&amp;gt; = &amp;lt;span style=&amp;quot;color: #569cd6;&amp;quot;&amp;gt;new&amp;lt;/span&amp;gt; &amp;lt;span style=&amp;quot;color: #dcdcaa;&amp;quot;&amp;gt;Editor&amp;lt;/span&amp;gt;({ &amp;lt;br&amp;gt;&amp;amp;nbsp;&amp;amp;nbsp;&amp;lt;span style=&amp;quot;color: #9cdcfe;&amp;quot;&amp;gt;active&amp;lt;/span&amp;gt;: &amp;lt;span style=&amp;quot;color: #569cd6;&amp;quot;&amp;gt;true&amp;lt;/span&amp;gt;, &amp;lt;br&amp;gt;&amp;amp;nbsp;&amp;amp;nbsp;&amp;lt;span style=&amp;quot;color: #9cdcfe;&amp;quot;&amp;gt;version&amp;lt;/span&amp;gt;: &amp;lt;span style=&amp;quot;color: #b5cea8;&amp;quot;&amp;gt;2.0&amp;lt;/span&amp;gt; &amp;lt;br&amp;gt;});&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
         </widget>
        </item>
        <item>
-        <layout class="QGridLayout" name="grid_styling">
+        <widget class="QLabel" name="l_syn">
+         <property name="text">
+          <string>&lt;b&gt;Syntax Highlighting&lt;/b&gt;</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QGridLayout" name="grid_syntax">
          <item row="0" column="0">
           <widget class="QPushButton" name="btn_sel_tags">
            <property name="text">
@@ -99,9 +88,6 @@ li.checked::marker { content: &quot;\2612&quot;; }
            <property name="checkable">
             <bool>true</bool>
            </property>
-           <attribute name="buttonGroup">
-            <string notr="true">btn_group</string>
-           </attribute>
           </widget>
          </item>
          <item row="0" column="1">
@@ -112,9 +98,6 @@ li.checked::marker { content: &quot;\2612&quot;; }
            <property name="checkable">
             <bool>true</bool>
            </property>
-           <attribute name="buttonGroup">
-            <string notr="true">btn_group</string>
-           </attribute>
           </widget>
          </item>
          <item row="1" column="0">
@@ -125,9 +108,6 @@ li.checked::marker { content: &quot;\2612&quot;; }
            <property name="checkable">
             <bool>true</bool>
            </property>
-           <attribute name="buttonGroup">
-            <string notr="true">btn_group</string>
-           </attribute>
           </widget>
          </item>
          <item row="1" column="1">
@@ -138,15 +118,32 @@ li.checked::marker { content: &quot;\2612&quot;; }
            <property name="checkable">
             <bool>true</bool>
            </property>
-           <attribute name="buttonGroup">
-            <string notr="true">btn_group</string>
-           </attribute>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QPushButton" name="btn_sel_keywords">
+           <property name="text">
+            <string>JS Keywords</string>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QPushButton" name="btn_sel_variables">
+           <property name="text">
+            <string>Variables</string>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
           </widget>
          </item>
         </layout>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="style_tools">
+        <layout class="QHBoxLayout" name="lay_tools">
          <item>
           <widget class="QPushButton" name="btn_style_color">
            <property name="text">
@@ -174,20 +171,104 @@ li.checked::marker { content: &quot;\2612&quot;; }
            </property>
           </widget>
          </item>
+         <item>
+          <widget class="QComboBox" name="cb_style_transform">
+           <item>
+            <property name="text">
+             <string>No Transform</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>UPPERCASE</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>lowercase</string>
+            </property>
+           </item>
+          </widget>
+         </item>
         </layout>
        </item>
        <item>
-        <layout class="QVBoxLayout" name="layout_features">
-         <property name="spacing">
-          <number>8</number>
+        <widget class="QLabel" name="l_beh">
+         <property name="text">
+          <string>&lt;b&gt;Editor Behavior&lt;/b&gt;</string>
          </property>
-         <item>
-          <widget class="QCheckBox" name="chk_auto_close">
+        </widget>
+       </item>
+       <item>
+        <layout class="QGridLayout" name="grid_beh">
+         <item row="0" column="0">
+          <widget class="QLabel" name="l_t">
            <property name="text">
-            <string>Auto-close Tags &amp; Brackets</string>
+            <string>Tab Size:</string>
            </property>
           </widget>
          </item>
+         <item row="0" column="1">
+          <widget class="QSpinBox" name="sb_tab_size">
+           <property name="value">
+            <number>4</number>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="l_i">
+           <property name="text">
+            <string>Indentation:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QComboBox" name="cb_indent_style">
+           <item>
+            <property name="text">
+             <string>Tabs</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Spaces</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="l_cur">
+           <property name="text">
+            <string>Cursor Style:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QComboBox" name="cb_cursor_style">
+           <item>
+            <property name="text">
+             <string>Line (Standard)</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Block (Retro)</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Underline</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="lay_feat">
+         <property name="spacing">
+          <number>8</number>
+         </property>
          <item>
           <widget class="QCheckBox" name="chk_line_numbers">
            <property name="text">
@@ -196,23 +277,65 @@ li.checked::marker { content: &quot;\2612&quot;; }
           </widget>
          </item>
          <item>
+          <widget class="QCheckBox" name="chk_highlight_line">
+           <property name="text">
+            <string>Highlight Current Line</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="chk_match_brackets">
+           <property name="text">
+            <string>Highlight Matching Brackets</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="chk_indent_guides">
+           <property name="text">
+            <string>Show Indentation Guides</string>
+           </property>
+          </widget>
+         </item>
+         <item>
           <widget class="QCheckBox" name="chk_word_wrap">
            <property name="text">
-            <string>Enable Word Wrap</string>
+            <string>Soft Word Wrap</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="chk_minimap">
+           <property name="text">
+            <string>Display Minimap Overview</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="chk_auto_close">
+           <property name="text">
+            <string>Auto-close Tags &amp; Brackets</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="chk_whitespace">
+           <property name="text">
+            <string>Render Whitespace Symbols</string>
            </property>
           </widget>
          </item>
          <item>
           <widget class="QCheckBox" name="chk_format_save">
            <property name="text">
-            <string>Format on Save</string>
+            <string>Format Document on Save</string>
            </property>
           </widget>
          </item>
         </layout>
        </item>
        <item>
-        <spacer name="verticalSpacer">
+        <spacer name="v_sp">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
@@ -232,7 +355,4 @@ li.checked::marker { content: &quot;\2612&quot;; }
  </widget>
  <resources/>
  <connections/>
- <buttongroups>
-  <buttongroup name="btn_group"/>
- </buttongroups>
 </ui>

@@ -17,7 +17,7 @@ class SourcePage(QWidget):
     # Initiator
     def __init__(self, parent) -> None:
         '''
-        Save parent, Ui, and other objects.
+        Init parenst and save app
         '''
 
         # Init parent
@@ -43,33 +43,7 @@ class SourcePage(QWidget):
         # Saved
         self.isSaved = True
 
-        # Browse all buttons in button group
-        for btn in self.stylingButtonGroup.buttons():
-            # If it have not style attribut
-            if not hasattr(btn, 'style'):
-                # Add it
-                btn.style = {
-                    "color": "none", "background-color": "none", 
-                    "font-weight": "none", "font-style": "none", 
-                    "text-decoration": "none", "transform": "none"
-                }
-                
-        # Připojení tlačítek kategorií
-        self.ui.btn_sel_tags.clicked.connect(self._loadStyle)
-        self.ui.btn_sel_attrs.clicked.connect(self._loadStyle)
-        self.ui.btn_sel_strings.clicked.connect(self._loadStyle)
-        self.ui.btn_sel_comments.clicked.connect(self._loadStyle)
-
-        # Připojení nástrojů (B, I, Color atd.)
-        self.ui.btn_style_color.clicked.connect(self._setForeground)
-        # self.ui.btn_style_bg.clicked.connect(self._setBackground) # Pokud ho v UI máš
-        self.ui.btn_style_bold.clicked.connect(self._setBold)
-        self.ui.btn_style_italic.clicked.connect(self._setItalic)
         
-        # Defaultní výběr první kategorie po startu
-        self.ui.btn_sel_tags.setChecked(True)
-        self._loadStyle()
-
         '''
         Connect actions and run setup functions.
         '''
@@ -80,175 +54,6 @@ class SourcePage(QWidget):
     '''
     Style methods.
     '''
-
-    # Encode style
-    def _encodeStyle(self) -> dict:
-        # Returnt stylesheet
-        return {
-            "color": self.foregroundColor,
-            "background-color": self.backgroundColor,
-            "font-weight": self.boldStyle,
-            "font-style": self.italicStyle,
-            "text-decoration": self.underlineStyle,
-            "transform": self.ui.transformStyle.currentText().lower()
-        }
-
-    # Decode style
-    def _decodeStyle(self) -> None:
-        self.foregroundColor = self.selected.style["color"]
-        self.backgroundColor = self.selected.style["background-color"]
-        self.boldStyle = self.selected.style["font-weight"]
-        self.italicStyle = self.selected.style["font-style"]
-        self.underlineStyle = self.selected.style["text-decoration"]
-        self.transform = self.selected.style["transform"]
-
-    # Reset style
-    def _resetStyle(self) -> None:
-        self.foregroundColor = "none"
-
-        self.backgroundColor = "none"
-
-        self.boldStyle = "none"
-
-        self.italicStyle = "none"
-
-        self.underlineStyle = "none"
-
-        self.ui.underlineStyle.setChecked(False)
-        self.ui.italicStyle.setChecked(False)
-        self.ui.boldStyle.setChecked(False)
-
-        self.ui.transformStyle.setCurrentIndex(0)
-
-        self.selected.style = self._encodeStyle()
-
-        self._loadStyle()
-
-        self.isSaved = False
-
-    # Load style
-    def _loadStyle(self) -> None:
-        # Set selected
-        self.selected = self.ui.stylingButtonGroup.checkedButton()
-
-        # Decode style
-        self._decodeStyle()
-        
-        self.ui.foregroundStyle.setStyleSheet(f"""
-            color: {self.foregroundColor};                    
-        """)
-
-        self.ui.backgroundStyle.setStyleSheet(f"""
-            background-color: {self.backgroundColor};                    
-        """)
-
-        self.ui.boldStyle.setStyleSheet(f"""
-            font-weight: {self.boldStyle};                    
-        """)
-
-        self.ui.italicStyle.setStyleSheet(f"""
-            font-style: {self.italicStyle};                    
-        """)
-
-        self.ui.underlineStyle.setStyleSheet(f"""
-            text-decoration: {self.underlineStyle};                    
-        """)
-
-        self.ui.underlineStyle.setChecked(self.underlineStyle == "underline")
-        self.ui.italicStyle.setChecked(self.italicStyle == "italic")
-        self.ui.boldStyle.setChecked(self.boldStyle == "bold")
-
-    # Foreground
-    def _setForeground(self) -> None:
-        # Open color dialog
-        color = QColorDialog.getColor()
-
-        # Check if color is valid
-        if color.isValid():
-            # Get HEX color name
-            hex_color = color.name()
-
-            self.ui.foregroundStyle.setStyleSheet(f"""
-                color: {hex_color};                    
-            """)
-
-            self.foregroundColor = hex_color
-
-        self.selected.style = self._encodeStyle()
-
-        self.isSaved = False
-        
-    # Background
-    def _setBackground(self) -> None:
-        # Open color dialog
-        color = QColorDialog.getColor()
-
-        # Check if color is valid
-        if color.isValid():
-            # Get HEX color name
-            hex_color = color.name()
-
-            self.ui.backgroundStyle.setStyleSheet(f"""
-                background-color: {hex_color};                    
-            """)
-
-            self.backgroundColor = hex_color
-        
-        self.selected.style = self._encodeStyle()
-
-        self.isSaved = False
-
-    # Bold
-    def _setBold(self) -> None:
-        if self.ui.boldStyle.isChecked():
-            self.ui.boldStyle.setStyleSheet(f"""
-                font-weight: bold;                    
-            """)
-            self.boldStyle = "bold"
-        else:
-            self.ui.boldStyle.setStyleSheet(f"""
-                font-weight: none;                    
-            """)       
-            self.boldStyle = "none"
-
-        self.selected.style = self._encodeStyle()
-
-        self.isSaved = False
-
-    # Italic
-    def _setItalic(self) -> None:
-        # If checked
-        if self.ui.italicStyle.isChecked():
-            self.ui.italicStyle.setStyleSheet(f"""
-                font-style: italic;                    
-            """)
-            self.italicStyle = "italic"
-        else:
-            self.ui.italicStyle.setStyleSheet(f"""
-                font-style: none;                    
-            """)
-            self.italicStyle = "none"
-
-        self.selected.style = self._encodeStyle()
-
-        self.isSaved = False
-
-    # Underline
-    def _setUnderline(self) -> None:
-        if self.ui.underlineStyle.isChecked():
-            self.ui.underlineStyle.setStyleSheet(f"""
-                text-decoration: underline;                    
-            """)
-            self.underlineStyle = "underline"
-        else:
-            self.ui.underlineStyle.setStyleSheet(f"""
-                text-decoration: none;                    
-            """)
-            self.underlineStyle = "none"
-
-        self.selected.style = self._encodeStyle()
-
-        self.isSaved = False
 
     '''
     Settings methods.

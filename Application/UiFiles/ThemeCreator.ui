@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ThemeCreator</class>
+ <widget class="QDialog" name="ThemeCreator">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>900</width>
+    <height>750</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Ultimate Qt Palette Designer</string>
+  </property>
+  <layout class="QVBoxLayout" name="lay_main">
+   <property name="spacing">
+    <number>15</number>
+   </property>
+   <property name="margin" stdset="0">
+    <number>15</number>
+   </property>
+   <item>
+    <widget class="QGroupBox" name="grp_state">
+     <property name="title">
+      <string>1. Select Color Group (State)</string>
+     </property>
+     <layout class="QHBoxLayout" name="lay_state">
+      <item>
+       <widget class="QComboBox" name="cb_state">
+        <item>
+         <property name="text">
+          <string>Active (Normal)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Inactive (Window in background)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Disabled (Grayed out)</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item>
+       <spacer name="h_sp_state">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QTreeWidget" name="tw_palette_roles">
+     <property name="alternatingRowColors">
+      <bool>true</bool>
+     </property>
+     <property name="animated">
+      <bool>true</bool>
+     </property>
+     <attribute name="headerDefaultSectionSize">
+      <number>200</number>
+     </attribute>
+     <attribute name="headerStretchLastSection">
+      <bool>true</bool>
+     </attribute>
+     <column>
+      <property name="text">
+       <string>Color Role</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Hex Value</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Visual Preview</string>
+      </property>
+     </column>
+     <item>
+      <property name="text">
+       <string>Window</string>
+      </property>
+      <property name="toolTip">
+       <string>General background color.</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>WindowText</string>
+      </property>
+      <property name="toolTip">
+       <string>General foreground color.</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Base</string>
+      </property>
+      <property name="toolTip">
+       <string>Used as the background color for text entry widgets.</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>AlternateBase</string>
+      </property>
+      <property name="toolTip">
+       <string>Used as the alternate background color in views with alternating row colors.</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Text</string>
+      </property>
+      <property name="toolTip">
+       <string>The foreground color used with Base.</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Button</string>
+      </property>
+      <property name="toolTip">
+       <string>The general button background color.</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>ButtonText</string>
+      </property>
+      <property name="toolTip">
+       <string>A foreground color used with the Button color.</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>BrightText</string>
+      </property>
+      <property name="toolTip">
+       <string>A text color that is very different from WindowText (e.g. for dark backgrounds).</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Light</string>
+      </property>
+      <property name="toolTip">
+       <string>Lighter than Button color.</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Midlight</string>
+      </property>
+      <property name="toolTip">
+       <string>Between Button and Light.</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Dark</string>
+      </property>
+      <property name="toolTip">
+       <string>Darker than Button color.</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Mid</string>
+      </property>
+      <property name="toolTip">
+       <string>Between Button and Dark.</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Shadow</string>
+      </property>
+      <property name="toolTip">
+       <string>A very dark color.</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Highlight</string>
+      </property>
+      <property name="toolTip">
+       <string>A color to indicate a selected or focused item.</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>HighlightedText</string>
+      </property>
+      <property name="toolTip">
+       <string>A text color that contrasts with Highlight.</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Link</string>
+      </property>
+      <property name="toolTip">
+       <string>A text color used for unvisited hyperlinks.</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>LinkVisited</string>
+      </property>
+      <property name="toolTip">
+       <string>A text color used for already visited hyperlinks.</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>PlaceholderText</string>
+      </property>
+      <property name="toolTip">
+       <string>Used for input placeholder text.</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>ToolTipBase</string>
+      </property>
+      <property name="toolTip">
+       <string>Used as the background color for QToolTip.</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>ToolTipText</string>
+      </property>
+      <property name="toolTip">
+       <string>Used as the foreground color for QToolTip.</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>NoRole</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="lay_buttons">
+     <item>
+      <widget class="QPushButton" name="btn_set_color">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Set Selected Role Color...</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btn_reset">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Reset Role</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btn_full_preview">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Show Full Live Preview</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="grp_io">
+     <property name="title">
+      <string>3. Import / Export</string>
+     </property>
+     <layout class="QGridLayout" name="grid_io">
+      <item row="0" column="0">
+       <widget class="QLabel" name="l_target_format">
+        <property name="text">
+         <string>Target Format:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QComboBox" name="cb_format">
+        <item>
+         <property name="text">
+          <string>JSON File (*.json)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Qt Stylesheet (*.qss)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Python Dict (*.py)</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="1" column="0" colspan="2">
+       <layout class="QHBoxLayout" name="lay_io_actions">
+        <item>
+         <widget class="QPushButton" name="btn_import">
+          <property name="text">
+           <string>Load Theme</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btn_export">
+          <property name="text">
+           <string>Save Theme</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
