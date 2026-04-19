@@ -1,0 +1,24 @@
+from PySide6.QtGui import QPalette, QColor
+
+THEME_DATA = {'Active': {'Highlight': '#000000'}, 'Inactive': {}, 'Disabled': {}}
+
+def get_palette():
+    palette = QPalette()
+    groups = {
+        "Active": QPalette.ColorGroup.Active,
+        "Inactive": QPalette.ColorGroup.Inactive,
+        "Disabled": QPalette.ColorGroup.Disabled
+    }
+    for group_name, roles in THEME_DATA.items():
+        qt_group = groups.get(group_name)
+        for role_name, hex_color in roles.items():
+            try:
+                qt_role = getattr(QPalette.ColorRole, role_name)
+                palette.setColor(qt_group, qt_role, QColor(hex_color))
+            except AttributeError:
+                continue
+    return palette
+
+def apply_theme(app):
+    app.setPalette(get_palette())
+        

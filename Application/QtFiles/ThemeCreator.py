@@ -270,6 +270,6 @@ class Ui_ThemeCreator(object):
         self.cb_format.setItemText(2, QCoreApplication.translate("ThemeCreator", u"Python Dict (*.py)", None))
 
         self.btn_import.setText(QCoreApplication.translate("ThemeCreator", u"Load Theme", None))
-        self.btn_export.setText(QCoreApplication.translate("ThemeCreator", u"Save Theme", None))
+        self.btn_export.setText(QCoreApplication.translate("ThemeCreator", u"Export Theme", None))
     # retranslateUi
 

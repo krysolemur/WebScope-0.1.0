@@ -24,15 +24,8 @@ class SettingsDialog(QDialog):
     # Initiator
     def __init__(self, app) -> None:
 
-        '''
-        Init parents and save instances.
-        '''
-
         # Init parents
         super().__init__()
-
-        # App objects
-        self.app = app
 
         # Config manager
         self.ConfigManager = app.ConfigManager
@@ -43,20 +36,12 @@ class SettingsDialog(QDialog):
         # Config from config manager
         self.config = app.config
 
-        '''
-        Load Ui to SettingsDialog.
-        '''
-
         # Load Ui file
         self.ui = Ui_SettingsDialog()
 
         # Setup Ui 
         self.ui.setupUi(self)
-        
-        '''
-        Save instances of all pages.
-        '''
-
+    
         # General page
         self.GeneralPage = GeneralPage
 
@@ -80,10 +65,6 @@ class SettingsDialog(QDialog):
             False
         ]
 
-        '''
-        Connect all actions to buttons and widgets.
-        '''
-
         # Set general as a first page
         self._changePage(self.ui.settingsView.currentRow())
 
@@ -98,16 +79,6 @@ class SettingsDialog(QDialog):
 
         # Cancel button action
         self.ui.cancelButton.clicked.connect(self.close)
-
-        '''
-        Set window preferences.
-        '''
-
-        # Window title
-        # self.setWindowTitle(self.title)
-
-        # Icon
-        # self.setWindowIcon(QIcon(self.app.iconPath))
 
     '''
     Private functions.

@@ -12,7 +12,6 @@ from Application.SettingsDialog.SettingsDialog import SettingsDialog
 
 from Application.QtFiles.MainWindow import Ui_MainWindow
 from Application.QtFiles.AboutDialog import Ui_aboutDialog
-from Application.QtFiles.TargetDialog import Ui_TargetDialog
 
 # MainWindow class
 class MainWindow(QMainWindow):
@@ -93,26 +92,11 @@ class MainWindow(QMainWindow):
 
     # TODO: Set target 
     def _setTargetAction(self) -> None:
-        # Create dialog
-        self.targetDialog = QDialog(self)
-
-        # Load Ui
-        self.targetDialogUi = Ui_TargetDialog()
-
-        # Setup Ui
-        self.targetDialogUi.setupUi(self.targetDialog)
-
-        # Adjust size of dialog
-        self.targetDialog.adjustSize()
-
-        # Show targetDialog
-        self.targetDialog.show()
-
-        # Connect _onCheckUrl to target button
-        # self.targetDialogUi.setTargetButton.clicked.connect(lambda: self._onCheckURL(self.targetDialogUi.setTargetLineEdit.text()))
+        None
 
     # Open theme creator
     def _themeCreatorAction(self) -> None:
+        # Open dialog
         self.ThemesManager.createTheme()
 
     # Show software information

@@ -84,11 +84,6 @@ class Ui_GeneralPage(object):
 
         self.lyt_appearance.addWidget(self.lbl_gen_theme, 0, 0, 1, 1)
 
-        self.fcb_gen_font = QFontComboBox(self.sa_content)
-        self.fcb_gen_font.setObjectName(u"fcb_gen_font")
-
-        self.lyt_appearance.addWidget(self.fcb_gen_font, 1, 1, 1, 1)
-
         self.lbl_gen_stylesheet = QLabel(self.sa_content)
         self.lbl_gen_stylesheet.setObjectName(u"lbl_gen_stylesheet")
 
@@ -104,6 +99,11 @@ class Ui_GeneralPage(object):
         self.cb_gen_stylesheet.setObjectName(u"cb_gen_stylesheet")
 
         self.lyt_appearance.addWidget(self.cb_gen_stylesheet, 3, 1, 1, 1)
+
+        self.fcb_gen_font = QFontComboBox(self.sa_content)
+        self.fcb_gen_font.setObjectName(u"fcb_gen_font")
+
+        self.lyt_appearance.addWidget(self.fcb_gen_font, 1, 1, 1, 2)
 
 
         self.lyt_scroll.addLayout(self.lyt_appearance)
