@@ -4,7 +4,7 @@
 import os
 import sys
 
-from PySide6.QtWidgets import QApplication, QDialog # type: ignore
+from PySide6.QtWidgets import QApplication # type: ignore
 from PySide6.QtGui import QFont # type: ignore
 
 # Importing program files

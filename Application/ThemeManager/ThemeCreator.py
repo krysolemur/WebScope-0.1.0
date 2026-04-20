@@ -11,6 +11,9 @@ from PySide6.QtWidgets import QDialog, QColorDialog, QMessageBox, QFileDialog # 
 from PySide6.QtGui import QColor, QPalette, QIcon, QPixmap # type: ignore
 from PySide6.QtCore import Qt # type: ignore
 
+# Import program files
+from Application.ErrorDialog.ErrorDialog import ErrorDialog
+
 from Application.QtFiles.ThemeCreator import Ui_ThemeCreator
 from Application.QtFiles.ThemePreview import Ui_ThemePreview
 
@@ -70,6 +73,7 @@ class ThemeCreator(QDialog):
         self.ui.btn_export.clicked.connect(self._export_theme)
         self.ui.btn_import.clicked.connect(self._import_theme)
         self.ui.cb_state.currentIndexChanged.connect(self._update_table)
+        self.ui.tw_palette_roles.itemDoubleClicked.connect(self._color_picker)
 
     # Make icon from pixmap
     def _make_icon(self, color: QColor) -> QIcon:
@@ -81,16 +85,19 @@ class ThemeCreator(QDialog):
         return QIcon(pixmap)
 
     # Show color dialog
-    def _color_picker(self) -> None:
-        # Get selected item
-        selected_item = self.ui.tw_palette_roles.selected_items()
-
-        # Check selected
-        if not selected_item:
-            return
+    def _color_picker(self, row=None, column=0) -> None:
+        print(f"Item: {row}, Column: {column}")
+        if row:
+            # Get item
+            item = row
+        else: 
+            # Button
+            selected_item = self.ui.tw_palette_roles.selectedItems()
+            if not selected_item:
+                return
+            item = selected_item[0]
         
-        # Get item, role_name and current state
-        item = selected_item[0]
+        # Get role_name and current state
         role_name = item.text(0)
         current_state = self.ui.cb_state.currentText().split(" ")[0]
 
@@ -273,6 +280,7 @@ class ThemeCreator(QDialog):
             elif "py" in type:
                 self._import_from_py(file_path)
         except Exception as e:
+            ErrorDialog(e)
             print(e)
 
         # Reset table
@@ -463,5 +471,5 @@ class ThemeCreator(QDialog):
                 self._export_as_py(file_path)
         except Exception as e:
             # Show error dialog
-            ...
+            ErrorDialog()
             print(e) 

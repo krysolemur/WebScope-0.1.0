@@ -20,7 +20,6 @@ class Logger:
         # Service name
         self.serviceName = serviceName
         
-
         # Console format
         console_format = ""
 
@@ -92,9 +91,6 @@ class Logger:
     
     # Update settings
     def updateConfig(self, newConfig) -> None:
-        # Import loguru again
-        from loguru import logger # type: ignore
-
         # Remove configuration
         logger.remove() 
         

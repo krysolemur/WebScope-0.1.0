@@ -3,12 +3,7 @@
 # Module for managing settings window
 
 # Importing system files
-import re
-import sys
-import os
-
 from PySide6.QtWidgets import QDialog # type: ignore
-from PySide6.QtGui import QIcon # type: ignore
 
 # Importing program files
 from Application.SettingsDialog.SourcePage.SourcePage import SourcePage
