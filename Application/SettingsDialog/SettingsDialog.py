@@ -65,7 +65,7 @@ class SettingsDialog(QDialog):
         ]
 
         # Set general as a first page
-        self._changePage(self.ui.settingsView.currentRow())
+        self._change_page(self.ui.settingsView.currentRow())
 
         # Pages changing actions
         self.ui.settingsView.currentRowChanged.connect(self._change_page)

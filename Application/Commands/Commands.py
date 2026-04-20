@@ -4,13 +4,13 @@
 import sys
 
 # Importing program files
-from Config.ConfigManager import ConfigManager
+from Application.ConfigManager.ConfigManager import ConfigManager
 
 from Application.Application import Application as app
 
-from resources.Themes.ThemeCreator import ThemeCreator
+from Application.ThemeManager.ThemeCreator import ThemeCreator
 
-from Logs.Logger import Logger
+from Application.Logger.Logger import Logger
 
 # Stored all commands 
 

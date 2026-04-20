@@ -10,7 +10,7 @@ from PySide6.QtGui import QPalette, QColor # type: ignore
 from PySide6.QtCore import Qt # type: ignore
 
 # Import program files
-from resources.Themes.ThemeCreator import ThemeCreator
+from Application.ThemeManager.ThemeCreator import ThemeCreator
 
 # Main class ThemeManager
 class ThemesManager:
@@ -31,7 +31,7 @@ class ThemesManager:
         }
 
     # Move file to theme dir
-    def addTheme(self, path) -> bool:
+    def addTheme(cls, path) -> bool:
         try:
             # Move that file to themes dir
             shutil.move(path, cls.themeDir)
