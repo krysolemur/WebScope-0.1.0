@@ -34,14 +34,18 @@ def main() -> None:
 
             # 3. CLI Path
             else:
-                try:
-                    actions.commands[cmd](*args)
-                except TypeError as e:
-                    # Handle argument errors
-                    if "arguments" in str(e) or "positional" in str(e):
-                        print(f"Error: Invalid arguments for '{cmd}'.")
-                    else:
-                        raise 
+                action_func = actions.commands.get(cmd)
+                if callable(action_func):
+                    try:
+                        action_func(*args)
+                    except TypeError as e:
+                        if "arguments" in str(e) or "positional" in str(e):
+                            print(f"Error: Invalid arguments for '{cmd}'.")
+                        else:
+                            raise
+                else:
+                    # Toto nastane, pokud by někdo zkusil spustit --run v CLI sekci
+                    print(f"Error: Command '{cmd}' requires a GUI environment.")
         else:
             # Welcome message
             print("WebScope: Use --run to start or --help for options.")

@@ -4,22 +4,16 @@ CLI_COMMANDS = ["--help", "--version", "--reset-settings", "--clear-logs"]
 GUI_COMMANDS = ["--run", "--theme-creator", "--style-creator"]
 ALL_COMMANDS = ["run", "help", "reset-settings", "version", "--clear-logs", "--theme-creator", "--style-creator"]
 COMMANDS_DESCRIPTIONS = {
-    "--run": "Run application.",
+    "--run": "Run the main application.",
     "--help": "Display help message.",
-    "--reset-settings": "Reset program configuration.",
-    "--create-settings": "Create new settings if previous was deleted or renamed.",
+    "--reset-settings": "Reset program configuration to default.",
     "--version": "Show actual version of application.",
-    "--create-theme": "Show dialog for creating own theme.",
-    "--clear-logs": "Clear all logs."
+    "--theme-creator": "Show dialog for creating own theme.",
+    "--style-creator": "Show dialog for creating own style sheet.",
+    "--clear-logs": "Clear all application logs."
 }
 COMMANDS_ARGS = {
-    "--run": "",
     "--help": "<command>",
-    "--reset-settings": None,
-    "--version": None,
-    "--create-settings": None,
-    "--create-theme": None,
-    "--clear-logs": None
 }
 
 # Help menu
@@ -48,13 +42,11 @@ def show_help(*args) -> None:
         return
 
     # 4. Show detail
-    cmd_args = COMMANDS_ARGS.get(cmd_key, "")
-    description = COMMANDS_DESCRIPTIONS.get(cmd_key, "No description.")
-
-    # Only add space if there are arguments
+    cmd_args = COMMANDS_ARGS.get(cmd_key)
+    description = COMMANDS_DESCRIPTIONS.get(cmd_key, "No description available.")
     args_display = f" {cmd_args}" if cmd_args else ""
 
-    print(f"Usage: python3 main.py {cmd_key}{args_display}")
+    print(f"\nUsage: python3 main.py {cmd_key}{args_display}")
     print(f"Description: {description}")
 
 # Version function
@@ -107,7 +99,7 @@ def clear_logs()-> None:
     Logger.clear_logs()
 
 commands = {
-    "--run": "",
+    "--run": None,
     "--help": show_help,
     "--reset-settings": reset_settings,
     "--version": show_version,
