@@ -34,6 +34,17 @@ class Logger:
     # Logs filepath
     DEFAULT_LOG_FILE = "app.log"
 
+    # Level colors
+    LEVEL_COLORS = {
+        "INFO": "\033[94m",    # Light blue
+        "WARN": "\033[93m",    # Yellow
+        "SUCCESS": "\033[92m", # Green
+        "ERROR": "\033[91m",   # Red
+        "DEBUG": "\033[95m",   # Magenta
+        "CRITICAL": "\033[1;41;97m", # Bold white
+        "RESET": "\033[0m"     # Reset
+    }
+    
     def __init__(self, config:dict) -> None:
 
         self.log = None
@@ -83,8 +94,9 @@ class Logger:
                 "CRITICAL": True
             }
 
-        # Get time
+        # Get time and colors
         self.time = bool(config.get("cb_console_time"))
+        self.colored = bool(config.get("cb_console_colors"))
 
         # Log init
         self.info("Logger initialized")
@@ -100,8 +112,13 @@ class Logger:
             timestamp = datetime.now().strftime("%H:%M:%S")
 
         # Create msg
-        path = f"{filename}{':' if filename else ''}{func}{':' if func else ''}{row}"
-        msg = f"{timestamp} {level:^10} {path}{' - ' if path else ''}{msg}"
+        if self.colored:
+            clean_row = f"\033[1;97m{row}\033[0m" if row else ""
+            path = f"{filename}{':' if filename else ''}{func}{':' if func else ''}{clean_row}"
+            msg = f"\033[93m{timestamp}\033[0m {self.LEVEL_COLORS[level]}{level:^10}\033[0m {path}{' - ' if path else ''}{msg}"
+        else:
+            path = f"{filename}{':' if filename else ''}{func}{':' if func else ''}{row}"
+            msg = f"{timestamp} {level:^10} {path}{' - ' if path else ''}{msg}"
 
         # Print msg
         print(msg)
