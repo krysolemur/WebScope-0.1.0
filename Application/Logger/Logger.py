@@ -5,8 +5,8 @@ class Logger:
     # Logs dir
     LOGS_DIR = "Logs"
 
-    def __init__(self, config:dict, service_name:str) -> None:
+    def __init__(self) -> None:
         None
     
-
+logger = Logger()
 

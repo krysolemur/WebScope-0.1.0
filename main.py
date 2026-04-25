@@ -4,21 +4,20 @@ import sys
 import traceback
 import signal
 
-from Application.Logger.Logger import Logger
-from Application.Application import Application
+from Application.AppContext import ctx
+from Application.Logger.Logger import logger
 
-logger = Logger()
+from Application.Application import Application
 
 def main() -> None:
     # Allow Ctrl+C to work properly with Qt
     signal.signal(signal.SIGINT, signal.SIG_DFL)
 
     try:
-        # Create app, run end exec
+        # Create and execute app
         app = Application()
-        app.run() 
         sys.exit(app.exec())
-        
+
     except KeyboardInterrupt:
         # Clean exit on Ctrl+C
         print("\nApplication stopped.")

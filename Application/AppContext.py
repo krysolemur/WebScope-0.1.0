@@ -1,8 +1,6 @@
 # Globals.py
 
 from Application.ConfigManager.ConfigManager import ConfigManager
-from Application.ThemeManager.ThemesManager import ThemesManager
-from Application.StyleManager.StyleManager import StyleManager
 
 class AppContext:
 
@@ -14,6 +12,6 @@ class AppContext:
         # Configuration
         self.config = self.ConfigManager.loadSettings()
 
-
-# Init class
 ctx = AppContext()
+
+

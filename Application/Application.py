@@ -6,7 +6,6 @@ import sys
 from PySide6.QtWidgets import QApplication # type: ignore
 from PySide6.QtGui import QFont # type: ignore
 
-
 from Application.MainWindow.MainWindow import MainWindow
 from Application.Logger.Logger import Logger
 
@@ -33,11 +32,6 @@ class Application(QApplication):
 
         # Setup application
         self._setup_application()
-
-    # Run method
-    def run(self) -> None:
-        # Logger object
-        self.Logger = Logger(ctx.config["LoggingPage"], self.NAME)
 
         # Init MainWindow
         self.MainWindow = MainWindow()
