@@ -14,12 +14,6 @@ class AppContext:
         # Configuration
         self.config = self.ConfigManager.loadSettings()
 
-        # ThemeManager
-        self.ThemesManager = ThemesManager()
-
-        # StyleManager
-        self.StyleManager = StyleManager()
-
 
 # Init class
 ctx = AppContext()

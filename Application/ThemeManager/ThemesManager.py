@@ -2,12 +2,6 @@
 
 # Importing system files
 import shutil
-import json
-import os
-
-from PySide6.QtWidgets import QDialog, QFileDialog, QMessageBox # type: ignore
-from PySide6.QtGui import QPalette, QColor # type: ignore
-from PySide6.QtCore import Qt # type: ignore
 
 # Import program files
 from Application.ThemeManager.ThemeCreator import ThemeCreator

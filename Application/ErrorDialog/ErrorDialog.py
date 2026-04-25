@@ -10,7 +10,7 @@ from Application.QtFiles.ErrorDialog import Ui_ErrorDialog
 
 class ErrorDialog(QDialog):
 
-    def __init__(self, exception, msg) -> None:
+    def __init__(self, exception:Exception, msg:str) -> None:
 
         # Init parents
         super().__init__()
