@@ -70,9 +70,11 @@ class Application(QApplication):
     # Restart application function
     def restart_application(self) -> None:
         # Restart command
+        logger.info("Restarting application.")
         os.execv(sys.executable, [sys.executable] + sys.argv)
 
     # Quit application
     def quit_application(self) -> None:
         # Quit
+        logger.info("Quiting application.")
         QApplication.quit()

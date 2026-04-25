@@ -1,12 +1,10 @@
 # MainWindow.py
 
-# Importing system files
 import requests
 import jsbeautifier # type: ignore
 
 from PySide6.QtWidgets import QDialog, QApplication, QMainWindow # type: ignore
 
-# Imporing program files
 from Application.SettingsDialog.SettingsDialog import SettingsDialog
 
 from Application.QtFiles.MainWindow import Ui_MainWindow
@@ -14,13 +12,14 @@ from Application.QtFiles.AboutDialog import Ui_aboutDialog
 
 from Application.AppContext import ctx
 
-# MainWindow class
+from Application.Logger.Logger import logger
+
 class MainWindow(QMainWindow):
 
-    # Constructor
     def __init__(self) -> None:
 
-        # Init parents
+        logger.info("Opening main window.")
+
         super().__init__()
 
         # ThemesManager
@@ -151,4 +150,5 @@ class MainWindow(QMainWindow):
     # Close event overwritten.
     def closeEvent(self, event) -> None:
         # Quit application
-        QApplication.quit()
+        logger.info("Closing main window.")
+        ctx.app.quit_application()

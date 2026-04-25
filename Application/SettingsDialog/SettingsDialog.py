@@ -10,9 +10,13 @@ from Application.QtFiles.SettingsDialog import Ui_SettingsDialog
 
 from Application.AppContext import ctx
 
+from Application.Logger.Logger import logger
+
 class SettingsDialog(QDialog):
 
     def __init__(self) -> None:
+
+        logger.info("Opening settings.")
 
         super().__init__()
 
@@ -99,9 +103,13 @@ class SettingsDialog(QDialog):
                         # Mark page as saved
                         page.isSaved = True
 
+            # Save settings
             self.ConfigManager.saveSettings(config)
+            self.ui.statusLabel.setText(self.ui.statusLabel.text() + "SUCCESS")
+            logger.success("Settings saved.")
         except Exception as e:
-            None
+            self.ui.statusLabel.setText(self.ui.statusLabel.text() + "ERROR")
+            logger.error("Error while saving settings!")
 
     # Reset configuration
     def _reset_settings(self) -> None:
@@ -136,4 +144,6 @@ class SettingsDialog(QDialog):
         #             # Exit the function early as no further action is needed
         #             return
 
+        # Log and close
+        logger.info("Closing settings.")
         event.accept()
