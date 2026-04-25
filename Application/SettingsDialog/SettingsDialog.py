@@ -12,23 +12,22 @@ from Application.SettingsDialog.LoggingPage.LoggingPage import LoggingPage
 
 from Application.QtFiles.SettingsDialog import Ui_SettingsDialog
 
+from Application.AppContext import ctx
+
 # Class settings window
 class SettingsDialog(QDialog):
 
     # Initiator
-    def __init__(self, app) -> None:
+    def __init__(self) -> None:
 
         # Init parents
         super().__init__()
 
         # Config manager
-        self.ConfigManager = app.ConfigManager
-
-        # ThemeManager
-        self.ThemesManager = app.ThemesManager
+        self.ConfigManager = ctx.ConfigManager
 
         # Config from config manager
-        self.config = app.config
+        self.config = ctx.config
 
         # Load Ui file
         self.ui = Ui_SettingsDialog()

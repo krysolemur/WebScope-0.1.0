@@ -12,26 +12,22 @@ from Application.SettingsDialog.SettingsDialog import SettingsDialog
 from Application.QtFiles.MainWindow import Ui_MainWindow
 from Application.QtFiles.AboutDialog import Ui_aboutDialog
 
+from Application.AppContext import ctx
+
 # MainWindow class
 class MainWindow(QMainWindow):
 
     # Constructor
-    def __init__(self, app) -> None:
+    def __init__(self) -> None:
 
         # Init parents
         super().__init__()
 
-        # App variable
-        self.app = app
-
         # ThemesManager
-        self.ThemesManager = app.ThemesManager
+        self.ThemesManager = ctx.ThemesManager
 
         # StyleManager
-        self.StyleManager = app.StyleManager
-
-        # ConfigManager
-        self.ConfigManager = app.ConfigManager
+        self.StyleManager = ctx.StyleManager
 
         # Load Ui
         self.ui = Ui_MainWindow()
@@ -40,10 +36,10 @@ class MainWindow(QMainWindow):
         self.ui.setupUi(self)
 
         # Quit application
-        self.ui.actionQuit.triggered.connect(self.app.quit_application)
+        self.ui.actionQuit.triggered.connect(ctx.app.quit_application)
 
         # Restart application
-        self.ui.actionRestart.triggered.connect(self.app.restart_application)
+        self.ui.actionRestart.triggered.connect(ctx.app.restart_application)
 
         # Open settings dialog
         self.ui.actionSettings.triggered.connect(self._open_settings)
@@ -61,7 +57,7 @@ class MainWindow(QMainWindow):
         self.ui.actionStylesheetCreator.triggered.connect(self._open_style_creator)
 
         # Set window title
-        self.setWindowTitle(f"{self.app.NAME} | {self.app.VERSION}")  
+        self.setWindowTitle(f"{ctx.app.NAME} | {ctx.app.VERSION}")  
 
         # Set window icon
 
@@ -89,7 +85,7 @@ class MainWindow(QMainWindow):
     # Open settings dialog
     def _open_settings(self) -> None:
         # Create settings dialog object
-        self.SettingsDialog = SettingsDialog(self.app)
+        self.SettingsDialog = SettingsDialog()
 
         # Exec settings dialog
         self.SettingsDialog.exec()

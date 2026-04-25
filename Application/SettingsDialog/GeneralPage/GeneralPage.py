@@ -7,6 +7,8 @@ from PySide6.QtGui import QFont # type: ignore
 # Import program files
 from Application.QtFiles.GeneralPage import Ui_GeneralPage
 
+from Application.AppContext import ctx
+
 # Main class GeneralPage
 class GeneralPage(QWidget):
 
@@ -23,7 +25,7 @@ class GeneralPage(QWidget):
         self.ui.setupUi(self)
 
         # ThemeManager
-        self.ThemeManager = app.ThemesManager
+        self.ThemeManager = ctx.ThemesManager
 
         # Saved variable
         self.isSaved = True

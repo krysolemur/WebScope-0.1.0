@@ -6,11 +6,11 @@ import sys
 from PySide6.QtWidgets import QApplication # type: ignore
 from PySide6.QtGui import QFont # type: ignore
 
-from Application.ConfigManager.ConfigManager import ConfigManager
-from Application.ThemeManager.ThemesManager import ThemesManager
+
 from Application.MainWindow.MainWindow import MainWindow
 from Application.Logger.Logger import Logger
-from Application.StyleManager.StyleManager import StyleManager
+
+from Application.AppContext import ctx
 
 class Application(QApplication):
 
@@ -29,17 +29,14 @@ class Application(QApplication):
         # Init parents
         super().__init__(sys.argv)
 
+        # Save app
+        ctx.app = self
+
         # Config object
-        self.ConfigManager = ConfigManager()
+        self.ConfigManager = ctx.ConfigManager
 
         # Config variable
-        self.config = self.ConfigManager.loadSettings()
-
-        # ThemeManager
-        self.ThemesManager = ThemesManager()
-
-        # StyleManager
-        self.StyleManager = StyleManager()
+        self.config = ctx.config
 
         # Setup application
         self._setup_application()
@@ -50,7 +47,7 @@ class Application(QApplication):
         self.Logger = Logger(self.config["LoggingPage"], self.NAME)
 
         # Init MainWindow
-        self.MainWindow = MainWindow(self)
+        self.MainWindow = MainWindow()
 
         # Show main window
         self.MainWindow.show()

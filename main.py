@@ -3,6 +3,7 @@
 import sys
 import traceback
 import signal
+
 import Application.Commands.Commands as actions
 
 def main() -> None:
