@@ -1,18 +1,15 @@
 # LoggingPage.py
 
-# Importing system files
 from PySide6.QtWidgets import QSlider, QComboBox, QCheckBox, QPushButton, QWidget, QSpinBox, QLineEdit, QFileDialog # type: ignore
 
-# Importing program files
 from Application.QtFiles.LoggingPage import Ui_LoggingPage
 
-# Class with color picker
+from Application.AppContext import ctx
+
 class LoggingPage(QWidget):
     
-    # Initiator
     def __init__(self, parent) -> None:
 
-        # Init parents
         super().__init__(parent)
 
         # Load page
@@ -20,6 +17,9 @@ class LoggingPage(QWidget):
 
         # Setup ui
         self.ui.setupUi(self)
+
+        # Load settings
+        self.loadSettings(ctx.config.get("LoggingPage"))
 
         # Saved
         self.isSaved = True
@@ -29,6 +29,22 @@ class LoggingPage(QWidget):
 
         # Browse button action
         self.ui.btn_file_browse.clicked.connect(self._browse_log_folder)
+
+        # Set file levels enabled or disabled
+        self._file_levels(self.ui.cb_file_enabled.currentText())
+
+        # Connect cb_file_enabled on changed text
+        self.ui.cb_file_enabled.currentTextChanged.connect(self._file_levels)
+
+    # Enable/disable file levels
+    def _file_levels(self, text) -> None:
+        # If yes, set enabled else disabled
+        enable = text == "Yes"
+        self.ui.btn_file_debug.setEnabled(enable)
+        self.ui.btn_file_error.setEnabled(enable)
+        self.ui.btn_file_info.setEnabled(enable)
+        self.ui.btn_file_warning.setEnabled(enable)
+        self.ui.btn_file_success.setEnabled(enable)
 
     # Browse log folder
     def _browse_log_folder(self) -> None:
@@ -43,12 +59,8 @@ class LoggingPage(QWidget):
         if selected_directory:
             # Set path to line edit
             self.ui.le_file_path.setText(selected_directory)
-            
-    '''
-    Settings methods.
-    '''
 
-    # Load settings function
+    # Load settings 
     def loadSettings(self, settings: dict) -> None:
         # Save settings reference
         self.settings = settings
@@ -94,7 +106,7 @@ class LoggingPage(QWidget):
             # Unblock signals
             widget.blockSignals(False)
 
-    # Get settings from childs
+    # Get settings 
     def getSettings(self) -> dict:
         # Return settings
         return {
@@ -122,11 +134,7 @@ class LoggingPage(QWidget):
             "cb_file_compression": self.ui.cb_file_compression.currentText() 
         }
     
-    '''
-    Marking as not saved.
-    '''
-
-    # Automatically discovers input widgets and connects their change signals to the dirty state tracker.
+    # Connect marking for all widgets
     def _connectChangesTracking(self) -> None:
         container = self.ui.sa_content
         # Locate all combo box widgets within the current window and its children.
@@ -151,7 +159,7 @@ class LoggingPage(QWidget):
                 # Connect the toggle signal to the dirty state tracker for checkable buttons.
                 button.clicked.connect(self._markAsDirty)
 
-    # Function that change isSaved status if somethings is saved.
+    # Mark page as not saved
     def _markAsDirty(self) -> None:
         # Change saved status
         self.isSaved = False

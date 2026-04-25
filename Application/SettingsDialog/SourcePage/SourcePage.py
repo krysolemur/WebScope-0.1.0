@@ -72,7 +72,7 @@ class SourcePage(QWidget):
 
         
         # Load style
-        self._loadStyle()
+        # self._loadStyle()
 
     # Get settings from childs
     def getSettings(self) -> dict:

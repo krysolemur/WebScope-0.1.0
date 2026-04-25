@@ -15,16 +15,17 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QDialog, QHBoxLayout, QLayout,
-    QListWidget, QListWidgetItem, QPushButton, QSizePolicy,
-    QStackedWidget, QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QDialog, QFrame, QHBoxLayout,
+    QLabel, QLayout, QListWidget, QListWidgetItem,
+    QPushButton, QSizePolicy, QStackedWidget, QVBoxLayout,
+    QWidget)
 
 class Ui_SettingsDialog(object):
     def setupUi(self, SettingsDialog):
         if not SettingsDialog.objectName():
             SettingsDialog.setObjectName(u"SettingsDialog")
         SettingsDialog.setWindowModality(Qt.NonModal)
-        SettingsDialog.resize(910, 624)
+        SettingsDialog.resize(910, 600)
         sizePolicy = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -62,10 +63,11 @@ class Ui_SettingsDialog(object):
         sizePolicy.setHeightForWidth(self.settingsWidget.sizePolicy().hasHeightForWidth())
         self.settingsWidget.setSizePolicy(sizePolicy)
         self.settingsWidget.setMinimumSize(QSize(0, 0))
+        self.settingsWidget.setFrameShape(QFrame.NoFrame)
+        self.settingsWidget.setFrameShadow(QFrame.Sunken)
 
         self.settingsLayout.addWidget(self.settingsWidget)
 
-        self.settingsLayout.setStretch(1, 1)
 
         self.mainLayout.addLayout(self.settingsLayout)
 
@@ -100,6 +102,20 @@ class Ui_SettingsDialog(object):
 
         self.mainLayout.addLayout(self.buttonsLayout)
 
+        self.statusLayout = QHBoxLayout()
+        self.statusLayout.setSpacing(3)
+        self.statusLayout.setObjectName(u"statusLayout")
+        self.statusLayout.setSizeConstraint(QLayout.SetDefaultConstraint)
+        self.statusLayout.setContentsMargins(3, 3, 3, 3)
+        self.statusLabel = QLabel(SettingsDialog)
+        self.statusLabel.setObjectName(u"statusLabel")
+        self.statusLabel.setFrameShape(QFrame.NoFrame)
+
+        self.statusLayout.addWidget(self.statusLabel)
+
+
+        self.mainLayout.addLayout(self.statusLayout)
+
         self.mainLayout.setStretch(0, 1)
 
         self.retranslateUi(SettingsDialog)
@@ -127,5 +143,6 @@ class Ui_SettingsDialog(object):
         self.cancelButton.setText(QCoreApplication.translate("SettingsDialog", u"Close", None))
         self.resetButton.setText(QCoreApplication.translate("SettingsDialog", u"Reset", None))
         self.applyButton.setText(QCoreApplication.translate("SettingsDialog", u"Apply", None))
+        self.statusLabel.setText(QCoreApplication.translate("SettingsDialog", u"Status: ", None))
     # retranslateUi
 

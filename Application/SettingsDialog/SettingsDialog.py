@@ -1,11 +1,7 @@
 # SettingsDialog.py
 
-# Module for managing settings window
-
-# Importing system files
 from PySide6.QtWidgets import QDialog # type: ignore
 
-# Importing program files
 from Application.SettingsDialog.SourcePage.SourcePage import SourcePage
 from Application.SettingsDialog.GeneralPage.GeneralPage import GeneralPage
 from Application.SettingsDialog.LoggingPage.LoggingPage import LoggingPage
@@ -14,13 +10,10 @@ from Application.QtFiles.SettingsDialog import Ui_SettingsDialog
 
 from Application.AppContext import ctx
 
-# Class settings window
 class SettingsDialog(QDialog):
 
-    # Initiator
     def __init__(self) -> None:
 
-        # Init parents
         super().__init__()
 
         # Config manager
@@ -85,40 +78,32 @@ class SettingsDialog(QDialog):
 
             # Insert it to stacked widget
             self.ui.settingsWidget.insertWidget(pageIndex, newPage)
-        
-            # Load settings
-            newPage.loadSettings(self.config.get(type(newPage).__name__))
 
         # Show page
         self.ui.settingsWidget.setCurrentIndex(pageIndex)
         
     # Collects values from all UI widgets, saves them to a dictionary, and updates the configuration file.
     def _save_settings(self) -> None:
-        # Create settings
-        config = self.config
+        try:
+            config = self.config
 
-        # Browse all pages
-        for page in self.activePages:
-            # Check if page exists
-            if page:
-                # Check if saved
-                if not page.isSaved:
-                    # Get page name
-                    pageName = type(page).__name__
+            for page in self.activePages:
+                # Check if page exists
+                if page:
+                    if not page.isSaved:
+                        pageName = type(page).__name__
 
-                    # Get settings
-                    config[pageName] = page.getSettings()
+                        # Get settings
+                        config[pageName] = page.getSettings()
 
-                    # Mark page as saved
-                    page.isSaved = True
+                        # Mark page as saved
+                        page.isSaved = True
 
-        # Write the settings dictionary to the physical configuration file via the config handler.
-        self.ConfigManager.saveSettings(config)
-    
-        # Revert the window title to its original state, typically removing an unsaved '*' marker.
-        # self.setWindowTitle(self.title)
+            self.ConfigManager.saveSettings(config)
+        except Exception as e:
+            None
 
-    # Reverts the configuration file to its factory defaults and refreshes the settings interface.
+    # Reset configuration
     def _reset_settings(self) -> None:
         # Trigger the configuration handler to overwrite the current JSON with default values.
         self.ConfigManager.resetSettings()

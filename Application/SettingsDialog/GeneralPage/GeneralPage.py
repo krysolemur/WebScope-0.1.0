@@ -27,6 +27,9 @@ class GeneralPage(QWidget):
         # ThemeManager
         self.ThemeManager = ctx.ThemesManager
 
+        # Load settings
+        self.loadSettings(ctx.config.get("LoggingPage"))
+
         # Saved variable
         self.isSaved = True
 
