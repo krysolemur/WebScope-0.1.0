@@ -7,7 +7,7 @@ from PySide6.QtWidgets import QApplication # type: ignore
 from PySide6.QtGui import QFont # type: ignore
 
 from Application.MainWindow.MainWindow import MainWindow
-from Application.Logger.Logger import Logger
+from Application.Logger.Logger import logger
 
 from Application.AppContext import ctx
 
@@ -44,8 +44,7 @@ class Application(QApplication):
         # App name
         self.setApplicationName(self.NAME)
 
-        # Get configuration
-        config = self.config["GeneralPage"]
+        config = ctx.config.get("GeneralPage", "")
 
         # Font size dictonary
         font_size = {

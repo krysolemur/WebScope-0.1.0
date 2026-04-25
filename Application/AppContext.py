@@ -2,6 +2,7 @@
 
 from Application.ConfigManager.ConfigManager import ConfigManager
 from Application.ThemeManager.ThemesManager import ThemesManager
+from Application.StyleManager.StyleManager import StyleManager
 
 class AppContext:
 
@@ -12,9 +13,12 @@ class AppContext:
 
         # Configuration
         self.config = self.ConfigManager.loadSettings()
-
+        
         # ThemeManager
-        self.ThemeManager = ThemesManager()
+        self.ThemesManager = ThemesManager()
+
+        # StyleManager
+        self.StyleManager = StyleManager()
 
 ctx = AppContext()
 
