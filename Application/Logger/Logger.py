@@ -1,8 +1,5 @@
 # Logger.py
 
-import sys
-import os
-
 class Logger:
 
     # Logs dir
@@ -12,5 +9,4 @@ class Logger:
         None
     
 
-# Init logger
-logger = Logger()
+
