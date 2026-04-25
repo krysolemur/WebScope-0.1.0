@@ -95,8 +95,8 @@ class Logger:
             }
 
         # Get time and colors
-        self.time = bool(config.get("cb_console_time"))
-        self.colored = bool(config.get("cb_console_colors"))
+        self.time = config.get("cb_console_time") == "Yes"
+        self.colored = config.get("cb_console_colors") == "Yes"
 
         # Log init
         self.info("Logger initialized")
@@ -115,10 +115,10 @@ class Logger:
         if self.colored:
             clean_row = f"\033[1;97m{row}\033[0m" if row else ""
             path = f"{filename}{':' if filename else ''}{func}{':' if func else ''}{clean_row}"
-            msg = f"\033[93m{timestamp}\033[0m {self.LEVEL_COLORS[level]}{level:^10}\033[0m {path}{' - ' if path else ''}{msg}"
+            msg = f"\033[93m{timestamp if self.time else ""}\033[0m {self.LEVEL_COLORS[level]}{level:^10}\033[0m {path}{' - ' if path else ''}{msg}"
         else:
             path = f"{filename}{':' if filename else ''}{func}{':' if func else ''}{row}"
-            msg = f"{timestamp} {level:^10} {path}{' - ' if path else ''}{msg}"
+            msg = f"{timestamp if self.time else ""} {level:^10} {path}{' - ' if path else ''}{msg}"
 
         # Print msg
         print(msg)
@@ -135,11 +135,11 @@ class Logger:
 
         # Create msg
         path = f"{filename}{':' if filename else ''}{func}{':' if func else ''}{row}"
-        msg = f"{timestamp} {level:^10} {path}{' - ' if path else ''}{msg}"
+        msg = f"{timestamp if self.time else ""} {level:^10} {path}{' - ' if path else ''}{msg}"
 
         # Write msg
         try:
-            self.log.write(msg)
+            self.log.write(msg+"\n")
             self.log.flush()
         except OSError as e:
             self.critical(e)
