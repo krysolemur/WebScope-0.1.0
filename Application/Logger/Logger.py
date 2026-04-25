@@ -13,13 +13,13 @@ DEFAULT_CONFIG = {
     "btn_console_warning": True,
     "btn_console_success": True,
     "btn_console_error": True,
-    "btn_console_debug": True,
+    "btn_console_debug": False,
     "cb_file_enabled": "Yes",
-    "btn_file_info": True,
-    "btn_file_warning": True,
-    "btn_file_success": True,
+    "btn_file_info": False,
+    "btn_file_warning": False,
+    "btn_file_success": False,
     "btn_file_error": True,
-    "btn_file_debug": True,
+    "btn_file_debug": False,
     "sb_file_rotation": 10,
     "sb_file_retention": 7,
     "le_file_path": "./Logs",
@@ -29,10 +29,10 @@ DEFAULT_CONFIG = {
 class Logger:
 
     # Logs dir
-    LOG_DIR = ctx.config.get("le_file_path", DEFAULT_CONFIG.get("le_file_path"))
-
-    # Logs path
-    LOG_PATH = LOG_DIR + "/app.log"
+    DEFAULT_LOG_DIR = "Logs"
+    
+    # Logs filepath
+    DEFAULT_LOG_FILE = "app.log"
 
     def __init__(self, config:dict) -> None:
 
@@ -89,7 +89,7 @@ class Logger:
         # Log init
         self.info("Logger initialized")
 
-    # Writing to console and file methods for high efectivity
+    # Writing to console 
     def _cout(self, level, msg, func="", row="", filename="") -> None:
         # Check level
         if not self.c_levels.get(level, False):
@@ -100,12 +100,13 @@ class Logger:
             timestamp = datetime.now().strftime("%H:%M:%S")
 
         # Create msg
-        path = f"{filename}{":" if filename else ""}{func}{":" if func else ""}{row}"
-        msg = f"{timestamp} {level:^10} {path}{" - " if path else ""}{msg}"
+        path = f"{filename}{':' if filename else ''}{func}{':' if func else ''}{row}"
+        msg = f"{timestamp} {level:^10} {path}{' - ' if path else ''}{msg}"
 
         # Print msg
         print(msg)
     
+    # Writing to file
     def _fout(self, level, msg, func="", row="", filename="") -> None:
         # Check level
         if not self.f_levels.get(level, False):
@@ -116,11 +117,16 @@ class Logger:
             timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
         # Create msg
-        path = f"{filename}{":" if filename else ""}{func}{":" if func else ""}{row}"
-        msg = f"{timestamp} {level:^10} {path}{" - " if path else ""}{msg}"
+        path = f"{filename}{':' if filename else ''}{func}{':' if func else ''}{row}"
+        msg = f"{timestamp} {level:^10} {path}{' - ' if path else ''}{msg}"
 
         # Write msg
-        self.log.write(msg)
+        try:
+            self.log.write(msg)
+            self.log.flush()
+        except OSError as e:
+            self.critical(e)
+            self.log = None 
     
     # Info log
     def info(self, msg) -> None:
@@ -175,7 +181,8 @@ class Logger:
             self._fout("INFO", msg)
 
     # Get error details
-    def _error_details(self, exception) -> dict:
+    @staticmethod
+    def _error_details(exception) -> dict:
         import traceback
         import json
         import sys
@@ -219,5 +226,5 @@ class Logger:
         return clean_json
 
 # Init logger
-logger = Logger(ctx.config.get("LoggingPage", DEFAULT_CONFIG))#
+logger = Logger(ctx.config.get("LoggingPage", DEFAULT_CONFIG))
 
