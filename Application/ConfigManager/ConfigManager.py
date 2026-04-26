@@ -117,7 +117,7 @@ class ConfigManager:
     '''
 
     # Load settings from disk and parse it. If parsing fail, use default settings.
-    def loadSettings(self) -> dict:
+    def load_settings(self) -> dict:
         # Try except
         try:
             # Open file
@@ -132,7 +132,7 @@ class ConfigManager:
             return self.defaultConfig
 
     # Public version of save settings function that is used in settings dialog which is calling from.
-    def saveSettings(self, settings) -> None:
+    def save_settings(self, settings) -> None:
         # Open profile
         with open(self.configPath, "w") as nwconfig:
             # Write into profile new configuration

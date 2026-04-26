@@ -12,7 +12,7 @@ class AppContext:
         self.ConfigManager = ConfigManager()
 
         # Configuration
-        self.config = self.ConfigManager.loadSettings()
+        self.config = self.ConfigManager.load_settings()
         
         # ThemeManager
         self.ThemesManager = ThemesManager()

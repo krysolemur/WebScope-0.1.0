@@ -20,25 +20,16 @@ class SettingsDialog(QDialog):
 
         super().__init__()
 
-        # Config manager
-        self.ConfigManager = ctx.ConfigManager
-
         # Config from config manager
         self.config = ctx.config
 
-        # Load Ui file
+        # Load Ui and setup
         self.ui = Ui_SettingsDialog()
-
-        # Setup Ui 
         self.ui.setupUi(self)
     
-        # General page
+        # General. logging and source page
         self.GeneralPage = GeneralPage
-
-        # Source page
         self.SourcePage = SourcePage
-
-        # Logging page
         self.LoggingPage = LoggingPage
 
         # All pages
@@ -55,19 +46,13 @@ class SettingsDialog(QDialog):
             False
         ]
 
-        # Set general as a first page
+        # Set first page and connect swithcin
         self._change_page(self.ui.settingsView.currentRow())
-
-        # Pages changing actions
         self.ui.settingsView.currentRowChanged.connect(self._change_page)
 
-        # Save settings action
+        # Save, reset and cancel actions
         self.ui.applyButton.clicked.connect(self._save_settings)
-
-        # Reset settings action
         self.ui.resetButton.clicked.connect(self._reset_settings)
-
-        # Cancel button action
         self.ui.cancelButton.clicked.connect(self.close)
 
     # Load one page
@@ -89,7 +74,7 @@ class SettingsDialog(QDialog):
     # Collects values from all UI widgets, saves them to a dictionary, and updates the configuration file.
     def _save_settings(self) -> None:
         try:
-            config = self.config
+            config = ctx.config
 
             for page in self.activePages:
                 # Check if page exists
@@ -104,7 +89,7 @@ class SettingsDialog(QDialog):
                         page.isSaved = True
 
             # Save settings
-            self.ConfigManager.saveSettings(config)
+            ctx.ConfigManager.save_settings(config)
             self.ui.statusLabel.setText(self.ui.statusLabel.text() + "SUCCESS")
             logger.success("Settings saved.")
         except Exception as e:
@@ -114,7 +99,7 @@ class SettingsDialog(QDialog):
     # Reset configuration
     def _reset_settings(self) -> None:
         # Trigger the configuration handler to overwrite the current JSON with default values.
-        self.ConfigManager.resetSettings()
+        ctx.ConfigManager.reset_settings()
 
         # Reload application config
         self.app.reloadConfiguration()
@@ -123,11 +108,11 @@ class SettingsDialog(QDialog):
         for page in self.activePages:
             # Run only for real objects
             if page and not isinstance(page, bool):
-                page.loadSettings(self.config.get(type(page).__name__, {}))
+                page.load_settings(ctx.config.get(type(page).__name__, {}))
 
         # Loguru acitalization
         if hasattr(self, 'Logger'):
-            self.app.Logger.updateConfig(self.config.get("LoggingPage", {}))
+            self.app.Logger.updateConfig(ctx.config.get("LoggingPage", {}))
 
     # Overrided close event 
     def closeEvent(self, event) -> None:
