@@ -1,0 +1,74 @@
+{
+    "GeneralPage": {
+        "cb_gen_theme": "Light",
+        "fcb_gen_font": "Noto Sans",
+        "cb_gen_font_size": "Medium (recommended)",
+        "sb_adv_autosave_interval": 5,
+        "chk_adv_gpu": true,
+        "cb_adv_startup": "Show Dashboard",
+        "chk_sys_updates": true,
+        "chk_sys_telemetry": false,
+        "cb_sys_lang": "English"
+    },
+    "LoggingPage": {
+        "cb_console_time": "Yes",
+        "cb_console_colors": "Yes",
+        "btn_console_info": true,
+        "btn_console_warning": true,
+        "btn_console_success": true,
+        "btn_console_error": true,
+        "btn_console_debug": false,
+        "cb_file_enabled": "Yes",
+        "btn_file_info": false,
+        "btn_file_warning": false,
+        "btn_file_success": false,
+        "btn_file_error": true,
+        "btn_file_debug": false,
+        "sb_file_rotation": 10,
+        "sb_file_retention": 7,
+        "le_file_path": "./Logs",
+        "cb_file_compression": "zip"
+    },
+    "SourcePage": {
+        "elementsButton": {
+            "color": "#569cd6",
+            "background-color": "none",
+            "font-weight": "bold",
+            "font-style": "none",
+            "text-decoration": "none",
+            "transform": "none"
+        },
+        "atributsButton": {
+            "color": "#9cdcfe",
+            "background-color": "none",
+            "font-weight": "none",
+            "font-style": "none",
+            "text-decoration": "none",
+            "transform": "none"
+        },
+        "attrValuesButton": {
+            "color": "#ce9178",
+            "background-color": "none",
+            "font-weight": "none",
+            "font-style": "none",
+            "text-decoration": "none",
+            "transform": "none"
+        },
+        "stringButton": {
+            "color": "#ce9178",
+            "background-color": "none",
+            "font-weight": "none",
+            "font-style": "none",
+            "text-decoration": "none",
+            "transform": "none"
+        },
+        "commentsButton": {
+            "color": "#6a9955",
+            "background-color": "none",
+            "font-weight": "none",
+            "font-style": "italic",
+            "text-decoration": "none",
+            "transform": "none"
+        }
+    }
+}

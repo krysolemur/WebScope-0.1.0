@@ -1,0 +1,20 @@
+# Python
+.linux-venv
+.linux-venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# Qt source files
+noctua/ui/
+
+# Logs
+Logs/
+*.log
+
+# Config
+config/config.json
+
+# IDE
+.vscode/
+
