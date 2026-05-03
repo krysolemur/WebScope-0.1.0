@@ -1,16 +1,9 @@
 # sourcepage.py
 
-# Importing system files
-import re 
+from PySide6.QtWidgets import QSlider, QComboBox, QCheckBox, QPushButton, QWidget # type: ignore
 
-from PySide6.QtWidgets import QSlider, QComboBox, QCheckBox, QPushButton, QDialog, QColorDialog, QWidget # type: ignore
-from PySide6.QtCore import QSignalBlocker # type: ignore
-from PySide6.QtGui import QColor # type: ignore
+from noctua.ui_gen.source_page import Ui_SourcePage
 
-# Importing program files
-from noctua.ui_gen.SourcePage import Ui_sourcePage
-
-# Class with color picker
 class SourcePage(QWidget):
 
     # Initiator
@@ -20,7 +13,7 @@ class SourcePage(QWidget):
         super().__init__(app)
 
         # Load page
-        self.ui = Ui_sourcePage()
+        self.ui = Ui_SourcePage()
 
         # Setup ui
         self.ui.setupUi(self)

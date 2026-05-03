@@ -18,17 +18,17 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
 from PySide6.QtWidgets import (QApplication, QDialog, QHBoxLayout, QLabel,
     QSizePolicy, QVBoxLayout, QWidget)
 
-class Ui_aboutDialog(object):
-    def setupUi(self, aboutDialog):
-        if not aboutDialog.objectName():
-            aboutDialog.setObjectName(u"aboutDialog")
-        aboutDialog.resize(400, 300)
-        self.mainLayout = QVBoxLayout(aboutDialog)
+class Ui_AboutDialog(object):
+    def setupUi(self, AboutDialog):
+        if not AboutDialog.objectName():
+            AboutDialog.setObjectName(u"AboutDialog")
+        AboutDialog.resize(400, 300)
+        self.mainLayout = QVBoxLayout(AboutDialog)
         self.mainLayout.setObjectName(u"mainLayout")
         self.versionLayout = QHBoxLayout()
         self.versionLayout.setObjectName(u"versionLayout")
         self.versionLayout.setContentsMargins(6, 6, 6, 6)
-        self.versionLabel = QLabel(aboutDialog)
+        self.versionLabel = QLabel(AboutDialog)
         self.versionLabel.setObjectName(u"versionLabel")
 
         self.versionLayout.addWidget(self.versionLabel)
@@ -37,13 +37,13 @@ class Ui_aboutDialog(object):
         self.mainLayout.addLayout(self.versionLayout)
 
 
-        self.retranslateUi(aboutDialog)
+        self.retranslateUi(AboutDialog)
 
-        QMetaObject.connectSlotsByName(aboutDialog)
+        QMetaObject.connectSlotsByName(AboutDialog)
     # setupUi
 
-    def retranslateUi(self, aboutDialog):
-        aboutDialog.setWindowTitle(QCoreApplication.translate("aboutDialog", u"Dialog", None))
-        self.versionLabel.setText(QCoreApplication.translate("aboutDialog", u"Version: ", None))
+    def retranslateUi(self, AboutDialog):
+        AboutDialog.setWindowTitle(QCoreApplication.translate("AboutDialog", u"Dialog", None))
+        self.versionLabel.setText(QCoreApplication.translate("AboutDialog", u"Version: ", None))
     # retranslateUi
 

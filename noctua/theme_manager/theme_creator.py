@@ -11,8 +11,8 @@ from PySide6.QtGui import QColor, QPalette, QIcon, QPixmap # type: ignore
 from PySide6.QtCore import Qt # type: ignore
 
 from noctua.error_dialog import ErrorDialog
-from noctua.ui_gen.ThemeCreator import Ui_ThemeCreator
-from noctua.ui_gen.ThemePreview import Ui_ThemePreview
+from noctua.ui_gen.theme_creator import Ui_ThemeCreator
+from noctua.ui_gen.theme_preview import Ui_ThemePreview
 
 class ThemeCreator(QDialog):
         

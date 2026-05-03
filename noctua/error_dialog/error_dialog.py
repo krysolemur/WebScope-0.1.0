@@ -5,7 +5,7 @@ import sys
 
 from PySide6.QtWidgets import QDialog, QApplication # type: ignore
 
-from noctua.ui_gen.ErrorDialog import Ui_ErrorDialog
+from noctua.ui_gen.error_dialog import Ui_ErrorDialog
 
 class ErrorDialog(QDialog):
 

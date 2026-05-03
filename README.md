@@ -43,8 +43,12 @@ python -m noctua
 Or via Makefile:
 
 ```bash
-make install
-make run
+make install      # Install project
+make run          # Run application
+make test         # Run tests
+make lint         # Check code
+make format       # Format code
+make clean        # Clean code
 ```
 
 ---

@@ -3,8 +3,8 @@
 from PySide6.QtWidgets import QSlider, QComboBox, QCheckBox, QPushButton, QWidget, QSpinBox, QFontComboBox, QFileDialog # type: ignore
 from PySide6.QtGui import QFont # type: ignore
 
-from noctua.ui_gen.GeneralPage import Ui_GeneralPage
-from noctua.context import ctx
+from noctua.ui_gen.general_page import Ui_GeneralPage
+from noctua.core.context import ctx
 
 # Main class GeneralPage
 class GeneralPage(QWidget):

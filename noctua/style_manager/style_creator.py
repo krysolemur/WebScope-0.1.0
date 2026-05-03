@@ -3,7 +3,7 @@
 from PySide6.QtWidgets import QDialog, QTreeWidgetItem # type: ignore
 from PySide6.QtCore import Qt # type: ignore
 
-from noctua.ui_gen.StyleCreator import Ui_StyleCreator
+from noctua.ui_gen.style_creator import Ui_StyleCreator
 
 class StyleCreator(QDialog):
 

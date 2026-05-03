@@ -7,8 +7,7 @@ from PySide6.QtWidgets import QDialog, QApplication, QMainWindow # type: ignore
 
 from noctua.settings_dialog import SettingsDialog
 from noctua.ui_gen import Ui_MainWindow
-from noctua.ui_gen.AboutDialog import Ui_aboutDialog
-from noctua.context import ctx
+from noctua.core.context import ctx
 
 class MainWindow(QMainWindow):
 
@@ -51,11 +50,14 @@ class MainWindow(QMainWindow):
 
     # Show app information
     def _about_dialog(self) -> None:
+        # Import about dialog
+        from noctua.ui_gen.about_dialog import Ui_AboutDialog
+        
         # Create dialog
         aboutDialog = QDialog(self)
 
         # Load Ui
-        aboutDialogUi = Ui_aboutDialog()
+        aboutDialogUi = Ui_AboutDialog()
 
         # Set Ui
         aboutDialogUi.setupUi(aboutDialog)

@@ -4,7 +4,7 @@
 
 # Import program files
 from noctua.style_manager import StyleCreator
-from noctua.context import ctx
+from noctua.core.context import ctx
 
 # Class stylesheet
 class StyleManager:

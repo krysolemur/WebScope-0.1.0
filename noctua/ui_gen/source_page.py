@@ -20,16 +20,16 @@ from PySide6.QtWidgets import (QApplication, QCheckBox, QComboBox, QFrame,
     QScrollArea, QSizePolicy, QSpacerItem, QSpinBox,
     QTextEdit, QVBoxLayout, QWidget)
 
-class Ui_sourcePage(object):
-    def setupUi(self, sourcePage):
-        if not sourcePage.objectName():
-            sourcePage.setObjectName(u"sourcePage")
-        sourcePage.resize(650, 1000)
-        self.mainLayout = QVBoxLayout(sourcePage)
+class Ui_SourcePage(object):
+    def setupUi(self, SourcePage):
+        if not SourcePage.objectName():
+            SourcePage.setObjectName(u"SourcePage")
+        SourcePage.resize(650, 1000)
+        self.mainLayout = QVBoxLayout(SourcePage)
         self.mainLayout.setSpacing(0)
         self.mainLayout.setContentsMargins(0, 0, 0, 0)
         self.mainLayout.setObjectName(u"mainLayout")
-        self.sa_source_code = QScrollArea(sourcePage)
+        self.sa_source_code = QScrollArea(SourcePage)
         self.sa_source_code.setObjectName(u"sa_source_code")
         self.sa_source_code.setFrameShape(QFrame.NoFrame)
         self.sa_source_code.setWidgetResizable(True)
@@ -234,14 +234,14 @@ class Ui_sourcePage(object):
         self.mainLayout.addWidget(self.sa_source_code)
 
 
-        self.retranslateUi(sourcePage)
+        self.retranslateUi(SourcePage)
 
-        QMetaObject.connectSlotsByName(sourcePage)
+        QMetaObject.connectSlotsByName(SourcePage)
     # setupUi
 
-    def retranslateUi(self, sourcePage):
-        self.l_pre.setText(QCoreApplication.translate("sourcePage", u"<b>Editor Preview</b>", None))
-        self.te_preview.setHtml(QCoreApplication.translate("sourcePage", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+    def retranslateUi(self, SourcePage):
+        self.l_pre.setText(QCoreApplication.translate("SourcePage", u"<b>Editor Preview</b>", None))
+        self.te_preview.setHtml(QCoreApplication.translate("SourcePage", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "hr { height: 1px; border-width: 0; }\n"
@@ -251,40 +251,40 @@ class Ui_sourcePage(object):
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">&lt;div style=&quot;font-family: 'Consolas', 'Monaco', monospace; line-height: 1.4; font-size: 13px;&quot;&gt; &lt;span style=&quot;color: #569cd6;&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span style=&quot;color: #9cdcfe;&quot;&gt;class&lt;/span&gt;=&lt;span style=&quot;color: #ce9178;&quot;&gt;&quot;card&quot;&lt;/span&gt; &lt;span style=&quot;color: #9cdcfe;&quot;&gt;id&lt;/span&gt;=&lt;span style=&quot"
                         ";color: #ce9178;&quot;&gt;&quot;hero&quot;&lt;/span&gt;&lt;span style=&quot;color: #569cd6;&quot;&gt;&amp;gt;&lt;/span&gt; &lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;span style=&quot;color: #569cd6;&quot;&gt;&amp;lt;h1&amp;gt;&lt;/span&gt;Xyra Editor&lt;span style=&quot;color: #569cd6;&quot;&gt;&amp;lt;/h1&amp;gt;&lt;/span&gt; &lt;br&gt;&lt;span style=&quot;color: #569cd6;&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;&lt;br&gt; &lt;br&gt;&lt;span style=&quot;color: #6a9955;&quot;&gt;/* CSS: Selektory a Vlastnosti */&lt;/span&gt;&lt;br&gt; &lt;span style=&quot;color: #d7ba7d;&quot;&gt;.card&lt;/span&gt; { &lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;span style=&quot;color: #9cdcfe;&quot;&gt;color&lt;/span&gt;: &lt;span style=&quot;color: #b5cea8;&quot;&gt;#ffffff&lt;/span&gt;; &lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;span style=&quot;color: #9cdcfe;&quot;&gt;display&lt;/span&gt;: &lt;span style=&quot;color: #ce9178;&quot;&gt;flex&lt;/span&gt;; &lt;br&gt;}&lt;br&gt; &lt;br&gt;&lt;span style=&quot;color: #6a9955;&quot;&gt;// JS: Kl\u00ed\u010d"
                         "ov\u00e1 slova a Prom\u011bnn\u00e9&lt;/span&gt;&lt;br&gt; &lt;span style=&quot;color: #569cd6;&quot;&gt;const&lt;/span&gt; &lt;span style=&quot;color: #4fc1ff;&quot;&gt;app&lt;/span&gt; = &lt;span style=&quot;color: #569cd6;&quot;&gt;new&lt;/span&gt; &lt;span style=&quot;color: #dcdcaa;&quot;&gt;Editor&lt;/span&gt;({ &lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;span style=&quot;color: #9cdcfe;&quot;&gt;active&lt;/span&gt;: &lt;span style=&quot;color: #569cd6;&quot;&gt;true&lt;/span&gt;, &lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;span style=&quot;color: #9cdcfe;&quot;&gt;version&lt;/span&gt;: &lt;span style=&quot;color: #b5cea8;&quot;&gt;2.0&lt;/span&gt; &lt;br&gt;});</p></body></html>", None))
-        self.l_syn.setText(QCoreApplication.translate("sourcePage", u"<b>Syntax Highlighting</b>", None))
-        self.btn_sel_tags.setText(QCoreApplication.translate("sourcePage", u"HTML Tags", None))
-        self.btn_sel_attrs.setText(QCoreApplication.translate("sourcePage", u"Attributes", None))
-        self.btn_sel_strings.setText(QCoreApplication.translate("sourcePage", u"Strings", None))
-        self.btn_sel_comments.setText(QCoreApplication.translate("sourcePage", u"Comments", None))
-        self.btn_sel_keywords.setText(QCoreApplication.translate("sourcePage", u"JS Keywords", None))
-        self.btn_sel_variables.setText(QCoreApplication.translate("sourcePage", u"Variables", None))
-        self.btn_style_color.setText(QCoreApplication.translate("sourcePage", u"Color", None))
-        self.btn_style_bold.setText(QCoreApplication.translate("sourcePage", u"B", None))
-        self.btn_style_italic.setText(QCoreApplication.translate("sourcePage", u"I", None))
-        self.cb_style_transform.setItemText(0, QCoreApplication.translate("sourcePage", u"No Transform", None))
-        self.cb_style_transform.setItemText(1, QCoreApplication.translate("sourcePage", u"UPPERCASE", None))
-        self.cb_style_transform.setItemText(2, QCoreApplication.translate("sourcePage", u"lowercase", None))
+        self.l_syn.setText(QCoreApplication.translate("SourcePage", u"<b>Syntax Highlighting</b>", None))
+        self.btn_sel_tags.setText(QCoreApplication.translate("SourcePage", u"HTML Tags", None))
+        self.btn_sel_attrs.setText(QCoreApplication.translate("SourcePage", u"Attributes", None))
+        self.btn_sel_strings.setText(QCoreApplication.translate("SourcePage", u"Strings", None))
+        self.btn_sel_comments.setText(QCoreApplication.translate("SourcePage", u"Comments", None))
+        self.btn_sel_keywords.setText(QCoreApplication.translate("SourcePage", u"JS Keywords", None))
+        self.btn_sel_variables.setText(QCoreApplication.translate("SourcePage", u"Variables", None))
+        self.btn_style_color.setText(QCoreApplication.translate("SourcePage", u"Color", None))
+        self.btn_style_bold.setText(QCoreApplication.translate("SourcePage", u"B", None))
+        self.btn_style_italic.setText(QCoreApplication.translate("SourcePage", u"I", None))
+        self.cb_style_transform.setItemText(0, QCoreApplication.translate("SourcePage", u"No Transform", None))
+        self.cb_style_transform.setItemText(1, QCoreApplication.translate("SourcePage", u"UPPERCASE", None))
+        self.cb_style_transform.setItemText(2, QCoreApplication.translate("SourcePage", u"lowercase", None))
 
-        self.l_beh.setText(QCoreApplication.translate("sourcePage", u"<b>Editor Behavior</b>", None))
-        self.l_t.setText(QCoreApplication.translate("sourcePage", u"Tab Size:", None))
-        self.l_i.setText(QCoreApplication.translate("sourcePage", u"Indentation:", None))
-        self.cb_indent_style.setItemText(0, QCoreApplication.translate("sourcePage", u"Tabs", None))
-        self.cb_indent_style.setItemText(1, QCoreApplication.translate("sourcePage", u"Spaces", None))
+        self.l_beh.setText(QCoreApplication.translate("SourcePage", u"<b>Editor Behavior</b>", None))
+        self.l_t.setText(QCoreApplication.translate("SourcePage", u"Tab Size:", None))
+        self.l_i.setText(QCoreApplication.translate("SourcePage", u"Indentation:", None))
+        self.cb_indent_style.setItemText(0, QCoreApplication.translate("SourcePage", u"Tabs", None))
+        self.cb_indent_style.setItemText(1, QCoreApplication.translate("SourcePage", u"Spaces", None))
 
-        self.l_cur.setText(QCoreApplication.translate("sourcePage", u"Cursor Style:", None))
-        self.cb_cursor_style.setItemText(0, QCoreApplication.translate("sourcePage", u"Line (Standard)", None))
-        self.cb_cursor_style.setItemText(1, QCoreApplication.translate("sourcePage", u"Block (Retro)", None))
-        self.cb_cursor_style.setItemText(2, QCoreApplication.translate("sourcePage", u"Underline", None))
+        self.l_cur.setText(QCoreApplication.translate("SourcePage", u"Cursor Style:", None))
+        self.cb_cursor_style.setItemText(0, QCoreApplication.translate("SourcePage", u"Line (Standard)", None))
+        self.cb_cursor_style.setItemText(1, QCoreApplication.translate("SourcePage", u"Block (Retro)", None))
+        self.cb_cursor_style.setItemText(2, QCoreApplication.translate("SourcePage", u"Underline", None))
 
-        self.chk_line_numbers.setText(QCoreApplication.translate("sourcePage", u"Show Line Numbers", None))
-        self.chk_highlight_line.setText(QCoreApplication.translate("sourcePage", u"Highlight Current Line", None))
-        self.chk_match_brackets.setText(QCoreApplication.translate("sourcePage", u"Highlight Matching Brackets", None))
-        self.chk_indent_guides.setText(QCoreApplication.translate("sourcePage", u"Show Indentation Guides", None))
-        self.chk_word_wrap.setText(QCoreApplication.translate("sourcePage", u"Soft Word Wrap", None))
-        self.chk_minimap.setText(QCoreApplication.translate("sourcePage", u"Display Minimap Overview", None))
-        self.chk_auto_close.setText(QCoreApplication.translate("sourcePage", u"Auto-close Tags & Brackets", None))
-        self.chk_whitespace.setText(QCoreApplication.translate("sourcePage", u"Render Whitespace Symbols", None))
-        self.chk_format_save.setText(QCoreApplication.translate("sourcePage", u"Format Document on Save", None))
+        self.chk_line_numbers.setText(QCoreApplication.translate("SourcePage", u"Show Line Numbers", None))
+        self.chk_highlight_line.setText(QCoreApplication.translate("SourcePage", u"Highlight Current Line", None))
+        self.chk_match_brackets.setText(QCoreApplication.translate("SourcePage", u"Highlight Matching Brackets", None))
+        self.chk_indent_guides.setText(QCoreApplication.translate("SourcePage", u"Show Indentation Guides", None))
+        self.chk_word_wrap.setText(QCoreApplication.translate("SourcePage", u"Soft Word Wrap", None))
+        self.chk_minimap.setText(QCoreApplication.translate("SourcePage", u"Display Minimap Overview", None))
+        self.chk_auto_close.setText(QCoreApplication.translate("SourcePage", u"Auto-close Tags & Brackets", None))
+        self.chk_whitespace.setText(QCoreApplication.translate("SourcePage", u"Render Whitespace Symbols", None))
+        self.chk_format_save.setText(QCoreApplication.translate("SourcePage", u"Format Document on Save", None))
         pass
     # retranslateUi
 

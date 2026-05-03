@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "noctua"
+version = "0.1.0"
+description = "A Python desktop application for web inspection, penetration testing and ethical hacking."
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.10"
+authors = [
+    { name = "krysolemur", url = "https://github.com/krysolemur" }
+]
+dependencies = [
+    "PySide6>=6.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "ruff",
+    "pre-commit",
+]
+
+[project.scripts]
+noctua = "noctua.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["noctua*"]
+
+[tool.setuptools.package-data]
+"*" = ["*.json", "*.qss", "*.svg"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

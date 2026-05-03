@@ -3,7 +3,7 @@
 import shutil
 
 from noctua.theme_manager import ThemeCreator
-from noctua.context import ctx
+from noctua.core.context import ctx
 
 class ThemeManager:
 

@@ -2,8 +2,8 @@
 
 from PySide6.QtWidgets import QSlider, QComboBox, QCheckBox, QPushButton, QWidget, QSpinBox, QLineEdit, QFileDialog # type: ignore
 
-from noctua.ui_gen.LoggingPage import Ui_LoggingPage
-from noctua.context import ctx
+from noctua.ui_gen.logging_page import Ui_LoggingPage
+from noctua.core.context import ctx
 
 class LoggingPage(QWidget):
     

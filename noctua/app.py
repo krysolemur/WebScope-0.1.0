@@ -9,7 +9,7 @@ from PySide6.QtGui import QFont # type: ignore
 from noctua.main_window import MainWindow
 from noctua.theme_manager import ThemeManager
 from noctua.style_manager import StyleManager
-from noctua.context import ctx
+from noctua.core.context import ctx
 
 class Noctua(QApplication):
 
@@ -59,7 +59,8 @@ class Noctua(QApplication):
         self.setFont(QFont(str(config["fcb_gen_font"]), int(font_size[str(config["cb_gen_font_size"])])))
 
     # Reload config
-    def reload_config(self) -> None:
+    @staticmethod
+    def reload_config() -> None:
         # New config variable
         new_config = ctx.ConfigManager.load_settings()
 
@@ -70,11 +71,13 @@ class Noctua(QApplication):
         ctx.config.update(new_config)
 
     # Restart application function
-    def restart_application(self) -> None:
+    @staticmethod
+    def restart_application() -> None:
         # Restart command
         os.execv(sys.executable, [sys.executable] + sys.argv)
 
     # Quit application
-    def quit_application(self) -> None:
+    @staticmethod
+    def quit_application() -> None:
         # Quit
         QApplication.quit()

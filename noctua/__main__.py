@@ -4,7 +4,7 @@ import sys
 import signal
 
 from noctua.app import Noctua
-from noctua.context import ctx
+from noctua.core import ctx
 
 def main() -> None:
     # Allow Ctrl+C to work properly with Qt

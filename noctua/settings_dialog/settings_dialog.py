@@ -5,8 +5,8 @@ from PySide6.QtWidgets import QDialog # type: ignore
 from noctua.settings_dialog.source_page import SourcePage
 from noctua.settings_dialog.general_page import GeneralPage
 from noctua.settings_dialog.logging_page import LoggingPage
-from noctua.ui_gen.SettingsDialog import Ui_SettingsDialog
-from noctua.context import ctx
+from noctua.ui_gen.settings_dialog import Ui_SettingsDialog
+from noctua.core.context import ctx
 
 class SettingsDialog(QDialog):
 
