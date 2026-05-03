@@ -10,7 +10,7 @@ readme = "README.md"
 license = { file = "LICENSE" }
 requires-python = ">=3.10"
 authors = [
-    { name = "krysolemur", url = "https://github.com/krysolemur" }
+    { name = "krysolemur" }
 ]
 dependencies = [
     "PySide6>=6.0",
@@ -25,6 +25,10 @@ dev = [
 
 [project.scripts]
 noctua = "noctua.__main__:main"
+
+[project.urls]
+Homepage = "https://github.com/krysolemur/Noctua"
+Repository = "https://github.com/krysolemur/Noctua"
 
 [tool.setuptools.packages.find]
 where = ["."]
