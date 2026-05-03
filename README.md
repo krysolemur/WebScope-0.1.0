@@ -29,7 +29,7 @@ A Python desktop application for web inspection, penetration testing and ethical
 ```bash
 git clone https://github.com/krysolemur/Noctua.git
 cd Noctua
-python -m venv .venv
+python3 -m venv .venv
 source .venv/bin/activate        # Windows: .venv\Scripts\activate
 pip install -e .
 ```
@@ -37,7 +37,7 @@ pip install -e .
 ## Run
 
 ```bash
-python -m noctua
+python3 -m noctua
 ```
 
 Or via Makefile:
