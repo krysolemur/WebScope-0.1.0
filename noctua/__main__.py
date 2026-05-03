@@ -4,6 +4,7 @@ import sys
 import signal
 
 from noctua.app import Noctua
+from noctua.context import ctx
 
 def main() -> None:
     # Allow Ctrl+C to work properly with Qt
@@ -13,7 +14,6 @@ def main() -> None:
         # Create and execute app
         noctua = Noctua()
         sys.exit(noctua.exec())
-
     except KeyboardInterrupt:
         # Clean exit on Ctrl+C
         print("\nApplication stopped.")
