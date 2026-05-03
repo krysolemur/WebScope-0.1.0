@@ -1,8 +1,3 @@
-# MainWindow.py
-
-import requests
-import jsbeautifier # type: ignore
-
 from PySide6.QtWidgets import QDialog, QApplication, QMainWindow # type: ignore
 
 from noctua.settings_dialog import SettingsDialog
@@ -73,27 +68,6 @@ class MainWindow(QMainWindow):
 
         # Show dialog
         aboutDialog.show()
-
-        # Setn GET request
-        source = requests.get(self.url)
-        
-        # Check if page is loaded 
-        source.raise_for_status()
-
-        # Set parametres for formating
-        opts = jsbeautifier.default_options()
-
-        # Ident size four spaces
-        opts.indent_size = 4  
-
-        # Long rows
-        opts.wrap_line_length = 80  
-        
-        # Format whole text (HTML, CSS, JS)
-        formatted_code = jsbeautifier.beautify(source.text, opts)
-        
-        # Return formated source code for better reading
-        return formatted_code
 
     # Center window/dialog
     @staticmethod
