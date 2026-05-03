@@ -99,5 +99,3 @@ noctua/
 ## License
 
 MIT © [krysolemur](https://github.com/krysolemur)
-> A Python desktop application for web inspection, penetration testing and ethical hacking.
-
