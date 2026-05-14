@@ -1,3 +1,32 @@
+Metadata-Version: 2.4
+Name: noctua
+Version: 0.1.0
+Summary: A Python desktop application for web inspection, penetration testing and ethical hacking.
+Author: krysolemur
+License: MIT License
+        
+        Copyright (c) 2026 Krysak
+        
+        Permission is hereby granted, free of charge, to any person obtaining a copy
+        of this software and associated documentation files (the "Software"), to deal
+        in the Software without restriction, including without limitation the rights
+        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        copies of the Software...
+        
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND.
+        EOF
+Project-URL: Homepage, https://github.com/krysolemur/Noctua
+Project-URL: Repository, https://github.com/krysolemur/Noctua
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: PySide6>=6.0
+Provides-Extra: dev
+Requires-Dist: pytest; extra == "dev"
+Requires-Dist: ruff; extra == "dev"
+Requires-Dist: pre-commit; extra == "dev"
+Dynamic: license-file
+
 # Noctua 🦉
 
 A Python desktop application for web inspection, penetration testing and ethical hacking.
@@ -8,12 +37,12 @@ A Python desktop application for web inspection, penetration testing and ethical
 
 ## Features
 
-- HTML/CSS/JS source inspection
-- HTTP header and request analysis
-- Fuzzing and brute-force attacks
-- SQL injection / XSS testing
-- Vulnerability scanning (CVE)
-- Traffic monitoring and logging
+- 🔍 HTML/CSS/JS source inspection
+- 📡 HTTP header and request analysis
+- 💥 Fuzzing and brute-force attacks
+- 🛡️ SQL injection / XSS testing
+- 🔎 Vulnerability scanning (CVE)
+- 📊 Traffic monitoring and logging
 
 ---
 

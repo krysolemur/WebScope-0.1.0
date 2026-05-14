@@ -1,0 +1,2 @@
+[console_scripts]
+noctua = noctua.__main__:main

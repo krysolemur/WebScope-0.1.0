@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "noctua"
-version = "0.1.0"
+dynamic = ["version"]
 description = "A Python desktop application for web inspection, penetration testing and ethical hacking."
 readme = "README.md"
 license = { file = "LICENSE" }
@@ -36,6 +36,9 @@ include = ["noctua*"]
 
 [tool.setuptools.package-data]
 "*" = ["*.json", "*.qss", "*.svg"]
+
+[tool.setuptools.dynamic]
+version = {attr = "noctua.version.__version__"}
 
 [tool.ruff]
 line-length = 100
